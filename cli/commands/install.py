@@ -6,14 +6,14 @@ import click
 from rich.console import Console
 
 from cli.config import Config
-from cli.utils import confirm_action, copy_directory, copy_file
+from cli.utils import confirm_action, copy_directory, copy_file, find_command_files, find_skill_directories
 from cli.validator import CommandValidator, SkillValidator
 
 console = Console()
 
 
 @click.command()
-@click.argument("name")
+@click.argument("name", required=False)
 @click.option(
     "--target",
     "-t",
@@ -30,15 +30,24 @@ console = Console()
 @click.option("--type", "item_type", type=click.Choice(["skill", "command"]), help="Item type")
 @click.option("--force", "-f", is_flag=True, help="Overwrite existing files")
 @click.option("--dry-run", is_flag=True, help="Preview without making changes")
+@click.option("--all", "install_all", is_flag=True, help="Install all skills and commands")
 @click.pass_context
-def install(ctx, name, target, platform, item_type, force, dry_run):
+def install(ctx, name, target, platform, item_type, force, dry_run, install_all):
     """
     Install a skill or command.
 
-    NAME is the name of the skill or command to install.
+    NAME is the name of the skill or command to install (or use --all to install everything).
     """
     verbose = ctx.obj.get("verbose", False)
     config = Config()
+
+    # Validate arguments
+    if install_all and name:
+        console.print("[red]Error: Cannot specify both NAME and --all[/red]")
+        raise click.Abort()
+    if not install_all and not name:
+        console.print("[red]Error: Must specify either NAME or --all[/red]")
+        raise click.Abort()
 
     # Get repository path
     repo_path = config.get_repository_path()
@@ -48,6 +57,11 @@ def install(ctx, name, target, platform, item_type, force, dry_run):
         )
         console.print("Run: claude-skills config set repository <path>")
         raise click.Abort()
+
+    # Handle --all flag
+    if install_all:
+        _install_all_items(repo_path, config, target, platform, dry_run, verbose)
+        return
 
     # Determine item type if not specified
     if not item_type:
@@ -159,3 +173,104 @@ def _find_command(repo_path: Path, name: str) -> Path:
             return cmd_path
 
     return None
+
+
+def _install_all_items(repo_path: Path, config: Config, target: str, platform: str, dry_run: bool, verbose: bool):
+    """Install all skills and commands from repository."""
+    # Discovery phase
+    skills = _discover_all_skills(repo_path)
+    commands = _discover_all_commands(repo_path)
+
+    console.print(f"Found {len(skills)} skills and {len(commands)} commands")
+
+    # Dry run preview
+    if dry_run:
+        console.print("[blue]Would install the following items:[/blue]")
+
+        console.print(f"\nSkills ({len(skills)}):")
+        for skill_path in skills:
+            dest = config.get_skills_dir(target, platform) / skill_path.name
+            status = "exists" if dest.exists() else "new"
+            console.print(f"  - {skill_path.name} [{status}]")
+
+        console.print(f"\nCommands ({len(commands)}):")
+        for cmd_path in commands:
+            dest = config.get_commands_dir(target, platform) / cmd_path.name
+            status = "exists" if dest.exists() else "new"
+            console.print(f"  - {cmd_path.stem} [{status}]")
+
+        return
+
+    # Installation phase - skills first
+    for skill_path in skills:
+        name = skill_path.name
+        dest_dir = config.get_skills_dir(target, platform)
+        dest_path = dest_dir / name
+
+        # Skip if already exists
+        if dest_path.exists():
+            console.print(f"[yellow]Skipping skill '{name}' (already installed)[/yellow]")
+            continue
+
+        # Validate
+        valid, errors = SkillValidator.validate_skill_directory(skill_path)
+        if not valid:
+            console.print(f"[red]Error: Invalid skill '{name}'[/red]")
+            for error in errors:
+                console.print(f"  - {error}")
+            raise click.Abort()
+
+        # Install
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        success = copy_directory(skill_path, dest_path, force=True)
+        if success:
+            console.print(f"[green]Installed skill '{name}'[/green]")
+        else:
+            console.print(f"[red]Failed to install skill '{name}'[/red]")
+            raise click.Abort()
+
+    # Installation phase - commands
+    for cmd_path in commands:
+        name = cmd_path.stem
+        dest_dir = config.get_commands_dir(target, platform)
+        dest_path = dest_dir / cmd_path.name
+
+        # Skip if already exists
+        if dest_path.exists():
+            console.print(f"[yellow]Skipping command '{name}' (already installed)[/yellow]")
+            continue
+
+        # Validate
+        valid, errors = CommandValidator.validate_command_file(cmd_path)
+        if not valid:
+            console.print(f"[red]Error: Invalid command '{name}'[/red]")
+            for error in errors:
+                console.print(f"  - {error}")
+            raise click.Abort()
+
+        # Install
+        dest_dir.mkdir(parents=True, exist_ok=True)
+        success = copy_file(cmd_path, dest_path, force=True)
+        if success:
+            console.print(f"[green]Installed command '{name}'[/green]")
+        else:
+            console.print(f"[red]Failed to install command '{name}'[/red]")
+            raise click.Abort()
+
+
+def _discover_all_skills(repo_path: Path) -> list:
+    """Discover all skills in repository."""
+    skills_dir = repo_path / "skills"
+    if not skills_dir.exists():
+        return []
+
+    return list(find_skill_directories(skills_dir))
+
+
+def _discover_all_commands(repo_path: Path) -> list:
+    """Discover all commands in repository."""
+    commands_dir = repo_path / "commands"
+    if not commands_dir.exists():
+        return []
+
+    return list(find_command_files(commands_dir))
