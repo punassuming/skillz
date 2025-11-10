@@ -29,7 +29,7 @@ Related work: [[file:YYYY-MM-DD.org::*Previous Entry]]
 *** Experimental/Computational Setup
 Detailed description of how the work was performed.
 
-#+BEGIN_SRC python
+#+BEGIN_SRC jupyter-python
 # Include actual code used
 from ase.build import fcc111
 slab = fcc111('Pt', size=(4, 4, 4), vacuum=10.0)
@@ -77,7 +77,7 @@ grep "energy" OUTCAR | tail -1
 | System 2      | Energy     | -125.789  | ±0.001      | eV    |
 
 *** Figures
-#+BEGIN_SRC python :results file
+#+BEGIN_SRC jupyter-python
 import matplotlib.pyplot as plt
 import numpy as np
 

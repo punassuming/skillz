@@ -19,7 +19,7 @@ List all data used in this analysis:
 ** Data Preprocessing
 Describe any cleaning, filtering, or transformation of raw data.
 
-#+BEGIN_SRC python :session analysis :exports both
+#+BEGIN_SRC jupyter-python
 import pandas as pd
 import numpy as np
 
@@ -48,7 +48,7 @@ Describe statistical approaches used:
 *** Computational Methods
 Describe algorithms or computational approaches:
 
-#+BEGIN_SRC python :session analysis :exports both
+#+BEGIN_SRC jupyter-python
 from scipy.stats import linregress
 from sklearn.linear_model import LinearRegression
 
@@ -69,7 +69,7 @@ print(f"p-value: {result.pvalue:.2e}")
 | Distance | 2.05  | 0.08    | 1.95  | 2.18  | 24  |
 
 *** Visualizations
-#+BEGIN_SRC python :session analysis :results file
+#+BEGIN_SRC jupyter-python
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -162,7 +162,7 @@ If using fitted models:
 *** Analysis Code
 Full analysis code: [[file:./data/YYYY-MM-DD/analysis.py]]
 
-#+BEGIN_SRC python :tangle data/YYYY-MM-DD/analysis.py
+#+BEGIN_SRC jupyter-python
 #!/usr/bin/env python3
 """
 Analysis script for [description]
