@@ -63,7 +63,7 @@ def install(ctx, name, target, platform, item_type, force, dry_run, install_all)
 
     # Handle --all flag
     if install_all:
-        _install_all_items(repo_path, config, target, platform, dry_run, verbose)
+        _install_all_items(repo_path, config, target, platform, force, dry_run, verbose)
         return
 
     # Determine item type if not specified
@@ -178,7 +178,7 @@ def _find_command(repo_path: Path, name: str) -> Path:
     return None
 
 
-def _install_all_items(repo_path: Path, config: Config, target: str, platform: str, dry_run: bool, verbose: bool):
+def _install_all_items(repo_path: Path, config: Config, target: str, platform: str, force: bool, dry_run: bool, verbose: bool):
     """Install all skills and commands from repository."""
     # Discovery phase
     skills = _discover_all_skills(repo_path)
@@ -194,12 +194,16 @@ def _install_all_items(repo_path: Path, config: Config, target: str, platform: s
         for skill_path in skills:
             dest = config.get_skills_dir(target, platform) / skill_path.name
             status = "exists" if dest.exists() else "new"
+            if dest.exists() and force:
+                status += " (overwrite)"
             console.print(f"  - {skill_path.name} [{status}]")
 
         console.print(f"\nCommands ({len(commands)}):")
         for cmd_path in commands:
             dest = config.get_commands_dir(target, platform) / cmd_path.name
             status = "exists" if dest.exists() else "new"
+            if dest.exists() and force:
+                status += " (overwrite)"
             console.print(f"  - {cmd_path.stem} [{status}]")
 
         return
@@ -210,8 +214,8 @@ def _install_all_items(repo_path: Path, config: Config, target: str, platform: s
         dest_dir = config.get_skills_dir(target, platform)
         dest_path = dest_dir / name
 
-        # Skip if already exists
-        if dest_path.exists():
+        # Skip if already exists and not forced
+        if dest_path.exists() and not force:
             console.print(f"[yellow]Skipping skill '{name}' (already installed)[/yellow]")
             continue
 
@@ -225,9 +229,13 @@ def _install_all_items(repo_path: Path, config: Config, target: str, platform: s
 
         # Install
         dest_dir.mkdir(parents=True, exist_ok=True)
+        is_reinstall = dest_path.exists() and force
         success = copy_directory(skill_path, dest_path, force=True)
         if success:
-            console.print(f"[green]Installed skill '{name}'[/green]")
+            if is_reinstall:
+                console.print(f"[green]Reinstalled skill '{name}'[/green]")
+            else:
+                console.print(f"[green]Installed skill '{name}'[/green]")
         else:
             console.print(f"[red]Failed to install skill '{name}'[/red]")
             raise click.Abort()
@@ -238,8 +246,8 @@ def _install_all_items(repo_path: Path, config: Config, target: str, platform: s
         dest_dir = config.get_commands_dir(target, platform)
         dest_path = dest_dir / cmd_path.name
 
-        # Skip if already exists
-        if dest_path.exists():
+        # Skip if already exists and not forced
+        if dest_path.exists() and not force:
             console.print(f"[yellow]Skipping command '{name}' (already installed)[/yellow]")
             continue
 
@@ -253,9 +261,13 @@ def _install_all_items(repo_path: Path, config: Config, target: str, platform: s
 
         # Install
         dest_dir.mkdir(parents=True, exist_ok=True)
+        is_reinstall = dest_path.exists() and force
         success = copy_file(cmd_path, dest_path, force=True)
         if success:
-            console.print(f"[green]Installed command '{name}'[/green]")
+            if is_reinstall:
+                console.print(f"[green]Reinstalled command '{name}'[/green]")
+            else:
+                console.print(f"[green]Installed command '{name}'[/green]")
         else:
             console.print(f"[red]Failed to install command '{name}'[/red]")
             raise click.Abort()
