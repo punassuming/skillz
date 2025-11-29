@@ -1,4 +1,4 @@
-"""List command for claude-skills."""
+"""List command for skillz."""
 
 from pathlib import Path
 
@@ -22,7 +22,7 @@ console = Console()
     type=click.Choice(["personal", "project"]),
     help="Filter by installation target",
 )
-@click.option("--platform", "-p", default="claude", help="Filter by platform")
+@click.option("--platform", "-p", default="claude", help="Filter by platform (claude, codex, gemini, opencode)")
 @click.option("--category", "-c", help="Filter by category")
 @click.pass_context
 def list_skills(ctx, item_type, source, target, platform, category):

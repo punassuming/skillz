@@ -1,4 +1,4 @@
-"""Search command for claude-skills."""
+"""Search command for skillz."""
 
 from pathlib import Path
 

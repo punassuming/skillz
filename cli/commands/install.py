@@ -1,4 +1,4 @@
-"""Install command for claude-skills."""
+"""Install command for skillz."""
 
 import os
 from pathlib import Path
@@ -7,7 +7,13 @@ import click
 from rich.console import Console
 
 from cli.config import Config
-from cli.utils import confirm_action, copy_directory, copy_file, find_command_files, find_skill_directories
+from cli.utils import (
+    confirm_action,
+    copy_directory,
+    copy_file,
+    find_command_files,
+    find_skill_directories,
+)
 from cli.validator import CommandValidator, SkillValidator
 
 console = Console()
@@ -26,7 +32,7 @@ console = Console()
     "--platform",
     "-p",
     default="claude",
-    help="Target platform (claude, codex, gemini)",
+    help="Target platform (claude, codex, gemini, opencode)",
 )
 @click.option("--type", "item_type", type=click.Choice(["skill", "command"]), help="Item type")
 @click.option("--force", "-f", is_flag=True, help="Overwrite existing files")
@@ -55,10 +61,8 @@ def install(ctx, name, target, platform, item_type, force, dry_run, install_all)
     if not repo_path or not repo_path.exists():
         repo_path = _setup_default_config(config)
         if not repo_path:
-            console.print(
-                "[red]Error: Repository path not configured or does not exist.[/red]"
-            )
-            console.print("Run: claude-skills config set repository <path>")
+            console.print("[red]Error: Repository path not configured or does not exist.[/red]")
+            console.print("Run: skillz config set repository <path>")
             raise click.Abort()
 
     # Handle --all flag
@@ -178,7 +182,15 @@ def _find_command(repo_path: Path, name: str) -> Path:
     return None
 
 
-def _install_all_items(repo_path: Path, config: Config, target: str, platform: str, force: bool, dry_run: bool, verbose: bool):
+def _install_all_items(
+    repo_path: Path,
+    config: Config,
+    target: str,
+    platform: str,
+    force: bool,
+    dry_run: bool,
+    verbose: bool,
+):
     """Install all skills and commands from repository."""
     # Discovery phase
     skills = _discover_all_skills(repo_path)
@@ -292,42 +304,32 @@ def _discover_all_commands(repo_path: Path) -> list:
 
 
 def _setup_default_config(config: Config) -> Path:
-    """
-    Detect and setup default config if in a valid repository.
+    """Detect and setup default config if in a valid repository.
+
+    Walks up from the current working directory to find a directory
+    that looks like a skillz repository (contains both ``skills`` and
+    ``commands`` subdirectories).
 
     Returns the repository path if setup was successful, None otherwise.
     """
     cwd = Path.cwd()
 
-    # Check if current directory is a valid repo
-    if _is_valid_repo(cwd):
-        console.print(
-            f"[yellow]Repository path not configured.[/yellow]"
-        )
-        console.print(f"Detected repository: {cwd}")
+    # Walk up the directory tree: cwd, parents[0], parents[1], ...
+    candidates = [cwd] + list(cwd.parents)
+    for candidate in candidates:
+        if _is_valid_repo(candidate):
+            console.print("[yellow]Repository path not configured.[/yellow]")
+            console.print(f"Detected repository: {candidate}")
 
-        # Prompt user for confirmation
-        if confirm_action("Use this directory as the repository?", default=True):
-            config.set_repository_path(cwd)
-            console.print(f"[green]Repository path set to: {cwd}[/green]")
-            return cwd
-
-    # Check parent directory as fallback
-    parent = cwd.parent
-    if parent != cwd and _is_valid_repo(parent):
-        console.print(
-            f"[yellow]Repository path not configured.[/yellow]"
-        )
-        console.print(f"Detected repository: {parent}")
-
-        if confirm_action("Use this directory as the repository?", default=True):
-            config.set_repository_path(parent)
-            console.print(f"[green]Repository path set to: {parent}[/green]")
-            return parent
+            # Prompt user for confirmation
+            if confirm_action("Use this directory as the repository?", default=True):
+                config.set_repository_path(candidate)
+                console.print(f"[green]Repository path set to: {candidate}[/green]")
+                return candidate
 
     return None
 
 
 def _is_valid_repo(path: Path) -> bool:
-    """Check if a directory is a valid claude-skills repository."""
+    """Check if a directory is a valid skillz repository."""
     return (path / "skills").exists() and (path / "commands").exists()

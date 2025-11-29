@@ -1,4 +1,4 @@
-"""Configuration management command for claude-skills."""
+"""Configuration management command for skillz."""
 
 import click
 from rich.console import Console

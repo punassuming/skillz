@@ -122,7 +122,8 @@ class SkillValidator:
         # Validate allowed-tools
         if "allowed-tools" in frontmatter:
             tools = frontmatter["allowed-tools"]
-            if tools and tools != "*":
+            # Allow "*" as string or ["*"] as list to mean "all tools"
+            if tools and tools != "*" and tools != ["*"]:
                 if isinstance(tools, list):
                     for tool in tools:
                         if tool not in cls.VALID_TOOLS:
@@ -219,7 +220,8 @@ class CommandValidator:
             # Validate allowed-tools
             if "allowed-tools" in frontmatter:
                 tools = frontmatter["allowed-tools"]
-                if tools and tools != "*":
+                # Allow "*" as string or ["*"] as list to mean "all tools"
+                if tools and tools != "*" and tools != ["*"]:
                     if not isinstance(tools, list):
                         errors.append("allowed-tools must be a list or '*'")
 

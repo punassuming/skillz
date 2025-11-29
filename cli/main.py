@@ -1,4 +1,4 @@
-"""Main CLI entry point for claude-skills."""
+"""Main CLI entry point for skillz."""
 
 import click
 from rich.console import Console
@@ -10,15 +10,15 @@ console = Console()
 
 
 @click.group()
-@click.version_option(version="0.1.0", prog_name="claude-skills")
+@click.version_option(version="0.1.0", prog_name="skillz")
 @click.option("--verbose", "-v", is_flag=True, help="Enable verbose output")
 @click.pass_context
 def cli(ctx, verbose):
     """
-    Claude Skills - Manage AI assistant skills and slash commands.
+    Skillz - Manage AI assistant skills and slash commands.
 
     A CLI tool for installing, managing, and creating skills and commands
-    for Claude Code and other LLM platforms.
+    for OpenCode, Claude Code, and other LLM platforms.
     """
     ctx.ensure_object(dict)
     ctx.obj["verbose"] = verbose

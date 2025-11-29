@@ -1,4 +1,4 @@
-"""Update command for claude-skills."""
+"""Update command for skillz."""
 
 import click
 from rich.console import Console
@@ -15,7 +15,7 @@ console = Console()
     type=click.Choice(["personal", "project"]),
     help="Target location to update",
 )
-@click.option("--platform", "-p", default="claude", help="Target platform")
+@click.option("--platform", "-p", default="claude", help="Target platform (claude, codex, gemini, opencode)")
 @click.option("--dry-run", is_flag=True, help="Preview without making changes")
 @click.pass_context
 def update(ctx, name, all, target, platform, dry_run):
@@ -50,8 +50,8 @@ def update(ctx, name, all, target, platform, dry_run):
     # For now, suggest using uninstall + install
     console.print("\n[dim]Tip: You can update by running:[/dim]")
     if name:
-        console.print(f"[dim]  claude-skills uninstall {name}[/dim]")
-        console.print(f"[dim]  claude-skills install {name}[/dim]")
+        console.print(f"[dim]  skillz uninstall {name}[/dim]")
+        console.print(f"[dim]  skillz install {name}[/dim]")
     else:
-        console.print("[dim]  claude-skills uninstall <name>[/dim]")
-        console.print("[dim]  claude-skills install <name>[/dim]")
+        console.print("[dim]  skillz uninstall <name>[/dim]")
+        console.print("[dim]  skillz install <name>[/dim]")

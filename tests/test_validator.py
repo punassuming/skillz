@@ -97,6 +97,22 @@ allowed-tools: not a list
         is_valid, errors = SkillValidator.validate_skill_directory(skill_dir)
         assert is_valid is False
 
+    def test_allowed_tools_all_tools_format(self, temp_dir):
+        """Test validation succeeds with ["*"] for all tools."""
+        skill_dir = temp_dir / "test-skill"
+        skill_dir.mkdir()
+        skill_md = skill_dir / "SKILL.md"
+        skill_md.write_text("""---
+name: test-skill
+description: Test skill with all tools allowed
+allowed-tools: ["*"]
+---
+# Test
+""")
+        is_valid, errors = SkillValidator.validate_skill_directory(skill_dir)
+        assert is_valid is True
+        assert len(errors) == 0
+
 
 class TestCommandValidator:
     """Tests for CommandValidator."""

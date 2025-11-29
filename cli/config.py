@@ -1,4 +1,4 @@
-"""Configuration management for claude-skills."""
+"""Configuration management for skillz."""
 
 import os
 from pathlib import Path
@@ -8,16 +8,21 @@ import yaml
 
 
 class Config:
-    """Configuration manager for claude-skills."""
+    """Configuration manager for skillz."""
 
     DEFAULT_CONFIG = {
-        "personal_skills_dir": "~/.claude/skills",
-        "personal_commands_dir": "~/.claude/commands",
-        "project_skills_dir": ".claude/skills",
-        "project_commands_dir": ".claude/commands",
+        "personal_skills_dir": "~/.config/opencode/skills",
+        "personal_commands_dir": "~/.config/opencode/command",
+        "project_skills_dir": ".opencode/skills",
+        "project_commands_dir": ".opencode/command",
         "repository_path": None,  # Path to the local clone of skills repository
         "default_target": "personal",  # personal or project
+        "default_platform": "opencode",  # Default platform: opencode, claude, codex, gemini
         "platforms": {
+            "opencode": {
+                "skills_dir": "~/.config/opencode/skills",
+                "commands_dir": "~/.config/opencode/command",
+            },
             "claude": {"skills_dir": "~/.claude/skills", "commands_dir": "~/.claude/commands"},
             "codex": {
                 "skills_dir": "~/.config/openai/skills",
@@ -38,18 +43,27 @@ class Config:
     @staticmethod
     def _default_config_path() -> Path:
         """Get the default configuration file path."""
-        return Path.home() / ".config" / "claude-skills" / "config.yaml"
+        return Path.home() / ".config" / "skillz" / "config.yaml"
 
     def _load_config(self) -> Dict:
         """Load configuration from file or use defaults."""
         if self.config_path.exists():
             with open(self.config_path, "r") as f:
                 user_config = yaml.safe_load(f) or {}
-                # Merge with defaults
-                config = self.DEFAULT_CONFIG.copy()
-                config.update(user_config)
+                # Deep merge with defaults
+                config = self._deep_merge(self.DEFAULT_CONFIG.copy(), user_config)
                 return config
         return self.DEFAULT_CONFIG.copy()
+
+    def _deep_merge(self, base: Dict, override: Dict) -> Dict:
+        """Deep merge two dictionaries, with override taking precedence."""
+        result = base.copy()
+        for key, value in override.items():
+            if key in result and isinstance(result[key], dict) and isinstance(value, dict):
+                result[key] = self._deep_merge(result[key], value)
+            else:
+                result[key] = value
+        return result
 
     def save_config(self) -> None:
         """Save current configuration to file."""

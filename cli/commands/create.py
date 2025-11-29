@@ -1,4 +1,4 @@
-"""Create command for claude-skills."""
+"""Create command for skillz."""
 
 from pathlib import Path
 

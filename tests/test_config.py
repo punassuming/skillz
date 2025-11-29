@@ -16,8 +16,10 @@ class TestConfig:
         config_path = temp_dir / "config.yaml"
         config = Config(config_path)
 
-        assert config.config["personal_skills_dir"] == "~/.claude/skills"
+        assert config.config["personal_skills_dir"] == "~/.config/opencode/skills"
         assert config.config["default_target"] == "personal"
+        assert config.config["default_platform"] == "opencode"
+        assert "opencode" in config.config["platforms"]
         assert "claude" in config.config["platforms"]
 
     def test_load_existing_config(self, temp_dir):
@@ -56,16 +58,22 @@ class TestConfig:
 
         # Mock home directory
         monkeypatch.setenv("HOME", str(temp_dir))
-        skills_dir = config.get_skills_dir("personal", "claude")
-        assert ".claude/skills" in str(skills_dir)
+        # Test OpenCode (default platform)
+        skills_dir = config.get_skills_dir("personal", "opencode")
+        assert "opencode/skills" in str(skills_dir)
+
+        # Test Claude Code platform
+        claude_skills_dir = config.get_skills_dir("personal", "claude")
+        assert ".claude/skills" in str(claude_skills_dir)
 
     def test_get_skills_dir_project(self, temp_dir):
         """Test getting project skills directory."""
         config_path = temp_dir / "config.yaml"
         config = Config(config_path)
 
-        skills_dir = config.get_skills_dir("project", "claude")
-        assert skills_dir == Path(".claude/skills")
+        # Default platform uses .opencode
+        skills_dir = config.get_skills_dir("project", "opencode")
+        assert skills_dir == Path(".opencode/skills")
 
     def test_get_commands_dir_personal(self, temp_dir, monkeypatch):
         """Test getting personal commands directory."""
@@ -73,8 +81,13 @@ class TestConfig:
         config = Config(config_path)
 
         monkeypatch.setenv("HOME", str(temp_dir))
-        commands_dir = config.get_commands_dir("personal", "claude")
-        assert ".claude/commands" in str(commands_dir)
+        # Test OpenCode (default platform)
+        commands_dir = config.get_commands_dir("personal", "opencode")
+        assert "opencode/command" in str(commands_dir)
+
+        # Test Claude Code platform
+        claude_commands_dir = config.get_commands_dir("personal", "claude")
+        assert ".claude/commands" in str(claude_commands_dir)
 
     def test_get_repository_path(self, temp_dir):
         """Test getting repository path."""

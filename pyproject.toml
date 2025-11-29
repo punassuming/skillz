@@ -1,7 +1,7 @@
 [project]
-name = "claude-skills"
+name = "skillz"
 version = "0.1.0"
-description = "A CLI tool for managing AI assistant skills and slash commands for Claude Code and other LLM platforms"
+description = "A CLI tool for managing AI assistant skills and slash commands for OpenCode, Claude Code, and other LLM platforms"
 authors = [
     {name = "John Kitchin", email = "jkitchin@andrew.cmu.edu"}
 ]
@@ -42,13 +42,13 @@ templates = [
 ]
 
 [project.scripts]
-claude-skills = "cli.main:cli"
+skillz = "cli.main:cli"
 
 [project.urls]
-Homepage = "https://github.com/jkitchin/claude-skills"
-Documentation = "https://github.com/jkitchin/claude-skills#readme"
-Repository = "https://github.com/jkitchin/claude-skills"
-Issues = "https://github.com/jkitchin/claude-skills/issues"
+Homepage = "https://github.com/jkitchin/skillz"
+Documentation = "https://github.com/jkitchin/skillz#readme"
+Repository = "https://github.com/jkitchin/skillz"
+Issues = "https://github.com/jkitchin/skillz/issues"
 
 [build-system]
 requires = ["hatchling"]

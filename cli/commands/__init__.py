@@ -1,1 +1,1 @@
-"""CLI commands for claude-skills."""
+"""CLI commands for skillz."""
