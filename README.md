@@ -1,6 +1,6 @@
 # Skillz
 
-![Skillz](skillz.png)
+<img src="skillz.png" alt="Skillz" width="300">
 
 [![Tests](https://github.com/jkitchin/skillz/actions/workflows/test.yml/badge.svg)](https://github.com/jkitchin/skillz/actions/workflows/test.yml)
 [![Lint](https://github.com/jkitchin/skillz/actions/workflows/lint.yml/badge.svg)](https://github.com/jkitchin/skillz/actions/workflows/lint.yml)
