@@ -1,8 +1,11 @@
 # Skillz
 
+![Skillz](skillz.png)
+
 [![Tests](https://github.com/jkitchin/skillz/actions/workflows/test.yml/badge.svg)](https://github.com/jkitchin/skillz/actions/workflows/test.yml)
 [![Lint](https://github.com/jkitchin/skillz/actions/workflows/lint.yml/badge.svg)](https://github.com/jkitchin/skillz/actions/workflows/lint.yml)
 [![codecov](https://codecov.io/gh/jkitchin/skillz/graph/badge.svg)](https://codecov.io/gh/jkitchin/skillz)
+
 
 A comprehensive CLI tool for managing AI assistant skills and slash commands for OpenCode, Claude Code, and other LLM platforms.
 
