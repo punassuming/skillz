@@ -1,8 +1,8 @@
-# Response to Reviewers
+* Response to Reviewers
 
-**Manuscript ID:** [ID Number]
-**Title:** [Manuscript Title]
-**Authors:** [Author List]
+*Manuscript ID:* [ID Number]
+*Title:* [Manuscript Title]
+*Authors:* [Author List]
 
 ---
 
@@ -26,23 +26,29 @@ Sincerely,
 
 ---
 
-## Reviewer 1
+** Reviewer 1
 
-### Comment 1.1:
-> [Quote exact reviewer comment]
+*** Comment 1.1:
 
-**Response:** [Your response - thank them, explain what you did, or respectfully disagree with evidence]
+#+begin_quote
+[Quote exact reviewer comment]
+#+end_quote
 
-**Changes in manuscript:** [Describe changes with line numbers. Example: "We have added new analysis as Figure S3 and describe it in Results (lines 234-241)"]
+*Response:* [Your response - thank them, explain what you did, or respectfully disagree with evidence]
+
+*Changes in manuscript:* [Describe changes with line numbers. Example: "We have added new analysis as Figure S3 and describe it in Results (lines 234-241)"]
 
 ---
 
-### Comment 1.2:
-> [Quote exact reviewer comment]
+*** Comment 1.2:
 
-**Response:** [Your response]
+#+begin_quote
+[Quote exact reviewer comment]
+#+end_quote
 
-**Changes in manuscript:** [Changes with line numbers]
+*Response:* [Your response]
+
+*Changes in manuscript:* [Changes with line numbers]
 
 ---
 
@@ -50,14 +56,17 @@ Sincerely,
 
 ---
 
-## Reviewer 2
+** Reviewer 2
 
-### Comment 2.1:
-> [Quote exact reviewer comment]
+*** Comment 2.1:
 
-**Response:** [Your response]
+#+begin_quote
+[Quote exact reviewer comment]
+#+end_quote
 
-**Changes in manuscript:** [Changes with line numbers]
+*Response:* [Your response]
+
+*Changes in manuscript:* [Changes with line numbers]
 
 ---
 
@@ -65,19 +74,19 @@ Sincerely,
 
 ---
 
-## Reviewer 3
+** Reviewer 3
 
 [Continue same format]
 
 ---
 
-## Editor Comments
+** Editor Comments
 
 [If editor had additional comments, address separately]
 
 ---
 
-## List of Changes
+** List of Changes
 
 For reference, here is a summary of all manuscript changes with line numbers:
 
@@ -89,4 +98,4 @@ For reference, here is a summary of all manuscript changes with line numbers:
 
 ---
 
-**Note:** All changes are highlighted in the revised manuscript submitted as [filename_tracked.docx]
+*Note:* All changes are highlighted in the revised manuscript submitted as [filename_tracked.docx]

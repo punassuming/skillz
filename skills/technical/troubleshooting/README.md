@@ -236,13 +236,13 @@ python binary_search_helper.py
 
 ```bash
 # Install to personal directory
-claude-skills install troubleshooting
+skillz install troubleshooting
 
 # Install to project
-claude-skills install troubleshooting --target project
+skillz install troubleshooting --target project
 
 # View detailed info
-claude-skills info troubleshooting
+skillz info troubleshooting
 ```
 
 ## Skill Structure
@@ -277,11 +277,11 @@ Based on established troubleshooting and diagnostic methodologies including:
 
 ## License
 
-This skill is part of the claude-skills repository and follows the repository's MIT license.
+This skill is part of the skillz repository and follows the repository's MIT license.
 
 ## Support
 
 For issues, suggestions, or contributions:
-- Repository: https://github.com/jkitchin/claude-skills
-- Issues: https://github.com/jkitchin/claude-skills/issues
+- Repository: https://github.com/jkitchin/skillz
+- Issues: https://github.com/jkitchin/skillz/issues
 - Category: technical/troubleshooting

@@ -257,10 +257,10 @@ Claude: I'll set up a NEB calculation with FAIRChem's oc20 model...
 ## Contributing
 
 If you find issues or have suggestions for improving this skill:
-1. Submit an issue to the claude-skills repository
+1. Submit an issue to the skillz repository
 2. Suggest additional examples or workflows
 3. Share performance optimization tips
 
 ## License
 
-This skill documentation is part of the claude-skills project (MIT License).
+This skill documentation is part of the skillz project (MIT License).

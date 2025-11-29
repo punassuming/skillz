@@ -377,4 +377,4 @@ If you have suggestions for improving this skill:
 
 ## License
 
-This skill documentation is part of the claude-skills project (MIT License).
+This skill documentation is part of the skillz project (MIT License).

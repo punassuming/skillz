@@ -1,20 +1,20 @@
-# Grant Proposal Writing
+* Grant Proposal Writing
 
 Guide to writing competitive research grant proposals.
 
-## Major Funding Agencies
+** Major Funding Agencies
 
-**NIH (US Biomedical):** R01, R21, F31, K awards
-**NSF (US Science/Engineering):** Various programs by directorate
-**ERC (European):** Starting, Consolidator, Advanced grants
-**Wellcome Trust (UK Biomedical):** Various career stages
-**NSERC/CIHR (Canada):** Discovery, Project grants
+/NIH (US Biomedical):/ R01, R21, F31, K awards
+/NSF (US Science/Engineering):/ Various programs by directorate
+/ERC (European):/ Starting, Consolidator, Advanced grants
+/Wellcome Trust (UK Biomedical):/ Various career stages
+/NSERC/CIHR (Canada):/ Discovery, Project grants
 
-## NIH R01 Grant Structure
+** NIH R01 Grant Structure
 
-### Specific Aims (1 page)
+*** Specific Aims (1 page)
 
-**Structure:**
+/Structure:/
 1. Opening paragraph: Problem importance, unmet need
 2. Gap/opportunity paragraph
 3. Long-term goal and objective
@@ -22,92 +22,92 @@ Guide to writing competitive research grant proposals.
 5. Three Specific Aims (testable, achievable)
 6. Expected outcomes and impact
 
-**Example Opening:**
+/Example Opening:/
 "Cancer remains the second leading cause of death in the US, with >600,000 deaths annually [1]. While therapies exist for many cancers, drug resistance develops in 70% of patients [2,3]. Understanding mechanisms of resistance is critical for developing effective treatments"
 
-**Aims Format:**
-```
+/Aims Format:/
+#+begin_src 
 Aim 1: Determine the molecular mechanism of X resistance
 Aim 2: Test whether targeting Y overcomes X resistance
 Aim 3: Validate approach in preclinical models
-```
+#+end_src
 
-**Aims Should:**
+/Aims Should:/
 - Be distinct but related
 - Build on each other logically
 - Be feasible in timeframe (typically 4-5 years for R01)
 - Have clear outcomes
 - Be testable
 
-### Research Strategy (12 pages for R01)
+*** Research Strategy (12 pages for R01)
 
-**Sections:**
-1. **Significance** (2-3 pages)
-2. **Innovation** (1-2 pages)
-3. **Approach** (8-9 pages, organized by Aim)
+/Sections:/
+1. /Significance/ (2-3 pages)
+2. /Innovation/ (1-2 pages)
+3. /Approach/ (8-9 pages, organized by Aim)
 
-#### Significance
+**** Significance
 
-**Address:**
+/Address:/
 - Why is this problem important?
 - What is the current state of knowledge?
 - What critical barrier does this address?
 - How will this advance the field?
 - What is the expected impact?
 
-**Structure:**
+/Structure:/
 - Problem importance with data/statistics
 - Current knowledge and gaps
 - How your project addresses barrier
 - Expected impact on field/health
 
-#### Innovation
+**** Innovation
 
-**Address:**
+/Address:/
 - What is novel about your concepts/approaches/methodologies?
 - How does it challenge existing paradigms?
 - Are you developing new methods/technologies?
 - Are you applying existing methods in new ways?
 
-**Innovation can be:**
+/Innovation can be:/
 - Novel hypothesis
 - New methodology
 - New application of existing methods
 - Novel system/model
 - Interdisciplinary approach
 
-#### Approach
+**** Approach
 
-**For each Aim:**
+/For each Aim:/
 
-**Rationale:**
+/Rationale:/
 - Why is this aim important?
 - What preliminary data support feasibility?
 
-**Experimental Design:**
+/Experimental Design:/
 - Detailed methods
 - Sample sizes with justification
 - Statistical power
 - Controls
 - Alternative approaches
 
-**Expected Results:**
+/Expected Results:/
 - What you expect to find
 - How results will be interpreted
 
-**Potential Problems and Alternative Approaches:**
+/Potential Problems and Alternative Approaches:/
 - What could go wrong?
 - How will you address problems?
 - Alternative strategies
-- **Critical:** Reviewers want to see you've thought this through
+- /Critical:/ Reviewers want to see you've thought this through
 
-**Timeline:**
+/Timeline:/
 - Years 1-2: Aim 1
 - Years 2-3: Aim 2
 - Years 4-5: Aim 3
 
-**Example Approach Section:**
-```
+/Example Approach Section:/
+#+begin_src 
 Aim 1: Determine molecular mechanism of X resistance
 
 Rationale: Our preliminary data show that 70% of X-resistant cells have elevated Y levels (Fig. 1).
@@ -128,37 +128,37 @@ Experimental Design:
 Potential Problems and Alternatives:
 Problem: If Y deletion doesn't reverse resistance...
 Alternative: We will test whether Y works redundantly with Z...
-```
+#+end_src
 
-### Preliminary Data
+*** Preliminary Data
 
-**Purpose:**
+/Purpose:/
 - Demonstrate feasibility
 - Show your capability
 - Support hypothesis
 - Prove concept works
 
-**Balance:**
+/Balance:/
 - Enough to show feasibility
 - Not so much that project seems finished
 
-**What to include:**
+/What to include:/
 - Proof-of-concept data
 - Method validation
 - Pilot studies
 - Published and unpublished data
 
-### Other NIH Grant Sections
+*** Other NIH Grant Sections
 
-**Bibliography:** Cited references (no page limit)
+/Bibliography:/ Cited references (no page limit)
 
-**Biographical Sketch:** NIH format, 5 pages
+/Biographical Sketch:/ NIH format, 5 pages
 - Education and positions
 - Personal statement (why you're suited for this)
 - Contributions to science (up to 5, with key papers)
 - Research support
 
-**Budget and Justification:**
+/Budget and Justification:/
 - Personnel with effort justification
 - Equipment
 - Supplies
@@ -166,13 +166,13 @@ Alternative: We will test whether Y works redundantly with Z...
 - Other expenses
 - Modular (≤$250k direct costs per year) or detailed
 
-**Facilities and Resources:** What you have available
+/Facilities and Resources:/ What you have available
 
-**Equipment:** Major equipment available
+/Equipment:/ Major equipment available
 
-## NSF Proposal Structure
+** NSF Proposal Structure
 
-**Project Description (15 pages):**
+/Project Description (15 pages):/
 - Introduction
 - Background and Significance
 - Preliminary Results (if applicable)
@@ -180,125 +180,125 @@ Alternative: We will test whether Y works redundantly with Z...
 - Broader Impacts
 - Results from Prior NSF Support (if applicable)
 
-**Intellectual Merit:**
+/Intellectual Merit:/
 - Advance knowledge/understanding?
 - Novel concepts/approaches?
 - Expertise of investigators?
 
-**Broader Impacts:**
+/Broader Impacts:/
 - Benefits to society?
 - Training and education?
 - Broadening participation?
 - Dissemination?
 - Infrastructure?
 
-**Key Difference from NIH:**
+/Key Difference from NIH:/
 - NSF emphasizes broader impacts more heavily
 - Can be more exploratory
 - Innovation highly valued
 
-## Review Criteria Alignment
+** Review Criteria Alignment
 
-### NIH Review Criteria
+*** NIH Review Criteria
 
-1. **Significance:** Importance of problem and expected impact
-2. **Investigator(s):** Qualifications and expertise
-3. **Innovation:** Novel approaches or concepts
-4. **Approach:** Strategy, methodology, analyses
-5. **Environment:** Institutional support and resources
+1. /Significance:/ Importance of problem and expected impact
+2. /Investigator(s):/ Qualifications and expertise
+3. /Innovation:/ Novel approaches or concepts
+4. /Approach:/ Strategy, methodology, analyses
+5. /Environment:/ Institutional support and resources
 
-### Address Explicitly
+*** Address Explicitly
 
-**Use subheadings matching criteria:**
+/Use subheadings matching criteria:/
 - Makes reviewers' job easy
 - Ensures you address all criteria
 - Shows you understand process
 
-**Example:**
-```
+/Example:/
+#+begin_src 
 Significance
 [Content explicitly addressing significance]
 
 Innovation
 [Content explicitly addressing innovation]
-```
+#+end_src
 
-## Common Grant Writing Problems
+** Common Grant Writing Problems
 
-### Problem: Too Ambitious
+*** Problem: Too Ambitious
 
-**Symptom:** Trying to do too much in timeframe
+/Symptom:/ Trying to do too much in timeframe
 
-**Fix:** Focus on achievable aims; one major finding per aim is sufficient
+/Fix:/ Focus on achievable aims; one major finding per aim is sufficient
 
-### Problem: Insufficient Preliminary Data
+*** Problem: Insufficient Preliminary Data
 
-**Symptom:** No evidence that approach will work
+/Symptom:/ No evidence that approach will work
 
-**Fix:** Generate pilot data; show feasibility; demonstrate your capability
+/Fix:/ Generate pilot data; show feasibility; demonstrate your capability
 
-### Problem: Weak Connection Between Aims
+*** Problem: Weak Connection Between Aims
 
-**Symptom:** Aims seem like separate projects
+/Symptom:/ Aims seem like separate projects
 
-**Fix:** Ensure aims address related questions that build toward common goal
+/Fix:/ Ensure aims address related questions that build toward common goal
 
-### Problem: Missing Pitfalls/Alternatives
+*** Problem: Missing Pitfalls/Alternatives
 
-**Symptom:** Everything will work perfectly (unrealistic!)
+/Symptom:/ Everything will work perfectly (unrealistic!)
 
-**Fix:** Identify potential problems and describe alternative approaches
+/Fix:/ Identify potential problems and describe alternative approaches
 
-### Problem: Poor Writing Clarity
+*** Problem: Poor Writing Clarity
 
-**Symptom:** Reviewers can't understand proposal
+/Symptom:/ Reviewers can't understand proposal
 
-**Fix:** Clear writing, defined terms, logical flow, figures to illustrate
+/Fix:/ Clear writing, defined terms, logical flow, figures to illustrate
 
-### Problem: Not Addressing Review Criteria
+*** Problem: Not Addressing Review Criteria
 
-**Symptom:** Leaving reviewers to figure out how proposal meets criteria
+/Symptom:/ Leaving reviewers to figure out how proposal meets criteria
 
-**Fix:** Explicitly address all review criteria with matching subheadings
+/Fix:/ Explicitly address all review criteria with matching subheadings
 
-## Grant Writing Tips
+** Grant Writing Tips
 
-**Start Early:**
+/Start Early:/
 - Begin 2-3 months before deadline
 - Time for multiple revisions
 - Get feedback from colleagues
 
-**Get Feedback:**
+/Get Feedback:/
 - Mock review panel
 - Senior colleagues
 - Grants office
 - Former reviewers
 
-**Follow Instructions:**
+/Follow Instructions:/
 - Page limits
 - Font size and margins
 - Required sections
 - Formatting requirements
 
-**Make It Easy to Review:**
+/Make It Easy to Review:/
 - Clear organization
 - Subheadings
 - Figures and tables
 - Define abbreviations
 - No jargon
 
-**Tell a Compelling Story:**
+/Tell a Compelling Story:/
 - Why does this matter?
 - What's the gap?
 - How will you fill it?
 - What's the impact?
 
-**Be Realistic:**
+/Be Realistic:/
 - Achievable in timeframe
 - Appropriate for your career stage
 - Supported by preliminary data
 
-## Specific Aims Page Checklist
+** Specific Aims Page Checklist
 
 - [ ] Compelling opening (why problem matters)
 - [ ] Clear gap/opportunity identified
@@ -314,7 +314,7 @@ Innovation
 - [ ] No citations (typically)
 - [ ] No figures (typically)
 
-## Full Proposal Checklist
+** Full Proposal Checklist
 
 - [ ] All sections present and within page limits
 - [ ] Review criteria explicitly addressed

@@ -158,8 +158,8 @@ emacs-lisp/
 ### For Personal Use
 
 ```bash
-# Using claude-skills CLI
-claude-skills install emacs-lisp
+# Using skillz CLI
+skillz install emacs-lisp
 
 # Or manually
 mkdir -p ~/.claude/skills/emacs-lisp
@@ -169,8 +169,8 @@ cp -r . ~/.claude/skills/emacs-lisp/
 ### For Project Use
 
 ```bash
-# Using claude-skills CLI
-claude-skills install emacs-lisp --target project
+# Using skillz CLI
+skillz install emacs-lisp --target project
 
 # Or manually
 mkdir -p .claude/skills/emacs-lisp
@@ -424,7 +424,7 @@ To improve this skill:
 
 ## License
 
-This skill is part of the claude-skills repository and follows the same license.
+This skill is part of the skillz repository and follows the same license.
 
 ## Version History
 

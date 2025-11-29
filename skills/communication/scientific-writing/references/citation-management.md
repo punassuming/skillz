@@ -1,22 +1,22 @@
-# Citation Management
+* Citation Management
 
 Guide to citation styles and reference formatting for scientific papers.
 
-## Citation Style Overview
+** Citation Style Overview
 
-### Numbered Citations (Vancouver Style)
+*** Numbered Citations (Vancouver Style)
 
-**Common in:** Nature, Science, Cell, NEJM, most biomedical journals
+/Common in:/ Nature, Science, Cell, NEJM, most biomedical journals
 
-**In-text format:**
+/In-text format:/
 - Single citation: [1]
 - Multiple citations: [1,2] or [1-3]
 - Sequential citations: [1-5]
 - Non-sequential: [1,3,7]
 
-**Reference list:** Numbered in order of first appearance in text
+/Reference list:/ Numbered in order of first appearance in text
 
-**Example:**
+/Example:/
 "Previous studies showed that X affects Y [1,2]. This was later confirmed [3]."
 
 References:
@@ -24,11 +24,11 @@ References:
 2. Jones A, et al. Title. Journal. 2019;14:456-462.
 3. Brown B, et al. Title. Journal. 2021;16:789-795.
 
-### Author-Year (Harvard Style)
+*** Author-Year (Harvard Style)
 
-**Common in:** Many social sciences, ecology, some biology journals
+/Common in:/ Many social sciences, ecology, some biology journals
 
-**In-text format:**
+/In-text format:/
 - Single: (Smith, 2020)
 - Multiple same author: (Smith, 2019, 2020)
 - Multiple authors: (Smith, 2020; Jones, 2021)
@@ -36,75 +36,75 @@ References:
 - Three+ authors: (Smith et al., 2020)
 - In sentence: "Smith (2020) showed that..."
 
-**Reference list:** Alphabetical by first author
+/Reference list:/ Alphabetical by first author
 
-**Example:**
+/Example:/
 "Previous studies showed that X affects Y (Smith, 2020; Jones, 2021). This was later confirmed (Brown, 2022)."
 
-### Author-Number (ACS Style)
+*** Author-Number (ACS Style)
 
-**Common in:** Chemistry journals (ACS publications)
+/Common in:/ Chemistry journals (ACS publications)
 
-**In-text format:**
+/In-text format:/
 - Citation as noun: Smith (1) showed that...
 - Citation in parentheses: Previous work (1,2) showed...
 
-**Reference list:** Numbered in order of appearance
+/Reference list:/ Numbered in order of appearance
 
-### Footnote Style (Chicago)
+*** Footnote Style (Chicago)
 
-**Common in:** Some humanities journals
+/Common in:/ Some humanities journals
 
-**In-text:** Superscript numbers¹
-**References:** Listed as footnotes at bottom of page or end
+/In-text:/ Superscript numbers¹
+/References:/ Listed as footnotes at bottom of page or end
 
-## In-Text Citation Rules
+** In-Text Citation Rules
 
-### Placement
+*** Placement
 
-**Before or after punctuation (varies by journal):**
+/Before or after punctuation (varies by journal):/
 - Before: "X affects Y [1]."
 - After: "X affects Y.[1]"
 
-**Check journal style and be consistent**
+/Check journal style and be consistent/
 
-### Multiple Citations
+*** Multiple Citations
 
-**Numbered style:**
+/Numbered style:/
 - Consecutive: [1-5]
 - Non-consecutive: [1,3,7]
 - Combined: [1-3,7,9-11]
 
-**Author-year style:**
+/Author-year style:/
 - Alphabetical: (Jones, 2020; Smith, 2021)
 - Or chronological: (Smith, 2020; Jones, 2021)
 
-**Check journal preference**
+/Check journal preference/
 
-### Et al. Usage
+*** Et al. Usage
 
-**Typically:**
+/Typically:/
 - 3+ authors: Smith et al.
 - First mention in author-year: sometimes list all, then "et al." after
 - Check journal guidelines
 
-**Example:**
+/Example:/
 "Smith, Jones, and Brown (2020) showed... In later work, Smith et al. (2021)..."
 
-### Personal Communications
+*** Personal Communications
 
-**Not in reference list:**
+/Not in reference list:/
 - In-text only: (J. Smith, personal communication, May 2023)
 
-**Unpublished data:**
+/Unpublished data:/
 - Can be in references or in-text only
 - Check journal policy
 
-## Reference List Formatting
+** Reference List Formatting
 
-### Journal Articles
+*** Journal Articles
 
-**Elements:**
+/Elements:/
 - Authors (all or et al. after N authors)
 - Article title (some styles omit)
 - Journal name (abbreviated or full)
@@ -114,18 +114,18 @@ References:
 - Pages
 - DOI (increasingly required)
 
-**Vancouver style:**
+/Vancouver style:/
 Smith J, Jones A, Brown B. Article title here. J Abbrev. 2020;15(3):123-130. doi:10.1234/journal.123
 
-**APA style:**
+/APA style:/
 Smith, J., Jones, A., & Brown, B. (2020). Article title here. Journal Name, 15(3), 123-130. https://doi.org/10.1234/journal.123
 
-**ACS style:**
+/ACS style:/
 (1) Smith, J.; Jones, A.; Brown, B. Article Title Here. J. Abbrev. 2020, 15, 123-130.
 
-### Books
+*** Books
 
-**Elements:**
+/Elements:/
 - Authors/Editors
 - Book title
 - Edition (if not first)
@@ -134,15 +134,15 @@ Smith, J., Jones, A., & Brown, B. (2020). Article title here. Journal Name, 15(3
 - Year
 - Pages (if citing specific chapter/section)
 
-**Example (Vancouver):**
+/Example (Vancouver):/
 Smith J. Book Title. 2nd ed. Publisher; 2020.
 
-**Example (APA):**
+/Example (APA):/
 Smith, J. (2020). Book title (2nd ed.). Publisher.
 
-### Book Chapters
+*** Book Chapters
 
-**Elements:**
+/Elements:/
 - Chapter authors
 - Chapter title
 - Editors
@@ -151,152 +151,152 @@ Smith, J. (2020). Book title (2nd ed.). Publisher.
 - Year
 - Pages
 
-**Example (Vancouver):**
+/Example (Vancouver):/
 Smith J. Chapter title. In: Jones A, Brown B, editors. Book Title. Publisher; 2020. p. 123-145.
 
-**Example (APA):**
+/Example (APA):/
 Smith, J. (2020). Chapter title. In A. Jones & B. Brown (Eds.), Book title (pp. 123-145). Publisher.
 
-### Conference Papers
+*** Conference Papers
 
-**Example (Vancouver):**
+/Example (Vancouver):/
 Smith J, Jones A. Paper title. In: Proceedings of Conference Name; 2020 May 15-17; City, State. Publisher; 2020. p. 45-52.
 
-**Example (APA):**
+/Example (APA):/
 Smith, J., & Jones, A. (2020, May 15-17). Paper title [Conference session]. Conference Name, City, State.
 
-### Websites
+*** Websites
 
-**Elements:**
+/Elements:/
 - Author (if available)
 - Title
 - Website name
 - URL
 - Access date
 
-**Example:**
+/Example:/
 National Institutes of Health. Grant application guide. https://grants.nih.gov/guide. Accessed May 15, 2023.
 
-### Theses/Dissertations
+*** Theses/Dissertations
 
-**Example:**
+/Example:/
 Smith J. Thesis Title [dissertation]. University Name; 2020.
 
-### Preprints
+*** Preprints
 
-**Example:**
+/Example:/
 Smith J, Jones A. Article title. bioRxiv. Posted online May 1, 2023. doi:10.1101/2023.05.01.123456
 
-## Journal Abbreviations
+** Journal Abbreviations
 
-### Standard Abbreviations
+*** Standard Abbreviations
 
-**Use:**
+/Use:/
 - PubMed abbreviations (MEDLINE)
 - ISO abbreviations
 - Journal-specific guidelines
 
-**Examples:**
+/Examples:/
 - Journal of Biological Chemistry → J Biol Chem
 - Proceedings of the National Academy of Sciences → Proc Natl Acad Sci USA
 - Nature → Nature (no abbreviation)
 - Science → Science (no abbreviation)
 
-### Full Journal Names
+*** Full Journal Names
 
-**Some journals require:**
+/Some journals require:/
 - Full journal name, not abbreviated
 - Check guidelines
 
-## Common Citation Problems
+** Common Citation Problems
 
-### Problem: Inconsistent Style
+*** Problem: Inconsistent Style
 
-**Wrong:** Mixed [1] and (Smith, 2020) styles
+/Wrong:/ Mixed [1] and (Smith, 2020) styles
 
-**Fix:** Use one style throughout
+/Fix:/ Use one style throughout
 
-### Problem: Missing Citations
+*** Problem: Missing Citations
 
-**Symptom:** In-text citation [15] but no reference 15 in list
+/Symptom:/ In-text citation [15] but no reference 15 in list
 
-**Fix:** Ensure all in-text citations have corresponding references
+/Fix:/ Ensure all in-text citations have corresponding references
 
-### Problem: Orphan References
+*** Problem: Orphan References
 
-**Symptom:** Reference 25 in list but never cited in text
+/Symptom:/ Reference 25 in list but never cited in text
 
-**Fix:** Remove or cite in text
+/Fix:/ Remove or cite in text
 
-### Problem: Incomplete Information
+*** Problem: Incomplete Information
 
-**Wrong:** Smith J. Article title. Journal. 2020.
+/Wrong:/ Smith J. Article title. Journal. 2020.
 (Missing volume, pages)
 
-**Right:** Smith J. Article title. Journal. 2020;15:123-130.
+/Right:/ Smith J. Article title. Journal. 2020;15:123-130.
 
-### Problem: Incorrect Author Names
+*** Problem: Incorrect Author Names
 
-**Issues:**
+/Issues:/
 - Author order wrong
 - Names misspelled
 - Initials vs. full first names (inconsistent)
 
-**Fix:** Copy from original source, verify PubMed
+/Fix:/ Copy from original source, verify PubMed
 
-### Problem: Missing DOIs
+*** Problem: Missing DOIs
 
-**Many journals now require DOIs when available**
+/Many journals now require DOIs when available/
 
-**Add:** doi:10.1234/journal.123 or https://doi.org/10.1234/journal.123
+/Add:/ doi:10.1234/journal.123 or https://doi.org/10.1234/journal.123
 
-## Reference Managers
+** Reference Managers
 
-### Tools
+*** Tools
 
-**Zotero (free, open-source):**
+/Zotero (free, open-source):/
 - Browser integration
 - Word/LibreOffice plugins
 - Group libraries
 - Multiple citation styles
 
-**Mendeley (free):**
+/Mendeley (free):/
 - PDF management
 - Desktop + web
 - Social features
 - Word/LibreOffice plugins
 
-**EndNote (commercial):**
+/EndNote (commercial):/
 - Advanced features
 - Large citation style library
 - Word integration
 - Institutional licenses common
 
-**Papers (commercial, Mac):**
+/Papers (commercial, Mac):/
 - Mac/iOS focused
 - PDF management
 - Reading features
 
-### Using Reference Managers
+*** Using Reference Managers
 
-**Workflow:**
+/Workflow:/
 1. Import references (from databases, PDFs, manual entry)
 2. Organize in folders/collections
 3. Insert citations while writing (via plugin)
 4. Generate bibliography automatically
 5. Switch citation styles as needed
 
-**Benefits:**
+/Benefits:/
 - Consistent formatting
 - Easy style switching
 - Reduces errors
 - Saves time
 - PDF organization
 
-### BibTeX (for LaTeX)
+*** BibTeX (for LaTeX)
 
-**Format:**
-```bibtex
+/Format:/
+#+begin_src bibtex
 @article{smith2020,
   author = {Smith, John and Jones, Alice},
   title = {Article Title},
@@ -306,50 +306,50 @@ Smith J, Jones A. Article title. bioRxiv. Posted online May 1, 2023. doi:10.1101
   pages = {123--130},
   doi = {10.1234/journal.123}
 }
-```
+#+end_src
 
-**In LaTeX:**
-```latex
+/In LaTeX:/
+#+begin_src latex
 \cite{smith2020}
 \bibliographystyle{plain}
 \bibliography{references}
-```
+#+end_src
 
-## Citation Style Language (CSL)
+** Citation Style Language (CSL)
 
-**Standard format for citation styles:**
+/Standard format for citation styles:/
 - XML-based
 - Used by Zotero, Mendeley, Papers
 - Repository: https://citationstyles.org/
 - 1000+ journal styles available
 
-**Can customize:**
+/Can customize:/
 - Create custom styles
 - Modify existing styles
 - Share with collaborators
 
-## Special Cases
+** Special Cases
 
-### Multiple Papers Same Author Same Year
+*** Multiple Papers Same Author Same Year
 
-**Author-year style:**
+/Author-year style:/
 Smith et al., 2020a
 Smith et al., 2020b
 
-### Retracted Papers
+*** Retracted Papers
 
-**Avoid citing if possible**
-**If must cite:** Note retraction status
+/Avoid citing if possible/
+/If must cite:/ Note retraction status
 
-### Preprints
+*** Preprints
 
-**Include:**
+/Include:/
 - Preprint server (bioRxiv, arXiv, etc.)
 - DOI
 - Posted date
 - Note if published version exists
 
-## Citation Checklist
+** Citation Checklist
 
 - [ ] Consistent style throughout (numbered or author-year)
 - [ ] All in-text citations have references
@@ -364,22 +364,22 @@ Smith et al., 2020b
 - [ ] Accessed dates for websites
 - [ ] No retracted papers (unless explicitly discussed)
 
-## Journal-Specific Examples
+** Journal-Specific Examples
 
-**Nature:**
+/Nature:/
 1. Smith, J. & Jones, A. Article title. Nature 580, 123-130 (2020).
 
-**Science:**
+/Science:/
 1. J. Smith, A. Jones, Article title. Science 365, 123 (2020).
 
-**Cell:**
+/Cell:/
 Smith, J., and Jones, A. (2020). Article title. Cell 180, 123-130.
 
-**PLOS:**
+/PLOS:/
 1. Smith J, Jones A (2020) Article title. PLoS One 15(3): e0123456.
 
-**IEEE:**
+/IEEE:/
 [1] J. Smith and A. Jones, "Article title," IEEE Trans. Pattern Anal. Mach. Intell., vol. 42, no. 3, pp. 123-130, Mar. 2020.
 
-**APA:**
+/APA:/
 Smith, J., & Jones, A. (2020). Article title. Journal Name, 15(3), 123-130. https://doi.org/10.1234/journal.123

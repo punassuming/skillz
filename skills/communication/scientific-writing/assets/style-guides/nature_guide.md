@@ -1,59 +1,59 @@
-# Nature Journal Style Guide - Quick Reference
+* Nature Journal Style Guide - Quick Reference
 
-## Article Structure
+** Article Structure
 
-- **Abstract:** 150-200 words, unstructured
-- **Introduction:** 2-3 paragraphs
-- **Results:** Main section
-- **Discussion:** Interpretation and context
-- **Methods:** After discussion (or supplementary)
-- **References:** Numbered, Nature style
+- *Abstract:* 150-200 words, unstructured
+- *Introduction:* 2-3 paragraphs
+- *Results:* Main section
+- *Discussion:* Interpretation and context
+- *Methods:* After discussion (or supplementary)
+- *References:* Numbered, Nature style
 
-## Formatting
+** Formatting
 
-- **Fonts:** Times, 12pt
-- **Line spacing:** Double
-- **Margins:** 2.5 cm all sides
-- **Page numbers:** Bottom right
+- *Fonts:* Times, 12pt
+- *Line spacing:* Double
+- *Margins:* 2.5 cm all sides
+- *Page numbers:* Bottom right
 
-## Figures
+** Figures
 
-- **Resolution:** 300 DPI minimum
-- **Formats:** EPS, PDF (vector); TIFF, PNG (raster)
-- **Size:** Single column 89 mm, double column 183 mm
-- **Color:** RGB for online, CMYK for print
-- **Panels:** Labeled a, b, c (lowercase)
+- *Resolution:* 300 DPI minimum
+- *Formats:* EPS, PDF (vector); TIFF, PNG (raster)
+- *Size:* Single column 89 mm, double column 183 mm
+- *Color:* RGB for online, CMYK for print
+- *Panels:* Labeled a, b, c (lowercase)
 
-## Citations
+** Citations
 
-**In-text:** Numbered superscript
+*In-text:* Numbered superscript
 - Example: "Previous work¹ showed that..."
 - Multiple: "Recent studies¹⁻³ demonstrated..."
 
-**Reference list:** Numbered in order of appearance
-```
+*Reference list:* Numbered in order of appearance
+#+begin_src
 1. Author, A. A., Author, B. B. & Author, C. C. Article title. Journal
    Abbrev. vol, pages (year).
-```
+#+end_src
 
-## Abbreviations
+** Abbreviations
 
 - Define at first use
 - Use standard abbreviations without definition (DNA, RNA, etc.)
 - Avoid in title and abstract
 
-## Numbers
+** Numbers
 
 - Use numerals with units: "5 mg"
 - Spell out at start of sentence
 - Use commas for thousands: "10,000"
 
-## Statistical Reporting
+** Statistical Reporting
 
 - Include n, test used, exact p-values
 - Report mean ± s.d. or mean ± s.e.m. (specify)
 - Asterisks: * P < 0.05, ** P < 0.01, *** P < 0.001
 
-## More Information
+** More Information
 
 https://www.nature.com/nature/for-authors/formatting-guide

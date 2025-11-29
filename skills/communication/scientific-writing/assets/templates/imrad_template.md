@@ -1,22 +1,22 @@
-# [Article Title]
+* [Article Title]
 
-**Authors:** [Names and Affiliations]
+*Authors:* [Names and Affiliations]
 
-## Abstract
+** Abstract
 
-**Background:** [1-2 sentences establishing context and importance]
+*Background:* [1-2 sentences establishing context and importance]
 
-**Objective:** [What this study does]
+*Objective:* [What this study does]
 
-**Methods:** [Brief approach, system studied, key techniques]
+*Methods:* [Brief approach, system studied, key techniques]
 
-**Results:** [Key findings with data - numbers and statistics]
+*Results:* [Key findings with data - numbers and statistics]
 
-**Conclusions:** [What findings mean, significance, implications]
+*Conclusions:* [What findings mean, significance, implications]
 
-**Keywords:** [3-6 keywords not in title]
+*Keywords:* [3-6 keywords not in title]
 
-## Introduction
+** Introduction
 
 [Start broad - why general topic matters]
 
@@ -28,35 +28,35 @@
 
 [Optional: Brief approach overview]
 
-## Materials and Methods
+** Materials and Methods
 
-### [Materials / Reagents / Cell Culture / etc.]
+*** [Materials / Reagents / Cell Culture / etc.]
 
 [List materials with sources, catalog numbers, concentrations]
 
-### [Experimental Procedure 1]
+*** [Experimental Procedure 1]
 
 [Detailed methods with enough information for reproducibility]
 
-### [Experimental Procedure 2]
+*** [Experimental Procedure 2]
 
 [Continue for all procedures]
 
-### Statistical Analysis
+*** Statistical Analysis
 
 [Software, tests used, significance levels, corrections]
 
-## Results
+** Results
 
-### [Finding 1 - Descriptive subheading]
+*** [Finding 1 - Descriptive subheading]
 
 [Report observations objectively. Reference figures/tables. Include statistical details.]
 
-### [Finding 2 - Descriptive subheading]
+*** [Finding 2 - Descriptive subheading]
 
 [Continue for all major findings]
 
-## Discussion
+** Discussion
 
 [Restate main findings briefly]
 
@@ -70,14 +70,14 @@
 
 [Suggest future directions]
 
-## Conclusions
+** Conclusions
 
 [Summary of key findings and significance in 1-2 paragraphs]
 
-## Acknowledgments
+** Acknowledgments
 
 [Funding sources, technical assistance, etc.]
 
-## References
+** References
 
 [Formatted according to journal requirements]

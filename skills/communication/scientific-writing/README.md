@@ -370,4 +370,4 @@ To extend this skill:
 
 ## License
 
-This skill is part of the claude-skills project.
+This skill is part of the skillz project.

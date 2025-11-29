@@ -159,13 +159,13 @@ This skill is suitable for:
 ## Contributing
 
 If you find issues or have suggestions for improving this skill:
-1. Submit an issue to the claude-skills repository
+1. Submit an issue to the skillz repository
 2. Suggest additional examples or workflows
 3. Share common problems you'd like documented
 
 ## License
 
-This skill documentation is part of the claude-skills project (MIT License).
+This skill documentation is part of the skillz project (MIT License).
 
 ## Resources
 

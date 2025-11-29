@@ -1,118 +1,118 @@
-# Review Article Writing
+* Review Article Writing
 
 Guide to writing effective literature review articles.
 
-## Review Article Types
+** Review Article Types
 
-### Narrative Review
-**Characteristics:** Broad overview, expert perspective, not systematic
-**Use:** General audience, providing perspective on field
-**Structure:** Flexible, thematic organization
+*** Narrative Review
+/Characteristics:/ Broad overview, expert perspective, not systematic
+/Use:/ General audience, providing perspective on field
+/Structure:/ Flexible, thematic organization
 
-### Systematic Review
-**Characteristics:** Structured search protocol, reproducible, comprehensive
-**Use:** Evidence synthesis, clinical guidelines
-**Structure:** PRISMA guidelines (for medical reviews)
-**Includes:** Search strategy, inclusion/exclusion criteria, quality assessment
+*** Systematic Review
+/Characteristics:/ Structured search protocol, reproducible, comprehensive
+/Use:/ Evidence synthesis, clinical guidelines
+/Structure:/ PRISMA guidelines (for medical reviews)
+/Includes:/ Search strategy, inclusion/exclusion criteria, quality assessment
 
-### Meta-Analysis
-**Characteristics:** Quantitative synthesis of multiple studies
-**Use:** Pooling effect sizes, resolving contradictions
-**Includes:** Statistical combination of results, heterogeneity assessment
+*** Meta-Analysis
+/Characteristics:/ Quantitative synthesis of multiple studies
+/Use:/ Pooling effect sizes, resolving contradictions
+/Includes:/ Statistical combination of results, heterogeneity assessment
 
-### Scoping Review
-**Characteristics:** Maps literature landscape, identifies gaps
-**Use:** Emerging topics, identifying research needs
-**Structure:** Broad inclusion, categorization of literature
+*** Scoping Review
+/Characteristics:/ Maps literature landscape, identifies gaps
+/Use:/ Emerging topics, identifying research needs
+/Structure:/ Broad inclusion, categorization of literature
 
-## Review Structure
+** Review Structure
 
-### Abstract
+*** Abstract
 - Background/context
 - Scope of review
 - Key findings/themes
 - Conclusions/implications
 
-### Introduction
+*** Introduction
 - Why topic is important
 - Scope of review (what's included/excluded)
 - Organization of review
 - Search strategy (if systematic)
 
-### Thematic Sections
-- **Not chronological listing of papers**
+*** Thematic Sections
+- /Not chronological listing of papers/
 - Organized by theme/topic/question
 - Compare and contrast findings
 - Synthesize across studies
 
-### Current State and Future Directions
+*** Current State and Future Directions
 - What do we know?
 - What are the gaps?
 - What's needed next?
 
-### Conclusions
+*** Conclusions
 - Summary of key points
 - Main take-home messages
 - Implications for field/practice
 
-## Literature Organization
+** Literature Organization
 
-### By Theme (Preferred)
+*** By Theme (Preferred)
 
-**Example (autophagy review):**
+/Example (autophagy review):/
 - Molecular mechanisms of autophagy initiation
 - Autophagy in development
 - Autophagy in disease
 - Therapeutic targeting of autophagy
 
-### By Methodology
+*** By Methodology
 
-**Example (imaging review):**
+/Example (imaging review):/
 - Fluorescence microscopy approaches
 - Super-resolution imaging
 - Live-cell imaging
 - Electron microscopy
 
-### By Theoretical Framework
+*** By Theoretical Framework
 
-**Example (social science review):**
+/Example (social science review):/
 - Behavioral theories
 - Cognitive theories
 - Social theories
 
-### NOT Chronological Overall
+*** NOT Chronological Overall
 
-❌ **Poor:** "In 2010, Smith studied X. In 2012, Jones studied Y. In 2015, Brown studied Z..."
+❌ /Poor:/ "In 2010, Smith studied X. In 2012, Jones studied Y. In 2015, Brown studied Z..."
 
-✅ **Good:** Chronology WITHIN themes if showing development: "Initial studies of X [2010 refs] were extended by [2015 refs] and recently [2020 refs]"
+✅ /Good:/ Chronology WITHIN themes if showing development: "Initial studies of X [2010 refs] were extended by [2015 refs] and recently [2020 refs]"
 
-## Synthesis Strategies
+** Synthesis Strategies
 
-### Identify Patterns
+*** Identify Patterns
 
 "Multiple studies demonstrate that X affects Y [refs 5-12], though the magnitude varies with [context]"
 
-### Compare Methodologies
+*** Compare Methodologies
 
 "Studies using method A found X [refs], while those using method B found Y [refs]. This discrepancy may reflect [methodological difference]"
 
-### Highlight Controversies
+*** Highlight Controversies
 
 "The role of X in Y remains controversial. Some evidence supports [position 1, refs], while other studies suggest [position 2, refs]"
 
-### Integrate Findings
+*** Integrate Findings
 
 "Collectively, these findings suggest that X regulates Y through multiple mechanisms, including A [refs], B [refs], and C [refs]"
 
-### Don't Just List
+*** Don't Just List
 
 ❌ "Smith found X [1]. Jones found Y [2]. Brown found Z [3]."
 
 ✅ "X has been shown to regulate Y through multiple mechanisms [1-3], with recent work revealing..."
 
-## Critical Evaluation
+** Critical Evaluation
 
-### Assess Study Quality
+*** Assess Study Quality
 
 - Sample size
 - Methodology rigor
@@ -120,22 +120,22 @@ Guide to writing effective literature review articles.
 - Statistical power
 - Potential biases
 
-### Note Limitations
+*** Note Limitations
 
 "While these studies provide important insights, limitations include [small sample sizes, single cell line, etc.]"
 
-### Identify Conflicting Evidence
+*** Identify Conflicting Evidence
 
 "Contradictory findings regarding X may reflect differences in [experimental conditions, populations studied, methodologies]"
 
-### Methodological Biases
+*** Methodological Biases
 
 "Publication bias may exist, as negative results are underreported"
 "Most studies used [one approach], limiting generalizability"
 
-## Figure/Table Types for Reviews
+** Figure/Table Types for Reviews
 
-### Summary Tables
+*** Summary Tables
 
 Compare studies side-by-side:
 
@@ -145,43 +145,43 @@ Compare studies side-by-side:
 | Jones 2021 | Cells | RNA-seq | X↑ | [6] |
 | Brown 2022 | Human | Array | X→ | [7] |
 
-### Conceptual Figures
+*** Conceptual Figures
 
 - Synthesize models from literature
 - Show relationships between concepts
 - Illustrate mechanisms
 - Timeline of developments
 
-### Meta-Analysis Plots
+*** Meta-Analysis Plots
 
 - Forest plots showing effect sizes
 - Funnel plots for publication bias
 - Heterogeneity assessments
 
-### Pathway/Network Diagrams
+*** Pathway/Network Diagrams
 
 - Integrate findings into comprehensive model
 - Show connections between studies
 
-## Systematic Review Protocol (PRISMA)
+** Systematic Review Protocol (PRISMA)
 
-### Define Question (PICO)
+*** Define Question (PICO)
 
-- **P**opulation
-- **I**ntervention/Exposure
-- **C**omparison
-- **O**utcome
+- /P/opulation
+- /I/ntervention/Exposure
+- /C/omparison
+- /O/utcome
 
-### Search Strategy
+*** Search Strategy
 
 - Databases searched (PubMed, Web of Science, etc.)
 - Search terms used
 - Date range
 - Language restrictions
 
-### Inclusion/Exclusion Criteria
+*** Inclusion/Exclusion Criteria
 
-**Explicit criteria:**
+/Explicit criteria:/
 - Study design (RCT, cohort, case-control, etc.)
 - Population characteristics
 - Interventions/exposures
@@ -189,66 +189,66 @@ Compare studies side-by-side:
 - Publication language
 - Date range
 
-### Study Selection
+*** Study Selection
 
 - Number of records identified
 - Number screened
 - Number excluded with reasons
 - Number included in review
 
-**PRISMA flow diagram** shows this process
+/PRISMA flow diagram/ shows this process
 
-### Quality Assessment
+*** Quality Assessment
 
 - Use validated tools (GRADE, Cochrane risk of bias, etc.)
 - Assess each study's quality
 - Note limitations
 
-### Data Extraction
+*** Data Extraction
 
 - Standardized form
 - Key information from each study
 - Results, sample sizes, methods
 
-## Common Review Problems
+** Common Review Problems
 
-### Problem: Laundry List of Studies
+*** Problem: Laundry List of Studies
 
-**Symptom:** "Smith found X. Jones found Y. Brown found Z..." (no synthesis)
+/Symptom:/ "Smith found X. Jones found Y. Brown found Z..." (no synthesis)
 
-**Fix:** Group thematically, identify patterns, synthesize findings
+/Fix:/ Group thematically, identify patterns, synthesize findings
 
-### Problem: Lack of Critical Evaluation
+*** Problem: Lack of Critical Evaluation
 
-**Symptom:** Accepting all findings equally without assessing quality
+/Symptom:/ Accepting all findings equally without assessing quality
 
-**Fix:** Evaluate study quality, note limitations, identify strong vs. weak evidence
+/Fix:/ Evaluate study quality, note limitations, identify strong vs. weak evidence
 
-### Problem: Missing Recent Literature
+*** Problem: Missing Recent Literature
 
-**Symptom:** Most recent refs are 2+ years old
+/Symptom:/ Most recent refs are 2+ years old
 
-**Fix:** Update search before submission, include latest findings
+/Fix:/ Update search before submission, include latest findings
 
-### Problem: Too Narrow
+*** Problem: Too Narrow
 
-**Symptom:** Only includes work from one lab or one perspective
+/Symptom:/ Only includes work from one lab or one perspective
 
-**Fix:** Broaden search, include diverse perspectives
+/Fix:/ Broaden search, include diverse perspectives
 
-### Problem: Too Broad
+*** Problem: Too Broad
 
-**Symptom:** Trying to cover entire field in one review
+/Symptom:/ Trying to cover entire field in one review
 
-**Fix:** Focus on specific question/aspect
+/Fix:/ Focus on specific question/aspect
 
-### Problem: Unclear Scope
+*** Problem: Unclear Scope
 
-**Symptom:** Reader doesn't know what review covers
+/Symptom:/ Reader doesn't know what review covers
 
-**Fix:** Explicitly state scope in introduction
+/Fix:/ Explicitly state scope in introduction
 
-## Review Checklist
+** Review Checklist
 
 - [ ] Clear scope defined
 - [ ] Search strategy described (if systematic)
@@ -263,11 +263,11 @@ Compare studies side-by-side:
 - [ ] References comprehensive and up-to-date
 - [ ] Appropriate length for journal
 
-## Length Guidelines
+** Length Guidelines
 
-**Depends on journal, but typically:**
+/Depends on journal, but typically:/
 - Narrative review: 3000-6000 words
 - Systematic review: 4000-8000 words
 - Mini-review: 1500-3000 words
 
-**Exclude:** Abstract, references, figures/tables from word count
+/Exclude:/ Abstract, references, figures/tables from word count

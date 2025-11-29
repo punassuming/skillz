@@ -1,13 +1,13 @@
-# Methods Section Reproducibility Checklist
+* Methods Section Reproducibility Checklist
 
-## Equipment and Instruments
+** Equipment and Instruments
 
 - [ ] Manufacturer names included
 - [ ] Model numbers/names included
 - [ ] Key specifications listed
 - [ ] Software versions specified
 
-## Reagents and Materials
+** Reagents and Materials
 
 - [ ] Sources/suppliers listed (company, city, country)
 - [ ] Catalog numbers included
@@ -15,7 +15,7 @@
 - [ ] Purity grades noted (when relevant)
 - [ ] Storage conditions (if critical)
 
-## Biological Materials
+** Biological Materials
 
 - [ ] Cell lines: Source and authentication
 - [ ] Antibodies: Clone, dilution, catalog number
@@ -23,7 +23,7 @@
 - [ ] Organisms: Strain, genetic background
 - [ ] Tissue samples: Source and ethical approval
 
-## Software and Code
+** Software and Code
 
 - [ ] Software name and version
 - [ ] Manufacturer/source
@@ -31,14 +31,14 @@
 - [ ] Custom code availability statement
 - [ ] Algorithm details (if novel)
 
-## Sample Sizes
+** Sample Sizes
 
 - [ ] Number stated clearly
 - [ ] Biological vs technical replicates distinguished
 - [ ] Justification provided (power analysis if done)
 - [ ] Exclusion criteria stated
 
-## Statistical Methods
+** Statistical Methods
 
 - [ ] Software specified
 - [ ] Tests used and why
@@ -47,21 +47,21 @@
 - [ ] Post-hoc tests specified
 - [ ] Assumptions checked (normality, etc.)
 
-## Study Design
+** Study Design
 
 - [ ] Randomization described (if applicable)
 - [ ] Blinding stated (if applicable)
 - [ ] Controls included
 - [ ] Treatment groups defined
 
-## Ethics and Compliance
+** Ethics and Compliance
 
 - [ ] IRB/IACUC approval number
 - [ ] Consent procedures (human subjects)
 - [ ] Guidelines followed (e.g., ARRIVE for animals)
 - [ ] Clinical trial registration (if applicable)
 
-## Reproducibility
+** Reproducibility
 
 - [ ] Enough detail to reproduce
 - [ ] Standard procedures cited
@@ -69,14 +69,14 @@
 - [ ] Modified procedures: changes highlighted
 - [ ] Environmental conditions (temperature, humidity)
 
-## Data Availability
+** Data Availability
 
 - [ ] Data availability statement
 - [ ] Repository accession numbers
 - [ ] Code availability
 - [ ] Materials availability
 
-## Organization
+** Organization
 
 - [ ] Logical order (chronological or by subsystem)
 - [ ] Clear subsection headings

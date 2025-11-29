@@ -415,4 +415,4 @@ To improve this skill:
 
 ## License
 
-This skill is part of the claude-skills project and follows the same license.
+This skill is part of the skillz project and follows the same license.

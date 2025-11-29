@@ -1,142 +1,142 @@
-# Table Design
+* Table Design
 
 Guide to creating effective tables for scientific papers.
 
-## Tables vs. Figures
+** Tables vs. Figures
 
-### When to Use Tables
+*** When to Use Tables
 
-**Use tables when:**
+/Use tables when:/
 - Precise values are important
 - Many variables to present
 - Comparing exact numbers across conditions
 - Presenting statistics with multiple parameters
 - Categorical data with multiple attributes
 
-### When to Use Figures
+*** When to Use Figures
 
-**Use figures when:**
+/Use figures when:/
 - Showing trends or patterns
 - Visual comparison more important than exact values
 - Illustrating distributions
 - Showing relationships between variables
 
-## Table Structure
+** Table Structure
 
-### Headers
+*** Headers
 
-**Column headers:**
+/Column headers:/
 - Descriptive names
 - Units in header (not repeated in cells)
 - Clear abbreviations or spell out
 - Bold formatting typical
 
-**Row headers:**
+/Row headers:/
 - First column typically identifiers
 - Left-aligned
 - Can be bold
 
-**Example:**
-```
+/Example:/
+#+begin_src 
 Parameter          | Control (n=10)  | Treatment (n=10) | p-value
                    | Mean ± SD       | Mean ± SD        |
 -------------------+-----------------+------------------+---------
 Cell viability (%) | 62 ± 9          | 85 ± 7           | 0.003
 Apoptosis (%)      | 23 ± 5          | 12 ± 3           | 0.001
-```
+#+end_src
 
-### Content Organization
+*** Content Organization
 
-**Logical ordering:**
+/Logical ordering:/
 - Alphabetical (genes, proteins)
 - By magnitude (largest to smallest)
 - By importance (most significant first)
 - By category (group related items)
 
-**Consistent formatting:**
+/Consistent formatting:/
 - Same decimal places within column
 - Aligned by decimal point
 - Consistent use of symbols
 
-### Footnotes
+*** Footnotes
 
-**Use for:**
+/Use for:/
 - Abbreviation definitions
 - Statistical test details
 - Special cases or exceptions
 - Symbols explanation
 
-**Notation:**
+/Notation:/
 - Lowercase superscript letters: ᵃ, ᵇ, ᶜ
 - Or symbols: *, †, ‡, §
 - Numbers if not confused with references
 
-## Formatting Guidelines
+** Formatting Guidelines
 
-### Lines
+*** Lines
 
-**Horizontal lines (typical):**
+/Horizontal lines (typical):/
 - Top of table
 - Below headers
 - Bottom of table
 - Occasionally between major sections
 
-**Vertical lines:**
+/Vertical lines:/
 - Generally avoid (cleaner look)
 - Use spacing instead to separate columns
 
-**Example structure:**
-```
+/Example structure:/
+#+begin_src 
 ═══════════════════════════════════════
 Parameter    | Group A | Group B | p-value
 ─────────────┼─────────┼─────────┼────────
 Value 1      | 25.3    | 32.1    | 0.003
 Value 2      | 18.7    | 21.3    | 0.045
 ═══════════════════════════════════════
-```
+#+end_src
 
-### Alignment
+*** Alignment
 
-**Text:** Left-aligned
-**Numbers:** Right-aligned or decimal-aligned
-**Headers:** Centered or left-aligned
-**Units:** Aligned with data
+/Text:/ Left-aligned
+/Numbers:/ Right-aligned or decimal-aligned
+/Headers:/ Centered or left-aligned
+/Units:/ Aligned with data
 
-### Significant Figures
+*** Significant Figures
 
-**Be consistent:**
+/Be consistent:/
 - Same decimal places in a column
 - Appropriate precision (not false precision)
 - Match to measurement precision
 
-**Examples:**
+/Examples:/
 - 12.3 ± 1.5 (not 12.345 ± 1.482)
 - p = 0.003 (not p = 0.00327845)
 
-## Caption Writing
+** Caption Writing
 
-### Caption Components
+*** Caption Components
 
-1. **Table number and title**
-2. **Description of contents**
-3. **Abbreviation definitions**
-4. **Statistical information**
-5. **Footnote explanations**
+1. /Table number and title/
+2. /Description of contents/
+3. /Abbreviation definitions/
+4. /Statistical information/
+5. /Footnote explanations/
 
-### Examples
+*** Examples
 
-**Good caption:**
+/Good caption:/
 "Table 1. Patient demographics and baseline characteristics. Data are presented as mean ± SD for continuous variables and n (%) for categorical variables. BMI, body mass index; SBP, systolic blood pressure; DBP, diastolic blood pressure. *p < 0.05, **p < 0.01 vs. control by Student's t-test or χ² test as appropriate"
 
-**Poor caption:**
+/Poor caption:/
 "Table 1. Demographics"
 (Too brief, missing details)
 
-## Table Types
+** Table Types
 
-### Summary Tables
+*** Summary Tables
 
-**Characteristics or descriptive statistics:**
+/Characteristics or descriptive statistics:/
 
 | Variable | Control (n=50) | Treatment (n=50) | p-value |
 |----------|----------------|------------------|---------|
@@ -144,21 +144,21 @@ Value 2      | 18.7    | 21.3    | 0.045
 | Male, n (%) | 27 (54) | 31 (62) | 0.40 |
 | BMI (kg/m²) | 28.3 ± 4.2 | 27.8 ± 3.9 | 0.52 |
 
-### Results Tables
+*** Results Tables
 
-**Experimental outcomes:**
+/Experimental outcomes:/
 
 | Treatment | Viability (%) | Apoptosis (%) | Expression (fold) |
 |-----------|---------------|---------------|-------------------|
 | Control | 62 ± 9 | 23 ± 5 | 1.0 ± 0.2 |
-| Drug A | 78 ± 6* | 15 ± 4* | 2.3 ± 0.4** |
-| Drug B | 85 ± 7** | 9 ± 3** | 3.1 ± 0.5** |
+| Drug A | 78 ± 6/ | 15 ± 4/ | 2.3 ± 0.4** |
+| Drug B | 85 ± 7/ | 9 ± 3/ | 3.1 ± 0.5** |
 
 *p < 0.05, **p < 0.01 vs. control
 
-### Regression Tables
+*** Regression Tables
 
-**Model coefficients:**
+/Model coefficients:/
 
 | Predictor | β | 95% CI | p-value |
 |-----------|---|--------|---------|
@@ -168,9 +168,9 @@ Value 2      | 18.7    | 21.3    | 0.045
 
 R² = 0.42, F(3,96) = 23.4, p < 0.001
 
-### Comparison Tables
+*** Comparison Tables
 
-**Multiple methods/studies:**
+/Multiple methods/studies:/
 
 | Method | Accuracy (%) | Speed (ms) | Memory (MB) |
 |--------|--------------|------------|-------------|
@@ -178,53 +178,53 @@ R² = 0.42, F(3,96) = 23.4, p < 0.001
 | Method B [13] | 89 | 180 | 512 |
 | Our method | 94 | 95 | 384 |
 
-## Common Table Problems
+** Common Table Problems
 
-### Problem: Too Much Information
+*** Problem: Too Much Information
 
-**Symptom:** Table spans multiple pages, hard to read
+/Symptom:/ Table spans multiple pages, hard to read
 
-**Fix:**
+/Fix:/
 - Split into multiple tables
 - Move less important data to supplementary
 - Consider if figure would be better
 - Group related data into sections
 
-### Problem: Inconsistent Significant Figures
+*** Problem: Inconsistent Significant Figures
 
-**Symptom:** 12.3, 8.47, 15.123 in same column
+/Symptom:/ 12.3, 8.47, 15.123 in same column
 
-**Fix:** Use same decimal places: 12.30, 8.47, 15.12
+/Fix:/ Use same decimal places: 12.30, 8.47, 15.12
 
-### Problem: Units Repeated in Every Cell
+*** Problem: Units Repeated in Every Cell
 
-**Wrong:**
+/Wrong:/
 | Sample | Concentration |
 |--------|---------------|
 | A | 10 μM |
 | B | 15 μM |
 | C | 20 μM |
 
-**Right:**
+/Right:/
 | Sample | Concentration (μM) |
 |--------|-------------|
 | A | 10 |
 | B | 15 |
 | C | 20 |
 
-### Problem: Unclear Abbreviations
+*** Problem: Unclear Abbreviations
 
-**Fix:** Define all abbreviations in caption, even if defined in text
+/Fix:/ Define all abbreviations in caption, even if defined in text
 
-### Problem: No Statistical Information
+*** Problem: No Statistical Information
 
-**Fix:** Include test used, p-values, sample sizes, and measures of variability
+/Fix:/ Include test used, p-values, sample sizes, and measures of variability
 
-### Problem: Poor Organization
+*** Problem: Poor Organization
 
-**Fix:** Order logically (by magnitude, category, or importance)
+/Fix:/ Order logically (by magnitude, category, or importance)
 
-## Table Checklist
+** Table Checklist
 
 - [ ] Clear, descriptive title
 - [ ] Units in headers, not cells
@@ -240,10 +240,10 @@ R² = 0.42, F(3,96) = 23.4, p < 0.001
 - [ ] Not redundant with figures or text
 - [ ] Self-contained caption
 
-## Formatting for Different Journals
+** Formatting for Different Journals
 
-**LaTeX:**
-```latex
+/LaTeX:/
+#+begin_src latex
 \begin{table}
 \caption{Patient demographics}
 \label{tab:demographics}
@@ -256,34 +256,34 @@ BMI (kg/m²) & 28.3 ± 4.2 & 27.8 ± 3.9 \\
 \hline
 \end{tabular}
 \end{table}
-```
+#+end_src
 
-**Word:**
+/Word:/
 - Use built-in table styles
 - Adjust borders (usually top/bottom/below header only)
 - Use table properties for consistent formatting
 
-**Excel/CSV:**
+/Excel/CSV:/
 - Can use scripts/table_formatter.py to convert to journal format
 - Export to desired format
 
-## Supplementary Tables
+** Supplementary Tables
 
-**Use for:**
+/Use for:/
 - Detailed data supporting main figures/tables
 - Complete datasets
 - Extended statistical analyses
 - Comprehensive parameter lists
 
-**Format:**
+/Format:/
 - Can be less strict on formatting
 - Often provided as Excel files
 - Still need captions and definitions
 - Number sequentially (Table S1, S2, etc.)
 
-## Accessibility
+** Accessibility
 
-**Make tables accessible:**
+/Make tables accessible:/
 - Simple structure (avoid merged cells when possible)
 - Clear headers
 - Alt text describing content

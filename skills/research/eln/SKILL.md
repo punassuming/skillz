@@ -99,7 +99,7 @@ research-notebook/
 * Daily Summary
 Brief overview of what was accomplished today.
 
-* Entry 1: [09:30] Hypothesis Testing - CO Adsorption on Pt
+* Entry 1: Hypothesis Testing - CO Adsorption on Pt
 :PROPERTIES:
 :ID: 2025-01-15-001
 :PROJECT: Catalyst_Screening
@@ -184,7 +184,7 @@ Document any problems encountered and how they were resolved.
 - Literature: Smith et al. (2024) DOI:10.1021/xxxxx
 - Code: [[file:~/projects/catalyst-screening/run_calculations.py]]
 
-* Entry 2: [14:00] Another Task
+* Entry 2: Another Task
 ...
 ```
 
@@ -196,8 +196,8 @@ Document any problems encountered and how they were resolved.
 :ID: unique-identifier
 :PROJECT: Project_Name
 :STATUS: Planning|In_Progress|Complete|On_Hold
-:STARTED: [2025-01-15 Wed 09:30]
-:COMPLETED: [2025-01-15 Wed 16:45]
+:STARTED: [2025-01-15 Wed]
+:COMPLETED: [2025-01-15 Wed]
 :RELATED: [[link-to-related-entry]]
 :DATA: [[file:./data/2025-01-15/results.csv]]
 :END:
@@ -274,10 +274,10 @@ DEADLINE: <2025-01-20 Fri>
 ```org
 # Active timestamps (appear in agenda)
 * Meeting with advisor
-<2025-01-20 Fri 14:00-15:00>
+<2025-01-20 Fri>
 
 # Inactive timestamps (documentation only)
-Calculation started [2025-01-15 Wed 09:30]
+Calculation started [2025-01-15 Wed]
 
 # Date ranges
 Project duration: <2025-01-10 Mon>--<2025-01-30 Mon>
@@ -288,7 +288,7 @@ Project duration: <2025-01-10 Mon>--<2025-01-30 Mon>
 ### 1. Experimental/Computational Work
 
 ```org
-* [09:30] DFT Calculation - Surface Relaxation
+* DFT Calculation - Surface Relaxation
 :PROPERTIES:
 :ID: 2025-01-15-001
 :PROJECT: Catalyst_Screening
@@ -333,7 +333,7 @@ Surface structure validated. Ready for adsorbate calculations.
 ### 2. Literature Review Entry
 
 ```org
-* [14:00] Literature Review - CO Oxidation Mechanisms
+* Literature Review - CO Oxidation Mechanisms
 :PROPERTIES:
 :ID: 2025-01-15-002
 :TOPIC: Catalysis
@@ -365,7 +365,7 @@ Our predicted -1.82 eV is in excellent agreement.
 ### 3. Data Analysis Entry
 
 ```org
-* [11:00] Analysis - Comparing Different Functionals
+* Analysis - Comparing Different Functionals
 :PROPERTIES:
 :ID: 2025-01-15-003
 :PROJECT: Method_Validation
@@ -428,7 +428,7 @@ Need to note that PBE tends to overbind slightly when reporting results.
 ### 4. Meeting Notes
 
 ```org
-* [10:00] Group Meeting - Project Discussion
+* Group Meeting - Project Discussion
 :PROPERTIES:
 :ID: 2025-01-15-004
 :TYPE: Meeting
@@ -462,7 +462,7 @@ Presented CO adsorption results on Pt(111):
 ### 5. Problem/Debugging Entry
 
 ```org
-* [15:30] Troubleshooting - VASP SCF Convergence Issues
+* Troubleshooting - VASP SCF Convergence Issues
 :PROPERTIES:
 :ID: 2025-01-15-005
 :TYPE: Problem
@@ -639,7 +639,7 @@ Result: PBE preferred (error < 0.25 eV)
 
 ### Quick Entry Template
 ```org
-* [HH:MM] Short Description
+* Short Description
 :PROPERTIES:
 :ID: YYYY-MM-DD-NNN
 :END:
@@ -655,7 +655,7 @@ Result: PBE preferred (error < 0.25 eV)
 
 ### Full Research Entry Template
 ```org
-* [HH:MM] Project - Specific Task
+* Project - Specific Task
 :PROPERTIES:
 :ID: YYYY-MM-DD-NNN
 :PROJECT: Project_Name
@@ -755,7 +755,7 @@ When helping with ELN:
 
 ### Starting New Project
 ```org
-* [09:00] Project Initiation - Catalyst Screening Study
+* Project Initiation - Catalyst Screening Study
 :PROPERTIES:
 :ID: 2025-01-15-001
 :PROJECT: Catalyst_Screening
@@ -787,7 +787,7 @@ Identify optimal catalyst for CO oxidation through computational screening.
 
 ### Documenting Failure
 ```org
-* [14:00] Failed Attempt - NEB Calculation
+* Failed Attempt - NEB Calculation
 :PROPERTIES:
 :ID: 2025-01-15-006
 :STATUS: Failed

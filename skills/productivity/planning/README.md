@@ -334,13 +334,13 @@ python scripts/timeline_visualizer.py timeline.json --style calendar
 
 ```bash
 # Install to personal directory
-claude-skills install planning
+skillz install planning
 
 # Install to project
-claude-skills install planning --target project
+skillz install planning --target project
 
 # View detailed info
-claude-skills info planning
+skillz info planning
 ```
 
 ## Usage Examples
@@ -421,11 +421,11 @@ Based on established project management methodologies including:
 
 ## License
 
-This skill is part of the claude-skills repository and follows the repository's MIT license.
+This skill is part of the skillz repository and follows the repository's MIT license.
 
 ## Support
 
 For issues, suggestions, or contributions:
-- Repository: https://github.com/jkitchin/claude-skills
-- Issues: https://github.com/jkitchin/claude-skills/issues
+- Repository: https://github.com/jkitchin/skillz
+- Issues: https://github.com/jkitchin/skillz/issues
 - Category: productivity/planning

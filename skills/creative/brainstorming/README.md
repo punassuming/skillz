@@ -209,13 +209,13 @@ python scripts/random_prompt.py --multiple 5    # Get 5 prompts
 
 ```bash
 # Install to personal directory
-claude-skills install brainstorming
+skillz install brainstorming
 
 # Install to project
-claude-skills install brainstorming --target project
+skillz install brainstorming --target project
 
 # View detailed info
-claude-skills info brainstorming
+skillz info brainstorming
 ```
 
 ## Usage Examples
@@ -280,11 +280,11 @@ Based on established creativity and brainstorming methodologies including:
 
 ## License
 
-This skill is part of the claude-skills repository and follows the repository's MIT license.
+This skill is part of the skillz repository and follows the repository's MIT license.
 
 ## Support
 
 For issues, suggestions, or contributions:
-- Repository: https://github.com/jkitchin/claude-skills
-- Issues: https://github.com/jkitchin/claude-skills/issues
+- Repository: https://github.com/jkitchin/skillz
+- Issues: https://github.com/jkitchin/skillz/issues
 - Category: creative/brainstorming
