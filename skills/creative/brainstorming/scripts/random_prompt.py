@@ -176,10 +176,7 @@ def get_random_prompt(category=None):
     if category and category != "all":
         if category not in PROMPTS:
             available = ", ".join(PROMPTS.keys())
-            raise ValueError(
-                f"Unknown category: {category}\n"
-                f"Available categories: {available}"
-            )
+            raise ValueError(f"Unknown category: {category}\nAvailable categories: {available}")
         selected_category = category
         prompt = random.choice(PROMPTS[category])
     else:
@@ -220,11 +217,7 @@ def get_multiple_prompts(count=3, category=None):
         return [(category, p) for p in prompts_pool[:count]]
     else:
         # Get from all categories
-        all_prompts = [
-            (cat, prompt)
-            for cat, prompts in PROMPTS.items()
-            for prompt in prompts
-        ]
+        all_prompts = [(cat, prompt) for cat, prompts in PROMPTS.items() for prompt in prompts]
         random.shuffle(all_prompts)
         return all_prompts[:count]
 

@@ -20,16 +20,18 @@ class Citation:
     """Represents a single citation with metadata."""
 
     def __init__(self, **kwargs):
-        self.authors = kwargs.get('authors', [])
-        self.year = kwargs.get('year', '')
-        self.title = kwargs.get('title', '')
-        self.journal = kwargs.get('journal', '')
-        self.volume = kwargs.get('volume', '')
-        self.issue = kwargs.get('issue', '')
-        self.pages = kwargs.get('pages', '')
-        self.doi = kwargs.get('doi', '')
-        self.url = kwargs.get('url', '')
-        self.publication_type = kwargs.get('type', 'journal')  # journal, book, chapter, web, conference
+        self.authors = kwargs.get("authors", [])
+        self.year = kwargs.get("year", "")
+        self.title = kwargs.get("title", "")
+        self.journal = kwargs.get("journal", "")
+        self.volume = kwargs.get("volume", "")
+        self.issue = kwargs.get("issue", "")
+        self.pages = kwargs.get("pages", "")
+        self.doi = kwargs.get("doi", "")
+        self.url = kwargs.get("url", "")
+        self.publication_type = kwargs.get(
+            "type", "journal"
+        )  # journal, book, chapter, web, conference
 
     def to_apa(self) -> str:
         """Format citation in APA style."""
@@ -37,9 +39,9 @@ class Citation:
 
         citation = f"{authors_str} ({self.year}). {self.title}. "
 
-        if self.publication_type == 'journal':
+        if self.publication_type == "journal":
             citation += f"{self.journal}, {self.volume}({self.issue}), {self.pages}."
-        elif self.publication_type == 'book':
+        elif self.publication_type == "book":
             citation += f"{self.journal}."
 
         if self.doi:
@@ -53,7 +55,7 @@ class Citation:
         """Format citation in Chicago (author-date) style."""
         authors_str = self._format_authors_chicago()
 
-        citation = f"{authors_str}. \"{self.title}.\" {self.journal} {self.volume}, no. {self.issue} ({self.year}): {self.pages}."
+        citation = f'{authors_str}. "{self.title}." {self.journal} {self.volume}, no. {self.issue} ({self.year}): {self.pages}.'
 
         if self.doi:
             citation += f" https://doi.org/{self.doi}"
@@ -66,7 +68,7 @@ class Citation:
         """Format citation in IEEE style."""
         authors_str = self._format_authors_ieee()
 
-        citation = f"{authors_str}, \"{self.title},\" {self.journal}, vol. {self.volume}, no. {self.issue}, pp. {self.pages}, {self.year}"
+        citation = f'{authors_str}, "{self.title}," {self.journal}, vol. {self.volume}, no. {self.issue}, pp. {self.pages}, {self.year}'
 
         if self.doi:
             citation += f", doi: {self.doi}"
@@ -79,7 +81,9 @@ class Citation:
         """Format citation in Nature style."""
         authors_str = self._format_authors_nature()
 
-        citation = f"{authors_str} {self.title}. {self.journal} {self.volume}, {self.pages} ({self.year})."
+        citation = (
+            f"{authors_str} {self.title}. {self.journal} {self.volume}, {self.pages} ({self.year})."
+        )
 
         if self.doi:
             citation += f" https://doi.org/{self.doi}"
@@ -133,16 +137,16 @@ class Citation:
     def to_dict(self) -> Dict:
         """Convert to dictionary."""
         return {
-            'authors': self.authors,
-            'year': self.year,
-            'title': self.title,
-            'journal': self.journal,
-            'volume': self.volume,
-            'issue': self.issue,
-            'pages': self.pages,
-            'doi': self.doi,
-            'url': self.url,
-            'type': self.publication_type
+            "authors": self.authors,
+            "year": self.year,
+            "title": self.title,
+            "journal": self.journal,
+            "volume": self.volume,
+            "issue": self.issue,
+            "pages": self.pages,
+            "doi": self.doi,
+            "url": self.url,
+            "type": self.publication_type,
         }
 
 
@@ -161,21 +165,22 @@ class CitationFormatter:
         citations = []
         try:
             import csv
-            with open(filename, 'r') as f:
+
+            with open(filename, "r") as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    authors = [a.strip() for a in row.get('authors', '').split(';')]
+                    authors = [a.strip() for a in row.get("authors", "").split(";")]
                     citation = Citation(
                         authors=authors,
-                        year=row.get('year', ''),
-                        title=row.get('title', ''),
-                        journal=row.get('journal', ''),
-                        volume=row.get('volume', ''),
-                        issue=row.get('issue', ''),
-                        pages=row.get('pages', ''),
-                        doi=row.get('doi', ''),
-                        url=row.get('url', ''),
-                        type=row.get('type', 'journal')
+                        year=row.get("year", ""),
+                        title=row.get("title", ""),
+                        journal=row.get("journal", ""),
+                        volume=row.get("volume", ""),
+                        issue=row.get("issue", ""),
+                        pages=row.get("pages", ""),
+                        doi=row.get("doi", ""),
+                        url=row.get("url", ""),
+                        type=row.get("type", "journal"),
                     )
                     citations.append(citation)
         except ImportError:
@@ -188,13 +193,13 @@ class CitationFormatter:
     def save_to_json(self, citations: List[Citation], filename: str):
         """Save citations to JSON file."""
         data = [c.to_dict() for c in citations]
-        with open(filename, 'w') as f:
+        with open(filename, "w") as f:
             json.dump(data, f, indent=2)
         print(f"Saved {len(citations)} citations to {filename}")
 
-    def format_batch(self, citations: List[Citation], output_format: str = 'apa') -> List[str]:
+    def format_batch(self, citations: List[Citation], output_format: str = "apa") -> List[str]:
         """Format multiple citations in specified format."""
-        format_method = f'to_{output_format.lower()}'
+        format_method = f"to_{output_format.lower()}"
         results = []
 
         for citation in citations:
@@ -208,15 +213,18 @@ class CitationFormatter:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Citation Formatter for Literature Reviews')
+    parser = argparse.ArgumentParser(description="Citation Formatter for Literature Reviews")
 
-    parser.add_argument('--input', help='Input CSV file with citations')
-    parser.add_argument('--output', help='Output file for formatted citations')
-    parser.add_argument('--format', default='apa',
-                       choices=['apa', 'chicago', 'ieee', 'nature'],
-                       help='Citation format')
-    parser.add_argument('--doi', help='Format a single citation from DOI')
-    parser.add_argument('--list', action='store_true', help='List supported formats')
+    parser.add_argument("--input", help="Input CSV file with citations")
+    parser.add_argument("--output", help="Output file for formatted citations")
+    parser.add_argument(
+        "--format",
+        default="apa",
+        choices=["apa", "chicago", "ieee", "nature"],
+        help="Citation format",
+    )
+    parser.add_argument("--doi", help="Format a single citation from DOI")
+    parser.add_argument("--list", action="store_true", help="List supported formats")
 
     args = parser.parse_args()
 
@@ -239,9 +247,9 @@ def main():
             formatted = formatter.format_batch(citations, args.format)
 
             if args.output:
-                with open(args.output, 'w') as f:
+                with open(args.output, "w") as f:
                     for i, formatted_cite in enumerate(formatted):
-                        f.write(f"{i+1}. {formatted_cite}\n")
+                        f.write(f"{i + 1}. {formatted_cite}\n")
                 print(f"Formatted citations saved to {args.output}")
             else:
                 print(f"\nFormatted citations ({args.format.upper()}):\n")
@@ -250,14 +258,18 @@ def main():
 
     elif args.doi:
         print(f"DOI: {args.doi}")
-        print("Note: Full metadata retrieval would require API access to CrossRef or similar service")
+        print(
+            "Note: Full metadata retrieval would require API access to CrossRef or similar service"
+        )
         print("This is a placeholder for demonstration")
 
     else:
         print("Example usage:")
-        print("  python citation_formatter.py --input citations.csv --output formatted.txt --format apa")
+        print(
+            "  python citation_formatter.py --input citations.csv --output formatted.txt --format apa"
+        )
         print("  python citation_formatter.py --list")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

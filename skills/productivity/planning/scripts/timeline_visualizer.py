@@ -54,8 +54,16 @@ from collections import defaultdict
 class TimelineTask:
     """Represents a task on the timeline."""
 
-    def __init__(self, task_id: str, name: str, start: datetime, end: datetime,
-                 owner: str = "", phase: str = "", status: str = ""):
+    def __init__(
+        self,
+        task_id: str,
+        name: str,
+        start: datetime,
+        end: datetime,
+        owner: str = "",
+        phase: str = "",
+        status: str = "",
+    ):
         self.id = task_id
         self.name = name
         self.start = start
@@ -65,7 +73,7 @@ class TimelineTask:
         self.status = status
         self.duration = (end - start).days + 1
 
-    def overlaps_with(self, other: 'TimelineTask') -> bool:
+    def overlaps_with(self, other: "TimelineTask") -> bool:
         """Check if this task overlaps with another task."""
         return not (self.end < other.start or self.start > other.end)
 
@@ -79,7 +87,7 @@ class TimelineTask:
             "duration": self.duration,
             "owner": self.owner,
             "phase": self.phase,
-            "status": self.status
+            "status": self.status,
         }
 
 
@@ -113,7 +121,9 @@ def parse_date(date_str: str) -> datetime:
     raise ValueError(f"Unable to parse date: {date_str}")
 
 
-def load_timeline(data: dict) -> Tuple[str, List[TimelineTask], List[Milestone], datetime, datetime]:
+def load_timeline(
+    data: dict,
+) -> Tuple[str, List[TimelineTask], List[Milestone], datetime, datetime]:
     """
     Load timeline from JSON data.
 
@@ -132,7 +142,7 @@ def load_timeline(data: dict) -> Tuple[str, List[TimelineTask], List[Milestone],
             end=parse_date(task_data["end"]),
             owner=task_data.get("owner", ""),
             phase=task_data.get("phase", ""),
-            status=task_data.get("status", "")
+            status=task_data.get("status", ""),
         )
         tasks.append(task)
 
@@ -142,7 +152,7 @@ def load_timeline(data: dict) -> Tuple[str, List[TimelineTask], List[Milestone],
         milestone = Milestone(
             name=ms_data["name"],
             date=parse_date(ms_data["date"]),
-            description=ms_data.get("description", "")
+            description=ms_data.get("description", ""),
         )
         milestones.append(milestone)
 
@@ -160,19 +170,25 @@ def load_timeline(data: dict) -> Tuple[str, List[TimelineTask], List[Milestone],
     return project_name, tasks, milestones, start_date, end_date
 
 
-def render_gantt_chart(project_name: str, tasks: List[TimelineTask],
-                       milestones: List[Milestone], start_date: datetime,
-                       end_date: datetime) -> str:
+def render_gantt_chart(
+    project_name: str,
+    tasks: List[TimelineTask],
+    milestones: List[Milestone],
+    start_date: datetime,
+    end_date: datetime,
+) -> str:
     """Render traditional Gantt chart."""
     output = []
 
     # Header
-    output.append("="*80)
+    output.append("=" * 80)
     output.append(f"GANTT CHART: {project_name}")
-    output.append("="*80)
+    output.append("=" * 80)
 
     total_days = (end_date - start_date).days + 1
-    output.append(f"\nTimeline: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')} ({total_days} days)")
+    output.append(
+        f"\nTimeline: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')} ({total_days} days)"
+    )
     output.append(f"Tasks: {len(tasks)} | Milestones: {len(milestones)}")
 
     # Determine time scale
@@ -195,9 +211,9 @@ def render_gantt_chart(project_name: str, tasks: List[TimelineTask],
     timeline_width = max(60, min(100, total_days // scale_factor))
 
     # Time scale header
-    output.append("\n" + "-"*80)
+    output.append("\n" + "-" * 80)
     output.append("TIMELINE")
-    output.append("-"*80)
+    output.append("-" * 80)
 
     # Create time markers
     time_header = ""
@@ -236,7 +252,9 @@ def render_gantt_chart(project_name: str, tasks: List[TimelineTask],
     header_line = " " * (name_width + 2) + "|"
     for pos, label in markers:
         # Place marker at approximate position
-        scaled_pos = min(timeline_width - len(label), pos * timeline_width // (total_days // scale_factor))
+        scaled_pos = min(
+            timeline_width - len(label), pos * timeline_width // (total_days // scale_factor)
+        )
         header_line += " " * (scaled_pos - len(header_line) + name_width + 3) + label
 
     output.append(header_line)
@@ -285,28 +303,34 @@ def render_gantt_chart(project_name: str, tasks: List[TimelineTask],
             output.append(f"{ms_name} {ms_date} |{marker_line}")
 
     # Legend
-    output.append("\n" + "-"*80)
+    output.append("\n" + "-" * 80)
     output.append("LEGEND")
-    output.append("-"*80)
+    output.append("-" * 80)
     output.append("█ = Completed  ▓ = In Progress  ░ = Not Started  ▼ = Milestone")
-    output.append("="*80 + "\n")
+    output.append("=" * 80 + "\n")
 
     return "\n".join(output)
 
 
-def render_roadmap(project_name: str, tasks: List[TimelineTask],
-                  milestones: List[Milestone], start_date: datetime,
-                  end_date: datetime) -> str:
+def render_roadmap(
+    project_name: str,
+    tasks: List[TimelineTask],
+    milestones: List[Milestone],
+    start_date: datetime,
+    end_date: datetime,
+) -> str:
     """Render high-level roadmap grouped by phases."""
     output = []
 
     # Header
-    output.append("="*80)
+    output.append("=" * 80)
     output.append(f"PROJECT ROADMAP: {project_name}")
-    output.append("="*80)
+    output.append("=" * 80)
 
     total_days = (end_date - start_date).days + 1
-    output.append(f"\n{start_date.strftime('%B %Y')} → {end_date.strftime('%B %Y')} ({total_days} days)")
+    output.append(
+        f"\n{start_date.strftime('%B %Y')} → {end_date.strftime('%B %Y')} ({total_days} days)"
+    )
 
     # Group tasks by phase
     phases = defaultdict(list)
@@ -327,9 +351,11 @@ def render_roadmap(project_name: str, tasks: List[TimelineTask],
 
     # Render each phase
     for phase, (phase_start, phase_end, phase_duration, phase_tasks) in sorted_phases:
-        output.append("\n" + "-"*80)
+        output.append("\n" + "-" * 80)
         output.append(f"Phase: {phase}")
-        output.append(f"  Duration: {phase_start.strftime('%Y-%m-%d')} to {phase_end.strftime('%Y-%m-%d')} ({phase_duration} days)")
+        output.append(
+            f"  Duration: {phase_start.strftime('%Y-%m-%d')} to {phase_end.strftime('%Y-%m-%d')} ({phase_duration} days)"
+        )
         output.append(f"  Tasks: {len(phase_tasks)}")
 
         # Calculate phase bar
@@ -352,9 +378,9 @@ def render_roadmap(project_name: str, tasks: List[TimelineTask],
 
     # Add milestones
     if milestones:
-        output.append("\n" + "-"*80)
+        output.append("\n" + "-" * 80)
         output.append("MILESTONES")
-        output.append("-"*80)
+        output.append("-" * 80)
 
         for ms in sorted(milestones, key=lambda m: m.date):
             ms_pos = int((ms.date - start_date).days * 60 / total_days)
@@ -364,21 +390,25 @@ def render_roadmap(project_name: str, tasks: List[TimelineTask],
             if ms.description:
                 output.append(f"                   {ms.description}")
 
-    output.append("\n" + "="*80 + "\n")
+    output.append("\n" + "=" * 80 + "\n")
 
     return "\n".join(output)
 
 
-def render_calendar(project_name: str, tasks: List[TimelineTask],
-                   milestones: List[Milestone], start_date: datetime,
-                   end_date: datetime) -> str:
+def render_calendar(
+    project_name: str,
+    tasks: List[TimelineTask],
+    milestones: List[Milestone],
+    start_date: datetime,
+    end_date: datetime,
+) -> str:
     """Render month-by-month calendar view."""
     output = []
 
     # Header
-    output.append("="*80)
+    output.append("=" * 80)
     output.append(f"CALENDAR VIEW: {project_name}")
-    output.append("="*80)
+    output.append("=" * 80)
 
     # Group tasks and milestones by month
     current = start_date.replace(day=1)
@@ -393,21 +423,15 @@ def render_calendar(project_name: str, tasks: List[TimelineTask],
             month_end = current.replace(month=current.month + 1, day=1) - timedelta(days=1)
 
         # Filter tasks for this month
-        month_tasks = [
-            t for t in tasks
-            if not (t.end < month_start or t.start > month_end)
-        ]
+        month_tasks = [t for t in tasks if not (t.end < month_start or t.start > month_end)]
 
         # Filter milestones for this month
-        month_milestones = [
-            m for m in milestones
-            if month_start <= m.date <= month_end
-        ]
+        month_milestones = [m for m in milestones if month_start <= m.date <= month_end]
 
         if month_tasks or month_milestones:
-            output.append("\n" + "-"*80)
+            output.append("\n" + "-" * 80)
             output.append(f"{current.strftime('%B %Y')}")
-            output.append("-"*80)
+            output.append("-" * 80)
 
             if month_tasks:
                 output.append(f"\nTasks ({len(month_tasks)}):")
@@ -429,7 +453,7 @@ def render_calendar(project_name: str, tasks: List[TimelineTask],
         else:
             current = current.replace(month=current.month + 1)
 
-    output.append("\n" + "="*80 + "\n")
+    output.append("\n" + "=" * 80 + "\n")
 
     return "\n".join(output)
 
@@ -447,7 +471,7 @@ def print_example():
                 "end": "2024-01-14",
                 "owner": "Sarah",
                 "phase": "Planning",
-                "status": "completed"
+                "status": "completed",
             },
             {
                 "id": "T2",
@@ -456,7 +480,7 @@ def print_example():
                 "end": "2024-01-28",
                 "owner": "Mike",
                 "phase": "Design",
-                "status": "completed"
+                "status": "completed",
             },
             {
                 "id": "T3",
@@ -465,7 +489,7 @@ def print_example():
                 "end": "2024-02-18",
                 "owner": "Lisa",
                 "phase": "Design",
-                "status": "in_progress"
+                "status": "in_progress",
             },
             {
                 "id": "T4",
@@ -474,7 +498,7 @@ def print_example():
                 "end": "2024-03-20",
                 "owner": "Alex",
                 "phase": "Development",
-                "status": "not_started"
+                "status": "not_started",
             },
             {
                 "id": "T5",
@@ -483,7 +507,7 @@ def print_example():
                 "end": "2024-03-15",
                 "owner": "Jordan",
                 "phase": "Development",
-                "status": "not_started"
+                "status": "not_started",
             },
             {
                 "id": "T6",
@@ -492,7 +516,7 @@ def print_example():
                 "end": "2024-03-31",
                 "owner": "Sam",
                 "phase": "Testing",
-                "status": "not_started"
+                "status": "not_started",
             },
             {
                 "id": "T7",
@@ -501,7 +525,7 @@ def print_example():
                 "end": "2024-04-10",
                 "owner": "Sarah",
                 "phase": "Testing",
-                "status": "not_started"
+                "status": "not_started",
             },
             {
                 "id": "T8",
@@ -510,26 +534,22 @@ def print_example():
                 "end": "2024-04-12",
                 "owner": "Alex",
                 "phase": "Launch",
-                "status": "not_started"
-            }
+                "status": "not_started",
+            },
         ],
         "milestones": [
             {
                 "name": "Design Approved",
                 "date": "2024-02-18",
-                "description": "All design mockups approved by stakeholders"
+                "description": "All design mockups approved by stakeholders",
             },
             {
                 "name": "Code Complete",
                 "date": "2024-03-20",
-                "description": "All development work finished"
+                "description": "All development work finished",
             },
-            {
-                "name": "Launch",
-                "date": "2024-04-12",
-                "description": "Website goes live"
-            }
-        ]
+            {"name": "Launch", "date": "2024-04-12", "description": "Website goes live"},
+        ],
     }
 
     print(json.dumps(example, indent=2))
@@ -555,7 +575,7 @@ def main():
     # Load timeline from file
     input_file = sys.argv[1]
     try:
-        with open(input_file, 'r') as f:
+        with open(input_file, "r") as f:
             data = json.load(f)
     except FileNotFoundError:
         print(f"Error: File '{input_file}' not found")

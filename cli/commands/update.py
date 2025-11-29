@@ -15,7 +15,9 @@ console = Console()
     type=click.Choice(["personal", "project"]),
     help="Target location to update",
 )
-@click.option("--platform", "-p", default="claude", help="Target platform (claude, codex, gemini, opencode)")
+@click.option(
+    "--platform", "-p", default="claude", help="Target platform (claude, codex, gemini, opencode)"
+)
 @click.option("--dry-run", is_flag=True, help="Preview without making changes")
 @click.pass_context
 def update(ctx, name, all, target, platform, dry_run):

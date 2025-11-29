@@ -23,6 +23,7 @@ def set(key, value):
 
     if key == "repository":
         from pathlib import Path
+
         repo_path = Path(value).expanduser()
         if not repo_path.exists():
             console.print(f"[red]Error: Path does not exist: {repo_path}[/red]")

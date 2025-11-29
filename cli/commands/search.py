@@ -44,9 +44,7 @@ def search(ctx, query, item_type):
                 metadata = _parse_skill_metadata(skill_file)
 
                 # Check if query matches name or description
-                if _matches_query(
-                    query, skill_path.name, metadata.get("description", "")
-                ):
+                if _matches_query(query, skill_path.name, metadata.get("description", "")):
                     matches.append(
                         {
                             "type": "skill",

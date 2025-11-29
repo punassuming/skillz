@@ -117,9 +117,7 @@ def _display_skill_info(skill_path: Path, show_content: bool, verbose: bool):
 
     # Display metadata panel
     metadata_text = f"[bold cyan]Name:[/bold cyan] {metadata.get('name', 'N/A')}\n"
-    metadata_text += (
-        f"[bold cyan]Description:[/bold cyan] {metadata.get('description', 'N/A')}\n"
-    )
+    metadata_text += f"[bold cyan]Description:[/bold cyan] {metadata.get('description', 'N/A')}\n"
     metadata_text += f"[bold cyan]Location:[/bold cyan] {skill_path}\n"
     metadata_text += f"[bold cyan]Type:[/bold cyan] Skill\n"
 
@@ -169,7 +167,7 @@ def _display_skill_info(skill_path: Path, show_content: bool, verbose: bool):
         if content.startswith("---"):
             end_marker = content.find("---", 3)
             if end_marker != -1:
-                start_idx = content[:end_marker + 3].count("\n")
+                start_idx = content[: end_marker + 3].count("\n")
 
         # Show first 30 lines
         preview_lines = lines[start_idx : start_idx + 30]
@@ -195,9 +193,7 @@ def _display_command_info(cmd_path: Path, show_content: bool, verbose: bool):
 
     # Display metadata panel
     metadata_text = f"[bold cyan]Name:[/bold cyan] {cmd_path.stem}\n"
-    metadata_text += (
-        f"[bold cyan]Description:[/bold cyan] {metadata.get('description', 'N/A')}\n"
-    )
+    metadata_text += f"[bold cyan]Description:[/bold cyan] {metadata.get('description', 'N/A')}\n"
     metadata_text += f"[bold cyan]Location:[/bold cyan] {cmd_path}\n"
     metadata_text += f"[bold cyan]Type:[/bold cyan] Command\n"
 
@@ -237,7 +233,7 @@ def _display_command_info(cmd_path: Path, show_content: bool, verbose: bool):
         if content.startswith("---"):
             end_marker = content.find("---", 3)
             if end_marker != -1:
-                start_idx = content[:end_marker + 3].count("\n")
+                start_idx = content[: end_marker + 3].count("\n")
 
         # Show first 30 lines
         preview_lines = lines[start_idx : start_idx + 30]

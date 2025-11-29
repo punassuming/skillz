@@ -26,24 +26,26 @@ import sys
 
 def binary_search_session():
     """Run interactive binary search session."""
-    print("="*80)
+    print("=" * 80)
     print("BINARY SEARCH TROUBLESHOOTING")
-    print("="*80)
+    print("=" * 80)
     print("\nThis tool helps you efficiently narrow down the cause of a problem")
     print("by repeatedly dividing the search space in half.\n")
 
     # Define search space
     print("STEP 1: Define your search space")
-    print("-"*80)
+    print("-" * 80)
 
-    space_type = input("What are you searching through?\n"
-                      "  1. Git commits\n"
-                      "  2. Configuration settings\n"
-                      "  3. Data records\n"
-                      "  4. Time range\n"
-                      "  5. Code sections\n"
-                      "  6. Other\n"
-                      "Choose (1-6): ").strip()
+    space_type = input(
+        "What are you searching through?\n"
+        "  1. Git commits\n"
+        "  2. Configuration settings\n"
+        "  3. Data records\n"
+        "  4. Time range\n"
+        "  5. Code sections\n"
+        "  6. Other\n"
+        "Choose (1-6): "
+    ).strip()
 
     type_names = {
         "1": "commits",
@@ -51,7 +53,7 @@ def binary_search_session():
         "3": "records",
         "4": "time periods",
         "5": "code lines",
-        "6": "items"
+        "6": "items",
     }
     item_name = type_names.get(space_type, "items")
 
@@ -79,9 +81,9 @@ def binary_search_session():
         mid = (left + right) // 2
         percentage = int((mid / size) * 100)
 
-        print("\n" + "="*80)
+        print("\n" + "=" * 80)
         print(f"ITERATION {iteration}")
-        print("="*80)
+        print("=" * 80)
         print(f"Current range: positions {left} to {right} ({right - left} {item_name})")
         print(f"Midpoint: position {mid} ({percentage}% through)")
 
@@ -101,21 +103,25 @@ def binary_search_session():
 
         # Get test result
         while True:
-            result = input(f"\nDoes the problem occur at this midpoint? (yes/no/quit): ").strip().lower()
-            if result in ['yes', 'no', 'quit', 'q']:
+            result = (
+                input(f"\nDoes the problem occur at this midpoint? (yes/no/quit): ").strip().lower()
+            )
+            if result in ["yes", "no", "quit", "q"]:
                 break
             print("Please enter 'yes', 'no', or 'quit'")
 
-        if result in ['quit', 'q']:
+        if result in ["quit", "q"]:
             print("\n👋 Binary search interrupted.")
             sys.exit(0)
 
         # Update boundaries
-        if result == 'yes':
+        if result == "yes":
             print(f"   Problem OCCURS → Issue is in first half (positions {left} to {mid})")
             right = mid
         else:
-            print(f"   Problem DOESN'T OCCUR → Issue is in second half (positions {mid} to {right})")
+            print(
+                f"   Problem DOESN'T OCCUR → Issue is in second half (positions {mid} to {right})"
+            )
             left = mid
 
         remaining = right - left
@@ -141,19 +147,19 @@ def binary_search_session():
         iteration += 1
 
     # Summary
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("BINARY SEARCH COMPLETE")
-    print("="*80)
+    print("=" * 80)
     print(f"Iterations: {iteration}")
     print(f"Initial size: {size} {item_name}")
     print(f"Final range: {right - left} {item_name}")
     print(f"\nEfficiency: Found issue in {iteration} tests instead of {size} tests!")
-    print(f"Time saved: {int((1 - iteration/size) * 100)}%")
+    print(f"Time saved: {int((1 - iteration / size) * 100)}%")
 
 
 def main():
     """Main entry point."""
-    if len(sys.argv) > 1 and sys.argv[1] in ['-h', '--help', 'help']:
+    if len(sys.argv) > 1 and sys.argv[1] in ["-h", "--help", "help"]:
         print(__doc__)
         sys.exit(0)
 

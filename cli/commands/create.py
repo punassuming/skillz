@@ -97,7 +97,7 @@ name: {name}
 description: {description}
 ---
 
-# {name.replace('-', ' ').title()}
+# {name.replace("-", " ").title()}
 
 {description}
 
@@ -130,7 +130,7 @@ def _create_command(base_path: Path, name: str, description: str, verbose: bool)
 description: {description}
 ---
 
-# {name.replace('-', ' ').title()} Command
+# {name.replace("-", " ").title()} Command
 
 TODO: Add the command prompt content here.
 

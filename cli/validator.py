@@ -213,9 +213,7 @@ class CommandValidator:
                 model = frontmatter["model"]
                 valid_models = ["sonnet", "opus", "haiku"]
                 if model not in valid_models:
-                    errors.append(
-                        f"Invalid model '{model}': must be one of {valid_models}"
-                    )
+                    errors.append(f"Invalid model '{model}': must be one of {valid_models}")
 
             # Validate allowed-tools
             if "allowed-tools" in frontmatter:

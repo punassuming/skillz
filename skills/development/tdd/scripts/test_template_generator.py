@@ -73,41 +73,43 @@ describe('{module}', () => {{
 }});
 """
 
+
 def generate_template(language, module):
     """Generate test template for specified language and module."""
     templates = {
-        'python': PYTHON_TEMPLATE,
-        'elisp': ELISP_TEMPLATE,
-        'javascript': JAVASCRIPT_TEMPLATE
+        "python": PYTHON_TEMPLATE,
+        "elisp": ELISP_TEMPLATE,
+        "javascript": JAVASCRIPT_TEMPLATE,
     }
-    
+
     if language not in templates:
         print(f"Error: Unsupported language '{language}'")
         print(f"Supported: {', '.join(templates.keys())}")
         sys.exit(1)
-    
+
     template = templates[language]
     return template.format(module=module)
 
+
 def main():
-    parser = argparse.ArgumentParser(description='Generate test file templates')
-    parser.add_argument('--language', '-l', required=True, 
-                       help='Programming language (python, elisp, javascript)')
-    parser.add_argument('--module', '-m', required=True,
-                       help='Module/package name to test')
-    parser.add_argument('--output', '-o',
-                       help='Output file (default: stdout)')
-    
+    parser = argparse.ArgumentParser(description="Generate test file templates")
+    parser.add_argument(
+        "--language", "-l", required=True, help="Programming language (python, elisp, javascript)"
+    )
+    parser.add_argument("--module", "-m", required=True, help="Module/package name to test")
+    parser.add_argument("--output", "-o", help="Output file (default: stdout)")
+
     args = parser.parse_args()
-    
+
     template = generate_template(args.language.lower(), args.module)
-    
+
     if args.output:
-        with open(args.output, 'w') as f:
+        with open(args.output, "w") as f:
             f.write(template)
         print(f"✅ Generated {args.output}")
     else:
         print(template)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

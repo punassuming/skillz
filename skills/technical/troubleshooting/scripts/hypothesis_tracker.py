@@ -31,19 +31,14 @@ DEFAULT_FILE = "troubleshooting_session.json"
 def load_session(filename=DEFAULT_FILE):
     """Load or create troubleshooting session."""
     if os.path.exists(filename):
-        with open(filename, 'r') as f:
+        with open(filename, "r") as f:
             return json.load(f)
-    return {
-        "problem": "",
-        "started": datetime.now().isoformat(),
-        "hypotheses": [],
-        "next_id": 1
-    }
+    return {"problem": "", "started": datetime.now().isoformat(), "hypotheses": [], "next_id": 1}
 
 
 def save_session(session, filename=DEFAULT_FILE):
     """Save troubleshooting session."""
-    with open(filename, 'w') as f:
+    with open(filename, "w") as f:
         json.dump(session, f, indent=2)
 
 
@@ -56,7 +51,7 @@ def add_hypothesis(session, text, priority="medium"):
         "priority": priority.lower(),
         "status": "untested",
         "added": datetime.now().isoformat(),
-        "tests": []
+        "tests": [],
     }
     session["hypotheses"].append(hypothesis)
     session["next_id"] += 1
@@ -80,7 +75,7 @@ def add_test(session, hyp_id, test_description):
     test = {
         "description": test_description,
         "timestamp": datetime.now().isoformat(),
-        "result": "pending"
+        "result": "pending",
     }
     hyp["tests"].append(test)
     hyp["status"] = "testing"
@@ -109,20 +104,19 @@ def record_result(session, hyp_id, result, notes=""):
 def list_hypotheses(session):
     """List all hypotheses."""
     if not session["hypotheses"]:
-        print("No hypotheses yet. Add one with: add \"hypothesis text\" --priority high")
+        print('No hypotheses yet. Add one with: add "hypothesis text" --priority high')
         return
 
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("HYPOTHESES")
-    print("="*80)
+    print("=" * 80)
 
-    for hyp in sorted(session["hypotheses"], key=lambda h: {"high": 0, "medium": 1, "low": 2}[h["priority"]]):
-        status_icon = {
-            "untested": "❓",
-            "testing": "🔬",
-            "confirmed": "✅",
-            "falsified": "❌"
-        }[hyp["status"]]
+    for hyp in sorted(
+        session["hypotheses"], key=lambda h: {"high": 0, "medium": 1, "low": 2}[h["priority"]]
+    ):
+        status_icon = {"untested": "❓", "testing": "🔬", "confirmed": "✅", "falsified": "❌"}[
+            hyp["status"]
+        ]
 
         priority_str = hyp["priority"].upper()
 
@@ -150,9 +144,9 @@ def print_summary(session):
     confirmed = sum(1 for h in session["hypotheses"] if h["status"] == "confirmed")
     falsified = sum(1 for h in session["hypotheses"] if h["status"] == "falsified")
 
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("INVESTIGATION SUMMARY")
-    print("="*80)
+    print("=" * 80)
     print(f"Total Hypotheses: {total}")
     print(f"  ❓ Untested: {untested}")
     print(f"  🔬 Testing: {testing}")
@@ -167,7 +161,11 @@ def print_summary(session):
 
     if untested > 0:
         print("\n📋 NEXT TO TEST:")
-        high_priority = [h for h in session["hypotheses"] if h["status"] == "untested" and h["priority"] == "high"]
+        high_priority = [
+            h
+            for h in session["hypotheses"]
+            if h["status"] == "untested" and h["priority"] == "high"
+        ]
         if high_priority:
             for hyp in high_priority[:3]:
                 print(f"  • [{hyp['id']}] {hyp['text']}")
@@ -183,7 +181,7 @@ def main():
 
     if command == "add":
         if len(sys.argv) < 3:
-            print("Usage: add \"hypothesis text\" [--priority high|medium|low]")
+            print('Usage: add "hypothesis text" [--priority high|medium|low]')
             sys.exit(1)
 
         text = sys.argv[2]
@@ -199,7 +197,7 @@ def main():
 
     elif command == "test":
         if len(sys.argv) < 4:
-            print("Usage: test HYPOTHESIS_ID \"test description\"")
+            print('Usage: test HYPOTHESIS_ID "test description"')
             sys.exit(1)
 
         hyp_id = sys.argv[2]
@@ -214,7 +212,7 @@ def main():
 
     elif command == "result":
         if len(sys.argv) < 4:
-            print("Usage: result HYPOTHESIS_ID pass|fail [\"notes\"]")
+            print('Usage: result HYPOTHESIS_ID pass|fail ["notes"]')
             sys.exit(1)
 
         hyp_id = sys.argv[2]

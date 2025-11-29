@@ -69,26 +69,20 @@ class Task:
         self.float = 0
         self.is_critical = False
 
-    def calculate_early_times(self, tasks_dict: Dict[str, 'Task']):
+    def calculate_early_times(self, tasks_dict: Dict[str, "Task"]):
         """Calculate early start and early finish (forward pass)."""
         if not self.dependencies:
             self.early_start = 0
         else:
             # Early start is the maximum early finish of all dependencies
-            self.early_start = max(
-                tasks_dict[dep_id].early_finish
-                for dep_id in self.dependencies
-            )
+            self.early_start = max(tasks_dict[dep_id].early_finish for dep_id in self.dependencies)
 
         self.early_finish = self.early_start + self.duration
 
-    def calculate_late_times(self, tasks_dict: Dict[str, 'Task'], project_duration: int):
+    def calculate_late_times(self, tasks_dict: Dict[str, "Task"], project_duration: int):
         """Calculate late start and late finish (backward pass)."""
         # Find all tasks that depend on this one
-        dependents = [
-            task for task in tasks_dict.values()
-            if self.id in task.dependencies
-        ]
+        dependents = [task for task in tasks_dict.values() if self.id in task.dependencies]
 
         if not dependents:
             # This is an end task
@@ -103,7 +97,7 @@ class Task:
         """Calculate float (slack) and determine if task is critical."""
         self.float = self.late_start - self.early_start
         # Alternative: self.float = self.late_finish - self.early_finish
-        self.is_critical = (self.float == 0)
+        self.is_critical = self.float == 0
 
     def to_dict(self) -> dict:
         """Convert task to dictionary for JSON output."""
@@ -117,7 +111,7 @@ class Task:
             "late_start": self.late_start,
             "late_finish": self.late_finish,
             "float": self.float,
-            "is_critical": self.is_critical
+            "is_critical": self.is_critical,
         }
 
 
@@ -235,7 +229,7 @@ def calculate_critical_path(tasks_data: List[dict]) -> Tuple[Dict[str, Task], Li
             task_data["id"],
             task_data.get("name", task_data["id"]),
             task_data["duration"],
-            task_data.get("dependencies", [])
+            task_data.get("dependencies", []),
         )
         for task_data in tasks_data
     }
@@ -275,7 +269,8 @@ def build_critical_path(tasks: Dict[str, Task]) -> List[str]:
 
     # Find start task(s) - critical tasks with no dependencies or only non-critical dependencies
     start_tasks = [
-        task_id for task_id, task in critical_tasks.items()
+        task_id
+        for task_id, task in critical_tasks.items()
         if not task.dependencies or all(dep not in critical_tasks for dep in task.dependencies)
     ]
 
@@ -294,7 +289,8 @@ def build_critical_path(tasks: Dict[str, Task]) -> List[str]:
 
         # Find next critical task that depends on current
         next_tasks = [
-            task_id for task_id, task in critical_tasks.items()
+            task_id
+            for task_id, task in critical_tasks.items()
             if current in task.dependencies and task_id not in visited
         ]
 
@@ -305,34 +301,38 @@ def build_critical_path(tasks: Dict[str, Task]) -> List[str]:
 
 def print_results(tasks: Dict[str, Task], critical_path: List[str], project_duration: int):
     """Print critical path analysis results to console."""
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("CRITICAL PATH METHOD (CPM) ANALYSIS")
-    print("="*80)
+    print("=" * 80)
 
     print(f"\nProject Duration: {project_duration} days")
     print(f"Critical Path: {' → '.join(critical_path)}")
     print(f"Number of Tasks: {len(tasks)}")
     print(f"Critical Tasks: {sum(1 for t in tasks.values() if t.is_critical)}")
 
-    print("\n" + "-"*80)
+    print("\n" + "-" * 80)
     print("TASK DETAILS")
-    print("-"*80)
-    print(f"{'ID':<6} {'Name':<20} {'Dur':<5} {'ES':<5} {'EF':<5} {'LS':<5} {'LF':<5} {'Float':<7} {'Critical':<10}")
-    print("-"*80)
+    print("-" * 80)
+    print(
+        f"{'ID':<6} {'Name':<20} {'Dur':<5} {'ES':<5} {'EF':<5} {'LS':<5} {'LF':<5} {'Float':<7} {'Critical':<10}"
+    )
+    print("-" * 80)
 
     # Sort by early start for readability
     sorted_tasks = sorted(tasks.values(), key=lambda t: t.early_start)
 
     for task in sorted_tasks:
         critical_mark = "✓ CRITICAL" if task.is_critical else ""
-        print(f"{task.id:<6} {task.name:<20} {task.duration:<5} "
-              f"{task.early_start:<5} {task.early_finish:<5} "
-              f"{task.late_start:<5} {task.late_finish:<5} "
-              f"{task.float:<7} {critical_mark:<10}")
+        print(
+            f"{task.id:<6} {task.name:<20} {task.duration:<5} "
+            f"{task.early_start:<5} {task.early_finish:<5} "
+            f"{task.late_start:<5} {task.late_finish:<5} "
+            f"{task.float:<7} {critical_mark:<10}"
+        )
 
-    print("\n" + "-"*80)
+    print("\n" + "-" * 80)
     print("GANTT-STYLE TIMELINE")
-    print("-"*80)
+    print("-" * 80)
 
     # Create simple ASCII timeline
     max_time = project_duration
@@ -349,9 +349,9 @@ def print_results(tasks: Dict[str, Task], critical_path: List[str], project_dura
     # Print time scale
     print(f"{'Time':<6} |" + "".join(str(i % 10) for i in range(0, max_time, scale)))
 
-    print("\n" + "="*80)
+    print("\n" + "=" * 80)
     print("LEGEND")
-    print("="*80)
+    print("=" * 80)
     print("ES = Early Start    | Earliest a task can start")
     print("EF = Early Finish   | Earliest a task can finish (ES + Duration)")
     print("LS = Late Start     | Latest a task can start without delaying project")
@@ -359,19 +359,20 @@ def print_results(tasks: Dict[str, Task], critical_path: List[str], project_dura
     print("Float = Slack       | How long a task can be delayed (LS - ES)")
     print("Critical = ✓        | Tasks with zero float (critical path)")
     print("█ = Critical task   | ▒ = Non-critical task")
-    print("="*80 + "\n")
+    print("=" * 80 + "\n")
 
 
-def save_results(tasks: Dict[str, Task], critical_path: List[str],
-                project_duration: int, output_file: str):
+def save_results(
+    tasks: Dict[str, Task], critical_path: List[str], project_duration: int, output_file: str
+):
     """Save results to JSON file."""
     results = {
         "project_duration": project_duration,
         "critical_path": critical_path,
-        "tasks": [task.to_dict() for task in tasks.values()]
+        "tasks": [task.to_dict() for task in tasks.values()],
     }
 
-    with open(output_file, 'w') as f:
+    with open(output_file, "w") as f:
         json.dump(results, f, indent=2)
 
     print(f"\nResults saved to {output_file}")
@@ -381,54 +382,14 @@ def print_example():
     """Print example input JSON."""
     example = {
         "tasks": [
-            {
-                "id": "A",
-                "name": "Design wireframes",
-                "duration": 5,
-                "dependencies": []
-            },
-            {
-                "id": "B",
-                "name": "Client approval",
-                "duration": 2,
-                "dependencies": ["A"]
-            },
-            {
-                "id": "C",
-                "name": "Create visual designs",
-                "duration": 7,
-                "dependencies": ["B"]
-            },
-            {
-                "id": "D",
-                "name": "Develop frontend",
-                "duration": 10,
-                "dependencies": ["C"]
-            },
-            {
-                "id": "E",
-                "name": "Develop backend",
-                "duration": 8,
-                "dependencies": ["C"]
-            },
-            {
-                "id": "F",
-                "name": "Integration testing",
-                "duration": 3,
-                "dependencies": ["D", "E"]
-            },
-            {
-                "id": "G",
-                "name": "User acceptance testing",
-                "duration": 4,
-                "dependencies": ["F"]
-            },
-            {
-                "id": "H",
-                "name": "Deploy to production",
-                "duration": 1,
-                "dependencies": ["G"]
-            }
+            {"id": "A", "name": "Design wireframes", "duration": 5, "dependencies": []},
+            {"id": "B", "name": "Client approval", "duration": 2, "dependencies": ["A"]},
+            {"id": "C", "name": "Create visual designs", "duration": 7, "dependencies": ["B"]},
+            {"id": "D", "name": "Develop frontend", "duration": 10, "dependencies": ["C"]},
+            {"id": "E", "name": "Develop backend", "duration": 8, "dependencies": ["C"]},
+            {"id": "F", "name": "Integration testing", "duration": 3, "dependencies": ["D", "E"]},
+            {"id": "G", "name": "User acceptance testing", "duration": 4, "dependencies": ["F"]},
+            {"id": "H", "name": "Deploy to production", "duration": 1, "dependencies": ["G"]},
         ]
     }
 
@@ -454,7 +415,7 @@ def main():
     # Load tasks from file
     input_file = sys.argv[1]
     try:
-        with open(input_file, 'r') as f:
+        with open(input_file, "r") as f:
             data = json.load(f)
     except FileNotFoundError:
         print(f"Error: File '{input_file}' not found")
