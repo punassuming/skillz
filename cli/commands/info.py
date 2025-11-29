@@ -6,7 +6,6 @@ import click
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.panel import Panel
-from rich.syntax import Syntax
 from rich.table import Table
 
 from cli.config import Config
@@ -119,7 +118,7 @@ def _display_skill_info(skill_path: Path, show_content: bool, verbose: bool):
     metadata_text = f"[bold cyan]Name:[/bold cyan] {metadata.get('name', 'N/A')}\n"
     metadata_text += f"[bold cyan]Description:[/bold cyan] {metadata.get('description', 'N/A')}\n"
     metadata_text += f"[bold cyan]Location:[/bold cyan] {skill_path}\n"
-    metadata_text += f"[bold cyan]Type:[/bold cyan] Skill\n"
+    metadata_text += "[bold cyan]Type:[/bold cyan] Skill\n"
 
     if "allowed-tools" in metadata:
         tools = metadata["allowed-tools"]
@@ -195,7 +194,7 @@ def _display_command_info(cmd_path: Path, show_content: bool, verbose: bool):
     metadata_text = f"[bold cyan]Name:[/bold cyan] {cmd_path.stem}\n"
     metadata_text += f"[bold cyan]Description:[/bold cyan] {metadata.get('description', 'N/A')}\n"
     metadata_text += f"[bold cyan]Location:[/bold cyan] {cmd_path}\n"
-    metadata_text += f"[bold cyan]Type:[/bold cyan] Command\n"
+    metadata_text += "[bold cyan]Type:[/bold cyan] Command\n"
 
     if "model" in metadata:
         metadata_text += f"[bold cyan]Model:[/bold cyan] {metadata['model']}\n"

@@ -9,8 +9,6 @@ Usage:
     python table_formatter.py data.xlsx --format docx
 """
 
-import sys
-
 print("Table Formatter - Placeholder")
 print("This script would format tables with:")
 print("  - Journal-specific styles")

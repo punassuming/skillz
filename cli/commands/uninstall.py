@@ -1,7 +1,6 @@
 """Uninstall command for skillz."""
 
 import shutil
-from pathlib import Path
 
 import click
 from rich.console import Console

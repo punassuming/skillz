@@ -1,9 +1,5 @@
 """Tests for utils module."""
 
-from pathlib import Path
-
-import pytest
-
 from cli.utils import (
     copy_directory,
     copy_file,

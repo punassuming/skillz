@@ -15,11 +15,10 @@ Supported formats:
     - coverage.json (coverage.py JSON format)
 """
 
-import sys
 import argparse
 import json
+import sys
 from pathlib import Path
-from collections import defaultdict
 
 
 def parse_cobertura_xml(filepath):
@@ -74,7 +73,7 @@ def parse_cobertura_xml(filepath):
 
 def parse_coverage_json(filepath):
     """Parse coverage.py JSON format."""
-    with open(filepath, "r") as f:
+    with open(filepath) as f:
         data = json.load(f)
 
     coverage_data = {
@@ -137,7 +136,7 @@ def analyze_coverage(coverage_data, min_coverage=80):
     print(f"\nTarget Coverage: {min_coverage}%")
 
     if overall_coverage >= min_coverage:
-        print(f"✅ Coverage target met!")
+        print("✅ Coverage target met!")
     else:
         gap = min_coverage - overall_coverage
         print(f"⚠️  Coverage gap: {gap:.1f}%")

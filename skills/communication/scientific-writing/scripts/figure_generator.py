@@ -8,8 +8,6 @@ Usage:
     python figure_generator.py data.csv config.yaml --output figure1.pdf
 """
 
-import sys
-
 print("Figure Generator - Placeholder")
 print("This script would generate publication-quality figures with:")
 print("  - 300+ DPI resolution")

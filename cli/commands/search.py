@@ -23,7 +23,7 @@ def search(ctx, query, item_type):
 
     QUERY is the search term to look for in names and descriptions.
     """
-    verbose = ctx.obj.get("verbose", False)
+    _ = ctx.obj.get("verbose", False)  # Reserved for future use
     config = Config()
 
     # Get repository path

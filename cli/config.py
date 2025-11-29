@@ -48,7 +48,7 @@ class Config:
     def _load_config(self) -> Dict:
         """Load configuration from file or use defaults."""
         if self.config_path.exists():
-            with open(self.config_path, "r") as f:
+            with open(self.config_path) as f:
                 user_config = yaml.safe_load(f) or {}
                 # Deep merge with defaults
                 config = self._deep_merge(self.DEFAULT_CONFIG.copy(), user_config)

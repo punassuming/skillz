@@ -1,9 +1,5 @@
 """Tests for validator module."""
 
-from pathlib import Path
-
-import pytest
-
 from cli.validator import CommandValidator, SkillValidator
 
 

@@ -193,7 +193,7 @@ def list_categories():
     for category, prompts in PROMPTS.items():
         count = len(prompts)
         print(f"  {category:15} ({count:2} prompts)")
-    print(f"\n  all             (all categories)")
+    print("\n  all             (all categories)")
     print(f"\nTotal prompts: {sum(len(p) for p in PROMPTS.values())}")
     print("\nUsage: python random_prompt.py [category]")
 

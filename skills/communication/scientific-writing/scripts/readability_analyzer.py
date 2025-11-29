@@ -9,9 +9,9 @@ Usage:
     python readability_analyzer.py --text "Your text here"
 """
 
-import sys
 import argparse
 import re
+import sys
 
 
 def count_syllables(word):
@@ -136,12 +136,12 @@ def print_results(metrics):
     print("READABILITY ANALYSIS")
     print("=" * 60)
 
-    print(f"\nBasic Metrics:")
+    print("\nBasic Metrics:")
     print(f"  Words: {metrics['word_count']}")
     print(f"  Sentences: {metrics['sentence_count']}")
     print(f"  Average sentence length: {metrics['avg_sentence_length']:.1f} words")
 
-    print(f"\nComplexity:")
+    print("\nComplexity:")
     print(f"  Complex words (3+ syllables): {metrics['complex_word_percent']:.1f}%")
 
     # Flesch Reading Ease
@@ -160,11 +160,11 @@ def print_results(metrics):
     else:
         print("  ✓ Easier to read (may be too simple for scientific audience)")
 
-    print(f"\nStyle:")
+    print("\nStyle:")
     print(f"  Passive voice indicators: {metrics['passive_percent']:.1f}% of sentences")
 
     if metrics["problem_phrases"]:
-        print(f"\n⚠️  Problem Phrases Found:")
+        print("\n⚠️  Problem Phrases Found:")
         for phrase in metrics["problem_phrases"][:5]:  # Show first 5
             print(f"    - '{phrase}'")
         if len(metrics["problem_phrases"]) > 5:
@@ -194,7 +194,7 @@ def main():
         text = args.text
     elif args.file:
         try:
-            with open(args.file, "r", encoding="utf-8") as f:
+            with open(args.file, encoding="utf-8") as f:
                 text = f.read()
         except FileNotFoundError:
             print(f"Error: File not found: {args.file}")

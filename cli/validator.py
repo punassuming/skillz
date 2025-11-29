@@ -87,7 +87,7 @@ class SkillValidator:
         errors = []
 
         try:
-            with open(skill_file, "r") as f:
+            with open(skill_file) as f:
                 content = f.read()
         except Exception as e:
             errors.append(f"Error reading file: {e}")
@@ -117,7 +117,7 @@ class SkillValidator:
         if "description" in frontmatter:
             desc = frontmatter["description"]
             if not validate_description(desc):
-                errors.append(f"Description too long: max 1024 characters")
+                errors.append("Description too long: max 1024 characters")
 
         # Validate allowed-tools
         if "allowed-tools" in frontmatter:
@@ -191,7 +191,7 @@ class CommandValidator:
             return False, errors
 
         try:
-            with open(command_file, "r") as f:
+            with open(command_file) as f:
                 content = f.read()
         except Exception as e:
             errors.append(f"Error reading file: {e}")

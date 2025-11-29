@@ -11,8 +11,8 @@ Usage:
 
 import argparse
 import json
-from typing import Dict, List, Optional
 from collections import defaultdict
+from typing import Dict, List
 
 
 class SearchLog:
@@ -30,7 +30,7 @@ class SearchLog:
     def load_from_json(self, filename: str) -> bool:
         """Load search log from JSON file."""
         try:
-            with open(filename, "r") as f:
+            with open(filename) as f:
                 data = json.load(f)
                 if isinstance(data, list):
                     for record in data:
@@ -79,8 +79,6 @@ class SearchLog:
             "retention_rate_trend": [],
             "convergence_status": "Not converged",
         }
-
-        previous_papers = set()
 
         for i, search in enumerate(self.searches, 1):
             new_papers = search.get("retained", 0)

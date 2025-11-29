@@ -20,10 +20,9 @@ Examples:
 """
 
 import json
-import sys
 import os
+import sys
 from datetime import datetime
-from pathlib import Path
 
 DEFAULT_FILE = "troubleshooting_session.json"
 
@@ -31,7 +30,7 @@ DEFAULT_FILE = "troubleshooting_session.json"
 def load_session(filename=DEFAULT_FILE):
     """Load or create troubleshooting session."""
     if os.path.exists(filename):
-        with open(filename, "r") as f:
+        with open(filename) as f:
             return json.load(f)
     return {"problem": "", "started": datetime.now().isoformat(), "hypotheses": [], "next_id": 1}
 

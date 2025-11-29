@@ -1,6 +1,5 @@
 """Install command for skillz."""
 
-import os
 from pathlib import Path
 
 import click
@@ -87,7 +86,7 @@ def install(ctx, name, target, platform, item_type, force, dry_run, install_all)
         # Validate skill
         valid, errors = SkillValidator.validate_skill_directory(source_path)
         if not valid:
-            console.print(f"[red]Error: Invalid skill:[/red]")
+            console.print("[red]Error: Invalid skill:[/red]")
             for error in errors:
                 console.print(f"  - {error}")
             raise click.Abort()
@@ -105,7 +104,7 @@ def install(ctx, name, target, platform, item_type, force, dry_run, install_all)
         # Validate command
         valid, errors = CommandValidator.validate_command_file(source_path)
         if not valid:
-            console.print(f"[red]Error: Invalid command:[/red]")
+            console.print("[red]Error: Invalid command:[/red]")
             for error in errors:
                 console.print(f"  - {error}")
             raise click.Abort()

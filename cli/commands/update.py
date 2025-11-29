@@ -26,7 +26,7 @@ def update(ctx, name, all, target, platform, dry_run):
 
     NAME is the name of a specific item to update, or use --all to update everything.
     """
-    verbose = ctx.obj.get("verbose", False)
+    _ = ctx.obj.get("verbose", False)  # Reserved for future use
 
     if not name and not all:
         console.print("[red]Error: Specify a name or use --all[/red]")

@@ -9,11 +9,6 @@ Usage:
     python citation_checker.py manuscript.md --style numbered
 """
 
-import sys
-import argparse
-import re
-
-
 print("Citation Checker - Placeholder")
 print("This script would validate:")
 print("  - All in-text citations have references")

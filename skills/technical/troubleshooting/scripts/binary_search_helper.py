@@ -58,9 +58,9 @@ def binary_search_session():
     item_name = type_names.get(space_type, "items")
 
     # Get boundaries
-    print(f"\nDefine the boundaries of your search space:")
-    good_boundary = input(f"Working (good) boundary: ").strip()
-    bad_boundary = input(f"Broken (bad) boundary: ").strip()
+    print("\nDefine the boundaries of your search space:")
+    good_boundary = input("Working (good) boundary: ").strip()
+    bad_boundary = input("Broken (bad) boundary: ").strip()
 
     # Get size
     try:
@@ -104,7 +104,7 @@ def binary_search_session():
         # Get test result
         while True:
             result = (
-                input(f"\nDoes the problem occur at this midpoint? (yes/no/quit): ").strip().lower()
+                input("\nDoes the problem occur at this midpoint? (yes/no/quit): ").strip().lower()
             )
             if result in ["yes", "no", "quit", "q"]:
                 break
@@ -129,7 +129,7 @@ def binary_search_session():
             print(f"\n🎯 FOUND IT! The issue is at position {right}")
             if space_type == "1":
                 print(f"   The problematic commit is at position {right}")
-                print(f"   (Use 'git bisect' to find the exact commit)")
+                print("   (Use 'git bisect' to find the exact commit)")
             elif space_type == "2":
                 print(f"   The problematic setting is number {right}")
             elif space_type == "3":

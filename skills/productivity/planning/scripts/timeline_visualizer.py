@@ -46,9 +46,9 @@ Example:
 
 import json
 import sys
-from datetime import datetime, timedelta
-from typing import List, Dict, Optional, Tuple
 from collections import defaultdict
+from datetime import datetime, timedelta
+from typing import List, Tuple
 
 
 class TimelineTask:
@@ -186,9 +186,9 @@ def render_gantt_chart(
     output.append("=" * 80)
 
     total_days = (end_date - start_date).days + 1
-    output.append(
-        f"\nTimeline: {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')} ({total_days} days)"
-    )
+    start_str = start_date.strftime("%Y-%m-%d")
+    end_str = end_date.strftime("%Y-%m-%d")
+    output.append(f"\nTimeline: {start_str} to {end_str} ({total_days} days)")
     output.append(f"Tasks: {len(tasks)} | Milestones: {len(milestones)}")
 
     # Determine time scale
@@ -196,17 +196,14 @@ def render_gantt_chart(
         # Day-level granularity
         scale_unit = "day"
         scale_factor = 1
-        char_per_unit = 1
     elif total_days <= 180:
         # Week-level granularity
         scale_unit = "week"
         scale_factor = 7
-        char_per_unit = 1
     else:
         # Month-level granularity
         scale_unit = "month"
         scale_factor = 30
-        char_per_unit = 1
 
     timeline_width = max(60, min(100, total_days // scale_factor))
 
@@ -216,7 +213,6 @@ def render_gantt_chart(
     output.append("-" * 80)
 
     # Create time markers
-    time_header = ""
     current_date = start_date
     markers = []
 
@@ -353,9 +349,9 @@ def render_roadmap(
     for phase, (phase_start, phase_end, phase_duration, phase_tasks) in sorted_phases:
         output.append("\n" + "-" * 80)
         output.append(f"Phase: {phase}")
-        output.append(
-            f"  Duration: {phase_start.strftime('%Y-%m-%d')} to {phase_end.strftime('%Y-%m-%d')} ({phase_duration} days)"
-        )
+        ps = phase_start.strftime("%Y-%m-%d")
+        pe = phase_end.strftime("%Y-%m-%d")
+        output.append(f"  Duration: {ps} to {pe} ({phase_duration} days)")
         output.append(f"  Tasks: {len(phase_tasks)}")
 
         # Calculate phase bar
@@ -367,7 +363,7 @@ def render_roadmap(
         output.append(f"  {bar}")
 
         # List key tasks
-        output.append(f"\n  Key Tasks:")
+        output.append("\n  Key Tasks:")
         for task in sorted(phase_tasks, key=lambda t: t.start)[:5]:  # Show first 5
             duration_str = f"{task.duration}d"
             owner_str = f" - {task.owner}" if task.owner else ""
@@ -575,7 +571,7 @@ def main():
     # Load timeline from file
     input_file = sys.argv[1]
     try:
-        with open(input_file, "r") as f:
+        with open(input_file) as f:
             data = json.load(f)
     except FileNotFoundError:
         print(f"Error: File '{input_file}' not found")

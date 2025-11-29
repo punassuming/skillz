@@ -48,8 +48,7 @@ Example:
 
 import json
 import sys
-from collections import defaultdict
-from typing import Dict, List, Set, Tuple
+from typing import Dict, List, Tuple
 
 
 class Task:
@@ -314,7 +313,8 @@ def print_results(tasks: Dict[str, Task], critical_path: List[str], project_dura
     print("TASK DETAILS")
     print("-" * 80)
     print(
-        f"{'ID':<6} {'Name':<20} {'Dur':<5} {'ES':<5} {'EF':<5} {'LS':<5} {'LF':<5} {'Float':<7} {'Critical':<10}"
+        f"{'ID':<6} {'Name':<20} {'Dur':<5} {'ES':<5} {'EF':<5} "
+        f"{'LS':<5} {'LF':<5} {'Float':<7} {'Critical':<10}"
     )
     print("-" * 80)
 
@@ -415,7 +415,7 @@ def main():
     # Load tasks from file
     input_file = sys.argv[1]
     try:
-        with open(input_file, "r") as f:
+        with open(input_file) as f:
             data = json.load(f)
     except FileNotFoundError:
         print(f"Error: File '{input_file}' not found")

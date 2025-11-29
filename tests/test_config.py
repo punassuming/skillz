@@ -2,7 +2,6 @@
 
 from pathlib import Path
 
-import pytest
 import yaml
 
 from cli.config import Config
@@ -47,7 +46,7 @@ class TestConfig:
         config.save_config()
 
         # Load and verify
-        with open(config_path, "r") as f:
+        with open(config_path) as f:
             saved_config = yaml.safe_load(f)
         assert saved_config["repository_path"] == "/new/repo/path"
 

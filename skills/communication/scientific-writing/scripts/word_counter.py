@@ -9,8 +9,8 @@ Usage:
     python word_counter.py manuscript.md --exclude-refs
 """
 
-import sys
 import argparse
+import sys
 from pathlib import Path
 
 
@@ -87,7 +87,7 @@ def count_words_docx(filepath, exclude_refs=False):
 
 def count_words_markdown(filepath, exclude_refs=False):
     """Count words in markdown file."""
-    with open(filepath, "r", encoding="utf-8") as f:
+    with open(filepath, encoding="utf-8") as f:
         content = f.read()
 
     sections = {

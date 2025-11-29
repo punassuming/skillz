@@ -12,8 +12,8 @@ Usage:
 Supported languages: python, elisp, javascript
 """
 
-import sys
 import argparse
+import sys
 
 PYTHON_TEMPLATE = """# test_{module}.py
 import pytest

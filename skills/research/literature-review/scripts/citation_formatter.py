@@ -12,8 +12,7 @@ Usage:
 
 import argparse
 import json
-import re
-from typing import Dict, List, Optional
+from typing import Dict, List
 
 
 class Citation:
@@ -55,7 +54,10 @@ class Citation:
         """Format citation in Chicago (author-date) style."""
         authors_str = self._format_authors_chicago()
 
-        citation = f'{authors_str}. "{self.title}." {self.journal} {self.volume}, no. {self.issue} ({self.year}): {self.pages}.'
+        citation = (
+            f'{authors_str}. "{self.title}." {self.journal} {self.volume}, '
+            f"no. {self.issue} ({self.year}): {self.pages}."
+        )
 
         if self.doi:
             citation += f" https://doi.org/{self.doi}"
@@ -68,7 +70,10 @@ class Citation:
         """Format citation in IEEE style."""
         authors_str = self._format_authors_ieee()
 
-        citation = f'{authors_str}, "{self.title}," {self.journal}, vol. {self.volume}, no. {self.issue}, pp. {self.pages}, {self.year}'
+        citation = (
+            f'{authors_str}, "{self.title}," {self.journal}, vol. {self.volume}, '
+            f"no. {self.issue}, pp. {self.pages}, {self.year}"
+        )
 
         if self.doi:
             citation += f", doi: {self.doi}"
@@ -166,7 +171,7 @@ class CitationFormatter:
         try:
             import csv
 
-            with open(filename, "r") as f:
+            with open(filename) as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     authors = [a.strip() for a in row.get("authors", "").split(";")]
@@ -265,9 +270,8 @@ def main():
 
     else:
         print("Example usage:")
-        print(
-            "  python citation_formatter.py --input citations.csv --output formatted.txt --format apa"
-        )
+        print("  python citation_formatter.py --input citations.csv \\")
+        print("         --output formatted.txt --format apa")
         print("  python citation_formatter.py --list")
 
 
