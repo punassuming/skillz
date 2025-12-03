@@ -9,7 +9,10 @@
 
 A comprehensive CLI tool for managing AI assistant skills and slash commands for OpenCode, Claude Code, and other LLM platforms.
 
-> **Note:** Currently only tested on Claude Code and OpenCode.
+> **Note:** Currently only tested on Claude Code and OpenCode. Please report issues for Codex and Gemini. With opencode you may have better performance with https://www.npmjs.com/package/opencode-skills (this is what I use).
+
+- https://github.com/numman-ali/openskills (I have not tried this yet)
+- Requested feature in opencode https://github.com/sst/opencode/issues/3235
 
 ## Features
 
@@ -268,11 +271,11 @@ Skillz manages skills and commands for these AI coding assistants:
 - **[OpenCode](https://github.com/sst/opencode)** - The AI coding agent built for the terminal. Open-source, provider-agnostic, with 30k+ GitHub stars.
 - **[Claude Code](https://github.com/anthropics/claude-code)** - Anthropic's agentic coding tool that lives in your terminal. Understands your codebase and helps you code faster.
 - **[Codex CLI](https://github.com/openai/codex)** - OpenAI's lightweight coding agent that runs in your terminal.
-- **Gemini** - Google's AI assistant (skills support planned).
+- **Gemini** - Google's AI assistant.
 
 ### Related Skills Projects
 
-- **[Superpowers](https://github.com/obra/superpowers)** - A complete software development workflow framework for Claude Code with composable skills for design, TDD, code review, and integration.
+- **[Superpowers](https://github.com/obra/superpowers)** - A complete software development workflow framework for Claude Code with composable skills for design, TDD, code review, and integration. This project was an early motivation to develop this project.
 
 ## Credits
 
