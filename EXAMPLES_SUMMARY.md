@@ -144,18 +144,16 @@ All examples follow these standards:
 
 ## Next Steps (Potential)
 
-Additional skills that could benefit from examples:
+Additional skills that could benefit from examples can be identified by running:
+```bash
+skillz list --source repository | grep "examples directory: No"
+```
 
-### High Priority
-- `research/eln` - Lab notebook entry examples
-- `research/scientific-reviewer` - Peer review example
-- `technical/troubleshooting` - Debugging session
-- `programming/python-plotting` - Visualization examples
-
-### Medium Priority
-- Laboratory skills (opentrons-*, etc.) - Protocol examples
-- Programming skills (python-jax, materials-properties, etc.) - Code examples
-- Creative skills (elevenlabs, video-storytelling) - Generation examples
+Priority should be given to skills that:
+- Are frequently used by the community
+- Have complex workflows that benefit from demonstration
+- Lack clear documentation or tutorials elsewhere
+- Represent high-value use cases
 
 ## Validation
 
@@ -189,5 +187,4 @@ skills/
 ---
 
 **Date**: December 23, 2024  
-**Author**: GitHub Copilot  
 **PR**: copilot/extend-example-skills-usage
