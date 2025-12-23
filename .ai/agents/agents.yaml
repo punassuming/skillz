@@ -1,0 +1,61 @@
+version: "1.0"
+
+capabilities:
+  skill-management:
+    description: "Manage AI assistant skills and slash commands"
+  validation:
+    description: "Validate skill and command formats"
+  multi-platform:
+    description: "Support multiple LLM platforms (OpenCode, Claude, Codex, Gemini, Copilot, MCP)"
+  search-discovery:
+    description: "Search and discover skills by keywords"
+
+roles:
+  skill-manager:
+    default-capabilities:
+      - skill-management
+      - validation
+      - multi-platform
+      - search-discovery
+    policies: |
+      # Skill Manager Role Policies
+      
+      - Always validate skills and commands before installation
+      - Follow platform-specific directory conventions
+      - Maintain backward compatibility with existing installations
+      - Use clear error messages and validation feedback
+  
+  reviewer:
+    default-capabilities:
+      - validation
+      - search-discovery
+    policies: |
+      # Reviewer Role Policies
+      
+      - Perform thorough validation of skill formats
+      - Check for required frontmatter fields
+      - Verify allowed-tools restrictions
+      - Provide detailed error messages
+
+agents:
+  - id: default
+    name: "Default Skillz Agent"
+    role: skill-manager
+    policies: |
+      # Default Agent Policies
+      
+      - Use personal installation target by default
+      - Support all platforms equally
+      - Provide helpful prompts for missing configuration
+      - Auto-detect repository location when possible
+    
+  - id: review
+    name: "Skillz Review Agent"
+    role: reviewer
+    policies: |
+      # Review Agent Policies
+      
+      - Focus on validation and quality checks
+      - Do not perform installations without explicit confirmation
+      - Provide comprehensive validation reports
+      - Suggest improvements for skill documentation
