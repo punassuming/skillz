@@ -38,6 +38,14 @@ platforms:
     skills_dir: ~/.config/gemini/skills
     commands_dir: ~/.config/gemini/commands
 
+  openai:
+    skills_dir: ~/.openai/skills
+    commands_dir: ~/.openai/commands
+
+  copilot:
+    skills_dir: ~/.config/copilot/skills
+    commands_dir: ~/.config/copilot/commands
+
 # Additional options (optional)
 # verbose: false
 # auto_update: false

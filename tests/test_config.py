@@ -119,6 +119,21 @@ class TestConfig:
 
         claude_skills = config.get_skills_dir("personal", "claude")
         codex_skills = config.get_skills_dir("personal", "codex")
+        openai_skills = config.get_skills_dir("personal", "openai")
+        copilot_skills = config.get_skills_dir("personal", "copilot")
 
         assert ".claude/skills" in str(claude_skills)
         assert ".codex/skills" in str(codex_skills)
+        assert ".openai/skills" in str(openai_skills)
+        assert ".config/copilot/skills" in str(copilot_skills)
+
+    def test_all_platforms_configured(self, temp_dir):
+        """Test that all expected platforms are configured in DEFAULT_CONFIG."""
+        config_path = temp_dir / "config.yaml"
+        config = Config(config_path)
+
+        expected_platforms = ["opencode", "claude", "codex", "gemini", "openai", "copilot"]
+        for platform in expected_platforms:
+            assert platform in config.config["platforms"]
+            assert "skills_dir" in config.config["platforms"][platform]
+            assert "commands_dir" in config.config["platforms"][platform]
