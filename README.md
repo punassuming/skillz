@@ -14,6 +14,12 @@ A comprehensive CLI tool for managing AI assistant skills and slash commands for
 - https://github.com/numman-ali/openskills (I have not tried this yet)
 - Requested feature in opencode https://github.com/sst/opencode/issues/3235
 
+## 📚 Documentation
+
+- **[Quick Start Guide](QUICK_START.md)** - Get started in 5 minutes
+- **[Usage Guide](USAGE_GUIDE.md)** - Comprehensive guide for using skills with Gemini CLI, Copilot CLI, and Codex CLI
+- **[Examples Summary](EXAMPLES_SUMMARY.md)** - Overview of all example skills included
+
 ## Features
 
 - **Install/Uninstall**: Easily manage skills and commands
