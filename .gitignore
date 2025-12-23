@@ -1,6 +1,7 @@
 # Generated agent configuration files
 AGENTS.md
 GEMINI.md
+REVIEW-AGENTS.md
 .github/copilot-instructions.md
 
 # Python
