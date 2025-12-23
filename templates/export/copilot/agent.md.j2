@@ -7,6 +7,12 @@ tools:
   - search
   - shell
 infer: true
+{% if agent_metadata %}
+metadata:
+{% for key, value in agent_metadata.items() %}
+  {{ key }}: {{ value }}
+{% endfor %}
+{% endif %}
 ---
 
 # {{ agent_name | replace('-', ' ') | title }}
