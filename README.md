@@ -143,6 +143,8 @@ Into a single platform-specific file with:
 
 **Note:** Generated files (AGENTS.md, GEMINI.md, .github/copilot-instructions.md) are marked as generated and should be regenerated rather than edited manually.
 
+**For detailed documentation**, see [docs/EXPORT.md](docs/EXPORT.md).
+
 ## Configuration
 
 Configuration is stored in `~/.config/skillz/config.yaml`.
