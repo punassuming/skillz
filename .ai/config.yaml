@@ -73,11 +73,14 @@ platforms:
   codex:
     output: AGENTS.md
     enabled: true
+    # Codex uses plain markdown AGENTS.md in root
   
   gemini:
-    output: GEMINI.md
+    output: .gemini/settings.json
     enabled: true
+    # Gemini CLI uses JSON configuration files
   
   copilot:
-    output: .github/copilot-instructions.md
+    output: .github/agents/
     enabled: true
+    # Copilot uses .agent.md files in .github/agents/ directory

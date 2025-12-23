@@ -66,5 +66,5 @@ examples/
 
 # Generated export files (regenerate with skillz export)
 /AGENTS.md
-/GEMINI.md
-/.github/copilot-instructions.md
+/.gemini/
+/.github/agents/*.agent.md

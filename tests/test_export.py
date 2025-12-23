@@ -89,9 +89,9 @@ platforms:
         # Custom output from config
         assert ai_config.get_default_output("codex") == "CUSTOM_AGENTS.md"
 
-        # Fallback defaults
-        assert ai_config.get_default_output("gemini") == "GEMINI.md"
-        assert ai_config.get_default_output("copilot") == ".github/copilot-instructions.md"
+        # Fallback defaults (updated for standardized formats)
+        assert ai_config.get_default_output("gemini") == ".gemini/settings.json"
+        assert ai_config.get_default_output("copilot") == ".github/agents/"
 
 
 class TestContentAggregator:
@@ -206,11 +206,11 @@ platforms:
         assert Path(output_path).exists()
         content = Path(output_path).read_text()
 
-        # Verify generated file contains expected sections
+        # Verify generated file contains expected sections (updated for new format)
         assert "GENERATED FILE" in content
         assert "DO NOT EDIT BY HAND" in content
-        assert "Project Policies" in content
-        assert "Skills Index" in content
+        assert "Working Agreements" in content or "Test Policy" in content
+        assert "Skills" in content
         assert "test-skill" in content  # From mock_skills_dir fixture
 
     def test_export_gemini(self, mock_skills_dir, temp_dir):
@@ -227,7 +227,7 @@ commands:
   include_all: true
 platforms:
   gemini:
-    output: test-output/GEMINI.md
+    output: test-output/settings.json
 """
         )
 
@@ -237,8 +237,9 @@ platforms:
         assert Path(output_path).exists()
         content = Path(output_path).read_text()
 
-        assert "GENERATED FILE" in content
-        assert "Gemini" in content
+        # Gemini now outputs JSON format
+        assert "automatically generated" in content
+        assert "gemini-2.5-flash" in content or "gemini" in content.lower()
 
     def test_export_copilot(self, mock_skills_dir, temp_dir):
         """Test exporting for Copilot platform."""
@@ -254,18 +255,28 @@ commands:
   include_all: true
 platforms:
   copilot:
-    output: test-output/copilot.md
+    output: test-output/agents/
 """
         )
 
         manager = ExportManager(mock_skills_dir.parent, config_path)
         output_path = manager.export("copilot")
 
+        # Copilot now exports to a directory with multiple .agent.md files
         assert Path(output_path).exists()
-        content = Path(output_path).read_text()
+        assert Path(output_path).is_dir()
 
-        assert "GENERATED FILE" in content
-        assert "Copilot" in content
+        # Check that at least one .agent.md file was created
+        agent_files = list(Path(output_path).glob("*.agent.md"))
+        assert len(agent_files) > 0
+
+        # Check one agent file has proper YAML frontmatter
+        if agent_files:
+            content = agent_files[0].read_text()
+            assert "---" in content
+            assert "name:" in content
+            assert "description:" in content
+            assert "tools:" in content
 
     def test_export_unsupported_platform(self, mock_skills_dir):
         """Test exporting with unsupported platform."""

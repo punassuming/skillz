@@ -104,13 +104,13 @@ skillz uninstall skill-name
 Generate platform-specific instruction files from the canonical `.ai/` configuration:
 
 ```bash
-# Export for Codex CLI (generates AGENTS.md)
+# Export for Codex CLI (generates AGENTS.md in plain markdown)
 skillz export --platform codex
 
-# Export for Gemini CLI (generates GEMINI.md)
+# Export for Gemini CLI (generates .gemini/settings.json)
 skillz export --platform gemini
 
-# Export for GitHub Copilot CLI (generates .github/copilot-instructions.md)
+# Export for GitHub Copilot CLI (generates .github/agents/*.agent.md files)
 skillz export --platform copilot
 
 # Use a specific profile (e.g., minimal, full)
@@ -123,16 +123,21 @@ skillz export --platform codex --output custom/path/AGENTS.md
 skillz export --platform codex --dry-run
 ```
 
+**Platform-Specific Formats:**
+
+- **Codex CLI**: Plain markdown `AGENTS.md` file (no HTML comments, follows OpenAI standards)
+- **Gemini CLI**: JSON configuration in `.gemini/settings.json` (compatible with Gemini CLI config format)
+- **GitHub Copilot**: Individual `.agent.md` files in `.github/agents/` with YAML frontmatter (follows GitHub Copilot agent standards)
+
 The export command compiles:
 - Global policies from `.ai/config.yaml`
 - Selected skills from `skills/` directory
 - Selected commands from `commands/` directory
 
-Into a single platform-specific file with:
-- Generated header warning against manual edits
+Into platform-specific formats with:
+- Generated headers/metadata warning against manual edits
 - Project policies and coding standards
-- Skills index with descriptions
-- Full skill content for reference
+- Skills content appropriately formatted for each platform
 - Command definitions
 
 **Recommended workflow:**
@@ -141,9 +146,7 @@ Into a single platform-specific file with:
 3. Run `skillz export --platform <platform>` to regenerate instruction files
 4. Commit `.ai/config.yaml` and generated files to version control
 
-**Note:** Generated files (AGENTS.md, GEMINI.md, .github/copilot-instructions.md) are marked as generated and should be regenerated rather than edited manually.
-
-**For detailed documentation**, see [docs/EXPORT.md](docs/EXPORT.md).
+**Note:** Generated files are marked as generated and should be regenerated rather than edited manually. See [docs/EXPORT.md](docs/EXPORT.md) for detailed documentation.
 
 ## Configuration
 
@@ -232,14 +235,17 @@ platforms:
   codex:
     output: AGENTS.md
     enabled: true
+    # Codex uses plain markdown AGENTS.md in root
   
   gemini:
-    output: GEMINI.md
+    output: .gemini/settings.json
     enabled: true
+    # Gemini CLI uses JSON configuration files
   
   copilot:
-    output: .github/copilot-instructions.md
+    output: .github/agents/
     enabled: true
+    # Copilot uses .agent.md files in .github/agents/ directory
 ```
 
 ### Benefits
@@ -252,18 +258,33 @@ platforms:
 
 ### Platform-Specific Output Conventions
 
+The export feature follows platform-specific standards based on official documentation:
+
 - **Codex CLI**: `AGENTS.md` in repository root (configurable)
-- **Gemini CLI**: `GEMINI.md` in repository root (configurable)
-- **GitHub Copilot CLI**: `.github/copilot-instructions.md` (configurable)
-  - Note: GitHub Copilot CLI support for custom instruction files may vary by version
+  - Plain markdown format (no HTML comments)
+  - Follows OpenAI Codex AGENTS.md specification
+  - Sections: Working Agreements, Skills, Commands
+  - Reference: [OpenAI Codex docs](https://github.com/openai/codex/blob/main/docs/config.md)
+
+- **Gemini CLI**: `.gemini/settings.json` (configurable)
+  - JSON configuration format
+  - Compatible with Gemini CLI settings structure
+  - Includes model configuration and context
+  - Reference: [Gemini CLI docs](https://geminicli.com/docs/get-started/configuration/)
+
+- **GitHub Copilot CLI**: `.github/agents/*.agent.md` (configurable)
+  - Individual `.agent.md` files per skill in `.github/agents/` directory
+  - YAML frontmatter with name, description, tools, and infer settings
+  - Follows GitHub Copilot custom agents specification
+  - Invoke with `/agent <name>` in Copilot CLI
+  - Reference: [GitHub Copilot custom agents docs](https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli#use-custom-agents)
 
 All generated files include:
-- Warning header about being auto-generated
+- Warning headers/metadata about being auto-generated
 - Generation timestamp
 - Instructions for regeneration
 - Project policies
-- Skills index and full content
-- Commands definitions
+- Skills content (formatted appropriately for each platform)
 
 ## Skills Format
 

@@ -104,7 +104,7 @@ class AIConfig:
             platform: Platform name
 
         Returns:
-            Default output filename
+            Default output filename or directory
         """
         platform_config = self.get_platform_config(platform)
         if "output" in platform_config:
@@ -113,7 +113,7 @@ class AIConfig:
         # Fallback defaults
         defaults = {
             "codex": "AGENTS.md",
-            "gemini": "GEMINI.md",
-            "copilot": ".github/copilot-instructions.md",
+            "gemini": ".gemini/settings.json",
+            "copilot": ".github/agents/",
         }
         return defaults.get(platform, f"{platform.upper()}.md")
