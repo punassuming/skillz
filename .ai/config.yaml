@@ -1,0 +1,83 @@
+# Canonical AI Configuration
+# This file defines the platform-neutral configuration for skills, commands, and policies.
+# Use 'skillz export' to generate platform-specific instruction files.
+
+# Global project instructions and policies
+policies:
+  - name: code-quality
+    description: Maintain high code quality standards
+    content: |
+      - Write clean, readable, and maintainable code
+      - Follow language-specific conventions and best practices
+      - Include proper error handling and input validation
+      - Write comprehensive documentation and comments where needed
+
+  - name: testing
+    description: Testing requirements
+    content: |
+      - Write tests for new features and bug fixes
+      - Maintain test coverage above 80%
+      - Run tests before committing changes
+      - Include both unit and integration tests where appropriate
+
+# Skills to include in exports
+# Skills are referenced from the skills/ directory
+skills:
+  # Include all skills by default
+  include_all: true
+  
+  # Or explicitly list skills to include
+  # include:
+  #   - python/pycse
+  #   - scientific/design-of-experiments
+  
+  # Optionally exclude specific skills
+  exclude: []
+
+# Commands to include in exports
+# Commands are referenced from the commands/ directory
+commands:
+  # Include all commands by default
+  include_all: true
+  
+  # Or explicitly list commands to include
+  # include:
+  #   - examples/review-pr
+  #   - examples/explain-code
+  
+  # Optionally exclude specific commands
+  exclude: []
+
+# Profiles for different use cases
+profiles:
+  minimal:
+    description: Minimal set of essential skills
+    policies: [code-quality]
+    skills:
+      include_all: false
+      include: []
+    commands:
+      include_all: false
+      include: []
+  
+  full:
+    description: All available skills and commands
+    policies: [code-quality, testing]
+    skills:
+      include_all: true
+    commands:
+      include_all: true
+
+# Platform-specific configurations
+platforms:
+  codex:
+    output: AGENTS.md
+    enabled: true
+  
+  gemini:
+    output: GEMINI.md
+    enabled: true
+  
+  copilot:
+    output: .github/copilot-instructions.md
+    enabled: true
