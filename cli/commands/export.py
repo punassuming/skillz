@@ -1,6 +1,5 @@
 """Export command for generating agent configuration files."""
 
-import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 
@@ -54,7 +53,7 @@ def export(ctx, platform, agent, profile, output):
     if not repo_path:
         # Try to detect if we're in a repo
         repo_path = Path.cwd()
-    
+
     # Load agents configuration
     agents_yaml_path = repo_path / ".ai" / "agents" / "agents.yaml"
     if not agents_yaml_path.exists():
@@ -161,11 +160,13 @@ def _discover_skills(repo_path: Path) -> List[Dict]:
                     content = f.read()
                 frontmatter = _parse_frontmatter(content)
                 if frontmatter:
-                    skills.append({
-                        "name": frontmatter.get("name", skill_path.name),
-                        "description": frontmatter.get("description", ""),
-                        "path": skill_path.relative_to(repo_path),
-                    })
+                    skills.append(
+                        {
+                            "name": frontmatter.get("name", skill_path.name),
+                            "description": frontmatter.get("description", ""),
+                            "path": skill_path.relative_to(repo_path),
+                        }
+                    )
             except Exception:
                 pass
 
@@ -187,12 +188,14 @@ def _discover_commands(repo_path: Path) -> List[Dict]:
             description = ""
             if frontmatter and "description" in frontmatter:
                 description = frontmatter["description"]
-            
-            commands.append({
-                "name": cmd_path.stem,
-                "description": description,
-                "path": cmd_path.relative_to(repo_path),
-            })
+
+            commands.append(
+                {
+                    "name": cmd_path.stem,
+                    "description": description,
+                    "path": cmd_path.relative_to(repo_path),
+                }
+            )
         except Exception:
             pass
 
@@ -202,12 +205,13 @@ def _discover_commands(repo_path: Path) -> List[Dict]:
 def _parse_frontmatter(content: str) -> Optional[Dict]:
     """Parse YAML frontmatter from markdown content."""
     import re
+
     pattern = r"^---\s*\n(.*?)\n---\s*\n"
     match = re.match(pattern, content, re.DOTALL)
-    
+
     if not match:
         return None
-    
+
     frontmatter_str = match.group(1)
     try:
         return yaml.safe_load(frontmatter_str)
@@ -226,18 +230,18 @@ def _render_template(
     repo_path: Path,
 ) -> str:
     """Render platform-specific template."""
-    
+
     # Get agent details
     agent_name = agent_config.get("name", "Skillz Agent")
     agent_id = agent_config.get("id", "default")
     agent_policies = agent_config.get("policies", "")
     role_id = agent_config.get("role", "")
-    
+
     # Get capabilities
     role_config = agents_config.get("roles", {}).get(role_id, {})
     capability_ids = role_config.get("default-capabilities", [])
     capabilities = agents_config.get("capabilities", {})
-    
+
     # Build capabilities as policies (downgrade)
     capabilities_text = ""
     if capability_ids:
@@ -251,27 +255,27 @@ def _render_template(
 
     # Build header
     header = _get_header(platform)
-    
+
     # Build agent identity
     identity = f"# {agent_name}\n\n"
     identity += f"**Agent ID**: {agent_id}\n"
     identity += f"**Role**: {role_id}\n\n"
-    
+
     # Build policies section
     policies_section = "# Policies\n\n"
-    
+
     if global_policies:
         policies_section += "## Global Policies\n\n"
         policies_section += global_policies + "\n\n"
-    
+
     if role_policies:
         policies_section += f"## Role Policies ({role_id})\n\n"
         policies_section += role_policies + "\n\n"
-    
+
     if agent_policies:
         policies_section += "## Agent-Specific Policies\n\n"
         policies_section += agent_policies + "\n\n"
-    
+
     # Build skills index
     skills_section = "# Available Skills\n\n"
     if skills:
@@ -281,18 +285,18 @@ def _render_template(
             skills_section += f"Location: `{skill['path']}`\n\n"
     else:
         skills_section += "No skills available.\n\n"
-    
+
     # Build commands index
     commands_section = "# Available Commands\n\n"
     if commands:
         for cmd in commands:
             commands_section += f"## {cmd['name']}\n\n"
-            if cmd['description']:
+            if cmd["description"]:
                 commands_section += f"{cmd['description']}\n\n"
             commands_section += f"Location: `{cmd['path']}`\n\n"
     else:
         commands_section += "No commands available.\n\n"
-    
+
     # Assemble full content
     content = header
     content += identity
@@ -300,7 +304,7 @@ def _render_template(
     content += policies_section
     content += skills_section
     content += commands_section
-    
+
     return content
 
 
