@@ -20,6 +20,7 @@ A comprehensive CLI tool for managing AI assistant skills and slash commands for
 - **Search**: Find skills by keywords and descriptions
 - **Create**: Interactive wizard for creating new skills and commands
 - **Validate**: Ensure skills and commands meet format requirements
+- **Export**: Generate platform-specific instruction files (Codex, Gemini, Copilot)
 - **Multi-platform**: Support for OpenCode, Claude Code, Codex, Gemini, GitHub Copilot, and MCP
 
 ## Installation
@@ -98,6 +99,50 @@ skillz create --type skill --name my-awesome-skill
 skillz uninstall skill-name
 ```
 
+### Export Skills to Platform-Specific Files
+
+Generate platform-specific instruction files from the canonical `.ai/` configuration:
+
+```bash
+# Export for Codex CLI (generates AGENTS.md)
+skillz export --platform codex
+
+# Export for Gemini CLI (generates GEMINI.md)
+skillz export --platform gemini
+
+# Export for GitHub Copilot CLI (generates .github/copilot-instructions.md)
+skillz export --platform copilot
+
+# Use a specific profile (e.g., minimal, full)
+skillz export --platform codex --profile minimal
+
+# Custom output path
+skillz export --platform codex --output custom/path/AGENTS.md
+
+# Preview what would be exported
+skillz export --platform codex --dry-run
+```
+
+The export command compiles:
+- Global policies from `.ai/config.yaml`
+- Selected skills from `skills/` directory
+- Selected commands from `commands/` directory
+
+Into a single platform-specific file with:
+- Generated header warning against manual edits
+- Project policies and coding standards
+- Skills index with descriptions
+- Full skill content for reference
+- Command definitions
+
+**Recommended workflow:**
+1. Edit `.ai/config.yaml` to define policies and filters
+2. Create/update skills in `skills/` directory
+3. Run `skillz export --platform <platform>` to regenerate instruction files
+4. Commit `.ai/config.yaml` and generated files to version control
+
+**Note:** Generated files (AGENTS.md, GEMINI.md, .github/copilot-instructions.md) are marked as generated and should be regenerated rather than edited manually.
+
 ## Configuration
 
 Configuration is stored in `~/.config/skillz/config.yaml`.
@@ -133,6 +178,90 @@ platforms:
     skills_dir: ~/.config/mcp/skills
     commands_dir: ~/.config/mcp/commands
 ```
+
+## Canonical AI Configuration (`.ai/` Layer)
+
+The `.ai/config.yaml` file provides a platform-neutral source of truth for project policies, skills, and commands that can be exported to any platform-specific format.
+
+### Structure
+
+```yaml
+# Global project policies
+policies:
+  - name: code-quality
+    description: Maintain high code quality standards
+    content: |
+      - Write clean, readable code
+      - Follow language-specific conventions
+      - Include proper error handling
+
+# Skills configuration
+skills:
+  include_all: true  # Include all skills from skills/ directory
+  exclude: []        # Optionally exclude specific skills
+
+# Commands configuration
+commands:
+  include_all: true  # Include all commands from commands/ directory
+  exclude: []        # Optionally exclude specific commands
+
+# Profiles for different use cases
+profiles:
+  minimal:
+    description: Minimal set of essential skills
+    policies: [code-quality]
+    skills:
+      include_all: false
+      include: []  # List specific skills
+    commands:
+      include_all: false
+      include: []
+
+  full:
+    description: All available skills and commands
+    policies: [code-quality, testing]
+    skills:
+      include_all: true
+    commands:
+      include_all: true
+
+# Platform-specific output locations
+platforms:
+  codex:
+    output: AGENTS.md
+    enabled: true
+  
+  gemini:
+    output: GEMINI.md
+    enabled: true
+  
+  copilot:
+    output: .github/copilot-instructions.md
+    enabled: true
+```
+
+### Benefits
+
+- **Single source of truth**: Maintain policies and configurations in one place
+- **Multi-platform support**: Generate files for Codex, Gemini, and Copilot from same source
+- **Profile support**: Create different configurations (minimal, full, custom) for different scenarios
+- **Avoid drift**: Automatically generated files stay in sync with policies
+- **Version control**: Track changes to policies and configurations
+
+### Platform-Specific Output Conventions
+
+- **Codex CLI**: `AGENTS.md` in repository root (configurable)
+- **Gemini CLI**: `GEMINI.md` in repository root (configurable)
+- **GitHub Copilot CLI**: `.github/copilot-instructions.md` (configurable)
+  - Note: GitHub Copilot CLI support for custom instruction files may vary by version
+
+All generated files include:
+- Warning header about being auto-generated
+- Generation timestamp
+- Instructions for regeneration
+- Project policies
+- Skills index and full content
+- Commands definitions
 
 ## Skills Format
 
@@ -179,18 +308,25 @@ Use $ARGUMENTS or $1, $2, etc. for parameters.
 
 ```
 skillz/
-├── cli/                    # Python CLI tool
-│   ├── commands/          # CLI command implementations
-│   ├── config.py          # Configuration management
-│   ├── validator.py       # Skill/command validation
-│   └── utils.py           # Helper functions
-├── skills/                # Skill repository
+├── .ai/                   # Canonical AI configuration layer
+│   └── config.yaml       # Platform-neutral policies and filters
+├── cli/                   # Python CLI tool
+│   ├── commands/         # CLI command implementations
+│   ├── export/           # Export functionality
+│   ├── config.py         # Configuration management
+│   ├── validator.py      # Skill/command validation
+│   └── utils.py          # Helper functions
+├── skills/               # Skill repository
 │   ├── academic/
 │   ├── programming/
 │   └── research/
-├── commands/              # Command repository
-├── templates/             # Templates for new skills
-└── tests/                 # Test suite
+├── commands/             # Command repository
+├── templates/            # Templates for new skills and export
+│   └── export/          # Platform-specific export templates
+│       ├── codex/       # Codex CLI templates
+│       ├── gemini/      # Gemini CLI templates
+│       └── copilot/     # Copilot CLI templates
+└── tests/                # Test suite
 ```
 
 ## Development
