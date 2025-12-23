@@ -19,7 +19,7 @@ console = Console()
     "--platform",
     "-p",
     default="claude",
-    help="Target platform (claude, codex, gemini, opencode, openai, copilot)",
+    help="Target platform (claude, codex, gemini, opencode, copilot, mcp)",
 )
 @click.option("--dry-run", is_flag=True, help="Preview without making changes")
 @click.pass_context

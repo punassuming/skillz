@@ -26,7 +26,7 @@ console = Console()
     "--platform",
     "-p",
     default="claude",
-    help="Filter by platform (claude, codex, gemini, opencode, openai, copilot)",
+    help="Filter by platform (claude, codex, gemini, opencode, copilot, mcp)",
 )
 @click.option("--category", "-c", help="Filter by category")
 @click.pass_context

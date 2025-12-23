@@ -7,7 +7,7 @@
 [![codecov](https://codecov.io/gh/jkitchin/skillz/graph/badge.svg)](https://codecov.io/gh/jkitchin/skillz)
 
 
-A comprehensive CLI tool for managing AI assistant skills and slash commands for OpenCode, Claude Code, Codex, Gemini, OpenAI, GitHub Copilot, and other LLM platforms.
+A comprehensive CLI tool for managing AI assistant skills and slash commands for OpenCode, Claude Code, Codex, Gemini, GitHub Copilot, MCP, and other LLM platforms.
 
 > **Note:** Currently only tested on Claude Code and OpenCode. Please report issues for Codex and Gemini. With opencode you may have better performance with https://www.npmjs.com/package/opencode-skills (this is what I use).
 
@@ -20,7 +20,7 @@ A comprehensive CLI tool for managing AI assistant skills and slash commands for
 - **Search**: Find skills by keywords and descriptions
 - **Create**: Interactive wizard for creating new skills and commands
 - **Validate**: Ensure skills and commands meet format requirements
-- **Multi-platform**: Support for OpenCode, Claude Code, Codex, Gemini, OpenAI, and GitHub Copilot
+- **Multi-platform**: Support for OpenCode, Claude Code, Codex, Gemini, GitHub Copilot, and MCP
 
 ## Installation
 
@@ -126,12 +126,12 @@ platforms:
   gemini:
     skills_dir: ~/.config/gemini/skills
     commands_dir: ~/.config/gemini/commands
-  openai:
-    skills_dir: ~/.openai/skills
-    commands_dir: ~/.openai/commands
   copilot:
-    skills_dir: ~/.config/copilot/skills
-    commands_dir: ~/.config/copilot/commands
+    skills_dir: .github/skills
+    commands_dir: .github/commands
+  mcp:
+    skills_dir: ~/.config/mcp/skills
+    commands_dir: ~/.config/mcp/commands
 ```
 
 ## Skills Format
@@ -277,8 +277,8 @@ Skillz manages skills and commands for these AI coding assistants:
 - **[OpenCode](https://github.com/sst/opencode)** - The AI coding agent built for the terminal. Open-source, provider-agnostic, with 30k+ GitHub stars.
 - **[Claude Code](https://github.com/anthropics/claude-code)** - Anthropic's agentic coding tool that lives in your terminal. Understands your codebase and helps you code faster.
 - **[Codex CLI](https://github.com/openai/codex)** - OpenAI's lightweight coding agent that runs in your terminal. See [OpenAI adopts "skills"](https://simonwillison.net/2025/Dec/12/openai-skills/) for details on their skills implementation.
-- **[OpenAI CLI](https://platform.openai.com/docs/)** - OpenAI's official command-line interface for interacting with GPT models and other OpenAI services.
-- **[GitHub Copilot](https://github.com/features/copilot)** - AI pair programmer that helps you write code faster and with less effort, integrated with your development environment.
+- **[GitHub Copilot](https://github.com/features/copilot)** - AI pair programmer that helps you write code faster and with less effort. Uses project-level skills in `.github/skills/` directories.
+- **[MCP (Model Context Protocol)](https://docs.docker.com/ai/mcp-catalog-and-toolkit/)** - Protocol for connecting AI assistants to external tools and data sources. Supported by Docker Desktop, Claude Desktop, and other MCP-compatible clients.
 - **Gemini** - Google's AI assistant for code generation and assistance.
 
 ### Related Skills Projects

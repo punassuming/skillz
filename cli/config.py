@@ -17,7 +17,7 @@ class Config:
         "project_commands_dir": ".opencode/command",
         "repository_path": None,  # Path to the local clone of skills repository
         "default_target": "personal",  # personal or project
-        # Default platform: opencode, claude, codex, gemini, openai, copilot
+        # Default platform: opencode, claude, codex, gemini, copilot, mcp
         "default_platform": "opencode",
         "platforms": {
             "opencode": {
@@ -33,13 +33,13 @@ class Config:
                 "skills_dir": "~/.config/gemini/skills",
                 "commands_dir": "~/.config/gemini/commands",
             },
-            "openai": {
-                "skills_dir": "~/.openai/skills",
-                "commands_dir": "~/.openai/commands",
-            },
             "copilot": {
-                "skills_dir": "~/.config/copilot/skills",
-                "commands_dir": "~/.config/copilot/commands",
+                "skills_dir": ".github/skills",
+                "commands_dir": ".github/commands",
+            },
+            "mcp": {
+                "skills_dir": "~/.config/mcp/skills",
+                "commands_dir": "~/.config/mcp/commands",
             },
         },
     }

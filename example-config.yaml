@@ -38,13 +38,15 @@ platforms:
     skills_dir: ~/.config/gemini/skills
     commands_dir: ~/.config/gemini/commands
 
-  openai:
-    skills_dir: ~/.openai/skills
-    commands_dir: ~/.openai/commands
-
+  # GitHub Copilot uses project-level skills directories
   copilot:
-    skills_dir: ~/.config/copilot/skills
-    commands_dir: ~/.config/copilot/commands
+    skills_dir: .github/skills
+    commands_dir: .github/commands
+
+  # Model Context Protocol (MCP) for Docker Desktop and other MCP clients
+  mcp:
+    skills_dir: ~/.config/mcp/skills
+    commands_dir: ~/.config/mcp/commands
 
 # Additional options (optional)
 # verbose: false
