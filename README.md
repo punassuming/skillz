@@ -21,6 +21,7 @@ A comprehensive CLI tool for managing AI assistant skills and slash commands for
 - **Create**: Interactive wizard for creating new skills and commands
 - **Validate**: Ensure skills and commands meet format requirements
 - **Multi-platform**: Support for OpenCode, Claude Code, Codex, Gemini, GitHub Copilot, and MCP
+- **Agent Export**: Export canonical agent configurations to platform-specific instruction files
 
 ## Installation
 
@@ -98,6 +99,32 @@ skillz create --type skill --name my-awesome-skill
 skillz uninstall skill-name
 ```
 
+### Export Agent Configuration
+
+Export agent configurations from the canonical specification (`.ai/agents/agents.yaml`) to platform-specific instruction files:
+
+```bash
+# Export default agent to Codex CLI (creates AGENTS.md)
+skillz export --platform codex
+
+# Export default agent to Gemini CLI (creates GEMINI.md)
+skillz export --platform gemini
+
+# Export default agent to Copilot CLI (creates .github/copilot-instructions.md)
+skillz export --platform copilot
+
+# Export review agent instead of default
+skillz export --platform codex --agent review
+
+# Specify custom output location
+skillz export --platform codex --output /path/to/output.md
+```
+
+**Default Output Locations:**
+- **Codex CLI**: `./AGENTS.md`
+- **Gemini CLI**: `./GEMINI.md`
+- **Copilot CLI**: `./.github/copilot-instructions.md`
+
 ## Configuration
 
 Configuration is stored in `~/.config/skillz/config.yaml`.
@@ -133,6 +160,84 @@ platforms:
     skills_dir: ~/.config/mcp/skills
     commands_dir: ~/.config/mcp/commands
 ```
+
+## Canonical Agent Specification
+
+Skillz uses a centralized agent specification system that allows you to define AI agents once and export them to multiple platform-specific formats.
+
+### Agent Configuration File
+
+The canonical agent specification is stored in `.ai/agents/agents.yaml`. This file defines:
+
+- **Version**: Specification version
+- **Capabilities**: Available agent capabilities with descriptions
+- **Roles**: Reusable role definitions with capabilities and policies
+- **Agents**: Individual agent configurations
+
+### Example agents.yaml
+
+```yaml
+version: "1.0"
+
+capabilities:
+  skill-management:
+    description: "Manage AI assistant skills and slash commands"
+  validation:
+    description: "Validate skill and command formats"
+
+roles:
+  skill-manager:
+    default-capabilities:
+      - skill-management
+      - validation
+    policies: |
+      # Skill Manager Role Policies
+      - Always validate skills before installation
+      - Follow platform-specific conventions
+
+agents:
+  - id: default
+    name: "Default Skillz Agent"
+    role: skill-manager
+    policies: |
+      # Default Agent Policies
+      - Use personal installation target by default
+      - Provide helpful prompts for missing configuration
+  
+  - id: review
+    name: "Skillz Review Agent"
+    role: reviewer
+    policies: |
+      # Review Agent Policies
+      - Focus on validation and quality checks
+      - Provide comprehensive validation reports
+```
+
+### Global Policies
+
+Repository-wide policies can be defined in `.ai/policies/global.md`. These policies are included in all exported agent configurations.
+
+### Exporting Agent Configurations
+
+The `export` command reads the canonical specification and generates platform-specific instruction files:
+
+```bash
+# Export to Codex CLI
+skillz export --platform codex
+
+# Export to Gemini CLI
+skillz export --platform gemini
+
+# Export to GitHub Copilot
+skillz export --platform copilot
+
+# Use a specific agent
+skillz export --platform codex --agent review
+```
+
+### Capability Downgrade
+
+Since not all platforms support capability enforcement, capabilities are automatically rendered as plain-text policies in the exported files. This ensures compatibility across all platforms while maintaining clear documentation of agent capabilities.
 
 ## Skills Format
 

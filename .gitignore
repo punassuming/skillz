@@ -1,3 +1,8 @@
+# Generated agent configuration files
+AGENTS.md
+GEMINI.md
+.github/copilot-instructions.md
+
 # Python
 __pycache__/
 *.py[cod]
