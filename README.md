@@ -131,6 +131,8 @@ skillz export --platform codex --output /path/to/output.md
 - **Gemini CLI**: `./GEMINI.md`
 - **Copilot CLI**: `./.github/copilot-instructions.md`
 
+All exports are built from the same platform-neutral instruction block (policies, skills, commands) and then serialized into the format each CLI expects (Codex TOML, Gemini YAML, Copilot Markdown) to keep every instruction file in sync.
+
 ## Configuration
 
 Configuration is stored in `~/.config/skillz/config.yaml`.
