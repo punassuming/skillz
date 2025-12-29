@@ -11,6 +11,7 @@ from cli.config import Config
 from cli.utils import find_command_files, find_skill_directories
 
 console = Console()
+GEMINI_YAML_WIDTH = 120
 
 
 @click.command()
@@ -229,83 +230,52 @@ def _render_template(
     commands: List[Dict],
     repo_path: Path,
 ) -> str:
-    """Render platform-specific template."""
+    """Render platform-specific template using a shared instruction block."""
 
-    # Get agent details
     agent_name = agent_config.get("name", "Skillz Agent")
     agent_id = agent_config.get("id", "default")
     agent_policies = agent_config.get("policies", "")
     role_id = agent_config.get("role", "")
 
-    # Get capabilities
     role_config = agents_config.get("roles", {}).get(role_id, {})
     capability_ids = role_config.get("default-capabilities", [])
     capabilities = agents_config.get("capabilities", {})
+    capabilities_payload = []
+    for cap_id in capability_ids:
+        cap = capabilities.get(cap_id, {})
+        capabilities_payload.append({"id": cap_id, "description": cap.get("description", "")})
 
-    # Build capabilities as policies (downgrade)
-    capabilities_text = ""
-    if capability_ids:
-        capabilities_text = "## Capabilities\n\n"
-        capabilities_text += "The following capabilities are available to this agent:\n\n"
-        for cap_id in capability_ids:
-            if cap_id in capabilities:
-                cap = capabilities[cap_id]
-                capabilities_text += f"- **{cap_id}**: {cap.get('description', '')}\n"
-        capabilities_text += "\n"
+    normalized_skills = _normalize_items(skills)
+    normalized_commands = _normalize_items(commands)
 
-    # Build header
-    header = _get_header(platform)
+    instruction_block = _build_instruction_block(
+        agent_name=agent_name,
+        agent_id=agent_id,
+        role_id=role_id,
+        capabilities=capabilities_payload,
+        global_policies=global_policies,
+        role_policies=role_policies,
+        agent_policies=agent_policies,
+        skills=normalized_skills,
+        commands=normalized_commands,
+    )
 
-    # Build agent identity
-    identity = f"# {agent_name}\n\n"
-    identity += f"**Agent ID**: {agent_id}\n"
-    identity += f"**Role**: {role_id}\n\n"
+    payload = {
+        "agent": {"id": agent_id, "name": agent_name, "role": role_id},
+        "capabilities": capabilities_payload,
+        "skills": normalized_skills,
+        "commands": normalized_commands,
+        "instruction_block": instruction_block,
+    }
 
-    # Build policies section
-    policies_section = "# Policies\n\n"
+    if platform == "codex":
+        return _render_codex(payload)
+    if platform == "gemini":
+        return _render_gemini(payload)
+    if platform == "copilot":
+        return _render_copilot(payload)
 
-    if global_policies:
-        policies_section += "## Global Policies\n\n"
-        policies_section += global_policies + "\n\n"
-
-    if role_policies:
-        policies_section += f"## Role Policies ({role_id})\n\n"
-        policies_section += role_policies + "\n\n"
-
-    if agent_policies:
-        policies_section += "## Agent-Specific Policies\n\n"
-        policies_section += agent_policies + "\n\n"
-
-    # Build skills index
-    skills_section = "# Available Skills\n\n"
-    if skills:
-        for skill in skills:
-            skills_section += f"## {skill['name']}\n\n"
-            skills_section += f"{skill['description']}\n\n"
-            skills_section += f"Location: `{skill['path']}`\n\n"
-    else:
-        skills_section += "No skills available.\n\n"
-
-    # Build commands index
-    commands_section = "# Available Commands\n\n"
-    if commands:
-        for cmd in commands:
-            commands_section += f"## {cmd['name']}\n\n"
-            if cmd["description"]:
-                commands_section += f"{cmd['description']}\n\n"
-            commands_section += f"Location: `{cmd['path']}`\n\n"
-    else:
-        commands_section += "No commands available.\n\n"
-
-    # Assemble full content
-    content = header
-    content += identity
-    content += capabilities_text
-    content += policies_section
-    content += skills_section
-    content += commands_section
-
-    return content
+    raise ValueError(f"Unknown platform: {platform}")
 
 
 def _get_header(platform: str) -> str:
@@ -319,3 +289,168 @@ and then exported using: skillz export --platform {platform}
 
 """
     return base_header.format(platform=platform)
+
+
+def _build_instruction_block(
+    agent_name: str,
+    agent_id: str,
+    role_id: str,
+    capabilities: List[Dict],
+    global_policies: str,
+    role_policies: str,
+    agent_policies: str,
+    skills: List[Dict],
+    commands: List[Dict],
+) -> str:
+    """Construct a platform-neutral instruction block shared by all exporters."""
+
+    identity = f"# {agent_name}\n\n"
+    identity += f"**Agent ID**: {agent_id}\n"
+    identity += f"**Role**: {role_id}\n\n"
+
+    capabilities_text = ""
+    if capabilities:
+        capabilities_text = "## Capabilities\n\n"
+        capabilities_text += "The following capabilities are available to this agent:\n\n"
+        for cap in capabilities:
+            capabilities_text += f"- **{cap['id']}**: {cap.get('description', '')}\n"
+        capabilities_text += "\n"
+
+    policies_section = "# Policies\n\n"
+    if global_policies:
+        policies_section += "## Global Policies\n\n"
+        policies_section += global_policies + "\n\n"
+    if role_policies:
+        policies_section += f"## Role Policies ({role_id})\n\n"
+        policies_section += role_policies + "\n\n"
+    if agent_policies:
+        policies_section += "## Agent-Specific Policies\n\n"
+        policies_section += agent_policies + "\n\n"
+
+    skills_section = "# Available Skills\n\n"
+    if skills:
+        for skill in skills:
+            skills_section += f"## {skill['name']}\n\n"
+            if skill.get("description"):
+                skills_section += f"{skill['description']}\n\n"
+            skills_section += f"Location: `{skill['path']}`\n\n"
+    else:
+        skills_section += "No skills available.\n\n"
+
+    commands_section = "# Available Commands\n\n"
+    if commands:
+        for cmd in commands:
+            commands_section += f"## {cmd['name']}\n\n"
+            if cmd.get("description"):
+                commands_section += f"{cmd['description']}\n\n"
+            commands_section += f"Location: `{cmd['path']}`\n\n"
+    else:
+        commands_section += "No commands available.\n\n"
+
+    return identity + capabilities_text + policies_section + skills_section + commands_section
+
+
+def _render_codex(payload: Dict) -> str:
+    """Render Codex CLI configuration (TOML-style) using the shared instruction block."""
+    header = _get_header("codex")
+    agent = payload["agent"]
+    skills = payload.get("skills", [])
+    commands = payload.get("commands", [])
+
+    lines = []
+    lines.append(header)
+    lines.append("# Codex CLI Agent Profile")
+    lines.append("")
+    lines.append("[[agents]]")
+    lines.append(f'id = "{_escape_toml(agent["id"])}"')
+    lines.append(f'name = "{_escape_toml(agent["name"])}"')
+    if agent.get("role"):
+        lines.append(f'role = "{_escape_toml(agent["role"])}"')
+    lines.append('instructions = """')
+    lines.append(payload["instruction_block"].rstrip())
+    lines.append('"""')
+
+    if skills:
+        lines.append("")
+        lines.append("# Skills available to this agent")
+        for skill in skills:
+            lines.append("[[agents.skills]]")
+            lines.append(f'name = "{_escape_toml(skill["name"])}"')
+            lines.append(f'description = "{_escape_toml(skill.get("description", ""))}"')
+            lines.append(f'path = "{_escape_toml(skill.get("path", ""))}"')
+
+    if commands:
+        lines.append("")
+        lines.append("# Commands available to this agent")
+        for cmd in commands:
+            lines.append("[[agents.commands]]")
+            lines.append(f'name = "{_escape_toml(cmd["name"])}"')
+            lines.append(f'description = "{_escape_toml(cmd.get("description", ""))}"')
+            lines.append(f'path = "{_escape_toml(cmd.get("path", ""))}"')
+
+    return "\n".join(lines)
+
+
+def _render_gemini(payload: Dict) -> str:
+    """Render Gemini CLI configuration in YAML with embedded instructions."""
+    header = _get_header("gemini")
+    agent = payload["agent"]
+    gemini_payload = {
+        "agents": [
+            {
+                "id": agent["id"],
+                "name": agent["name"],
+                "role": agent.get("role", ""),
+                "instructions": payload["instruction_block"],
+                "skills": payload.get("skills", []),
+                "commands": payload.get("commands", []),
+            }
+        ]
+    }
+    yaml_content = yaml.safe_dump(
+        gemini_payload,
+        sort_keys=False,
+        default_flow_style=False,
+        width=GEMINI_YAML_WIDTH,
+    )
+    return header + yaml_content
+
+
+def _render_copilot(payload: Dict) -> str:
+    """Render GitHub Copilot instructions markdown using the shared block."""
+    header = _get_header("copilot")
+    agent = payload["agent"]
+    content = header
+    content += f"# Copilot Agent: {agent['name']}\n\n"
+    content += f"**Agent ID**: {agent['id']}\n\n"
+    if agent.get("role"):
+        content += f"**Role**: {agent['role']}\n\n"
+    content += payload["instruction_block"]
+    return content
+
+
+def _normalize_items(items: List[Dict]) -> List[Dict]:
+    """Normalize skill/command entries to plain dictionaries with string paths."""
+    normalized = []
+    for item in items:
+        normalized.append(
+            {
+                "name": item.get("name", ""),
+                "description": item.get("description", ""),
+                "path": str(item.get("path", "")),
+            }
+        )
+    return normalized
+
+
+def _escape_toml(value: str) -> str:
+    """Minimally escape TOML string content without pulling in extra dependencies."""
+    return (
+        value.replace("\\", "\\\\")
+        .replace('"', '\\"')
+        .replace("\n", "\\n")
+        .replace("\t", "\\t")
+        .replace("\r", "\\r")
+        .replace("\b", "\\b")
+        .replace("\f", "\\f")
+    )

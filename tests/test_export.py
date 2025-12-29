@@ -1,5 +1,6 @@
 """Tests for export command."""
 
+import re
 from pathlib import Path
 
 import pytest
@@ -12,6 +13,11 @@ from cli.commands.export import (
     _get_default_output_path,
     _render_template,
 )
+
+
+def _strip_html_header(content: str) -> str:
+    """Remove the auto-generated HTML comment header from exported outputs."""
+    return re.sub(r"^<!--.*?-->\s*", "", content, flags=re.S)
 
 
 class TestExportCommand:
@@ -332,6 +338,58 @@ description: Test skill {name}
         assert "cmd1" in content
         assert "Command 1 desc" in content
         assert "cmd2" in content
+
+    def test_render_template_gemini_renders_yaml_with_shared_instructions(self):
+        """Gemini export should emit YAML and reuse the shared instruction block."""
+        agent_config = {"id": "test", "name": "Test", "role": "test-role", "policies": "Agent note"}
+        agents_config = {"roles": {"test-role": {"default-capabilities": []}}}
+        skills = [{"name": "skill1", "description": "Skill 1 desc", "path": Path("skills/skill1")}]
+        commands = [{"name": "cmd1", "description": "Command 1", "path": Path("commands/cmd1.md")}]
+
+        content = _render_template(
+            platform="gemini",
+            agent_config=agent_config,
+            agents_config=agents_config,
+            global_policies="Global",
+            role_policies="",
+            skills=skills,
+            commands=commands,
+            repo_path=Path("/tmp"),
+        )
+
+        parsed = yaml.safe_load(_strip_html_header(content))
+
+        assert "agents" in parsed
+        agent_entry = parsed["agents"][0]
+        assert agent_entry["id"] == "test"
+        assert agent_entry["name"] == "Test"
+        assert agent_entry["instructions"]
+        assert "# Available Skills" in agent_entry["instructions"]
+        assert agent_entry["skills"][0]["name"] == "skill1"
+        assert agent_entry["commands"][0]["name"] == "cmd1"
+
+    def test_render_template_copilot_markdown_includes_shared_block(self):
+        """Copilot export should emit markdown with the shared instruction block."""
+        agent_config = {"id": "test", "name": "Test", "role": "test-role", "policies": ""}
+        agents_config = {"roles": {"test-role": {"default-capabilities": []}}}
+        skills = [{"name": "skill1", "description": "Skill 1 desc", "path": Path("skills/skill1")}]
+        commands = [{"name": "cmd1", "description": "", "path": Path("commands/cmd1.md")}]
+
+        content = _render_template(
+            platform="copilot",
+            agent_config=agent_config,
+            agents_config=agents_config,
+            global_policies="Global policies go here",
+            role_policies="",
+            skills=skills,
+            commands=commands,
+            repo_path=Path("/tmp"),
+        )
+
+        assert "# Copilot Agent: Test" in content
+        assert "# Available Skills" in content
+        assert "skills/skill1" in content
+        assert "commands/cmd1.md" in content
 
 
 @pytest.fixture
