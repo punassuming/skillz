@@ -10,6 +10,44 @@ from rich.console import Console
 console = Console()
 
 
+class PathTraversalError(Exception):
+    """Raised when a path traversal attack is detected."""
+
+    pass
+
+
+def safe_path_join(base: Path, name: str) -> Path:
+    """
+    Safely join a base path with a name, preventing path traversal attacks.
+
+    Args:
+        base: The base directory path
+        name: The name to join (e.g., skill name, hook name)
+
+    Returns:
+        The resolved path
+
+    Raises:
+        PathTraversalError: If the resulting path would escape the base directory
+    """
+    # Resolve the base to an absolute path
+    base_resolved = base.resolve()
+
+    # Create the joined path (unresolved to detect symlinks)
+    joined = base / name
+
+    # Resolve to get the actual target path
+    result = joined.resolve()
+
+    # Check if the result is within the base directory
+    try:
+        result.relative_to(base_resolved)
+    except ValueError:
+        raise PathTraversalError(f"Path traversal detected: '{name}' would escape base directory")
+
+    return result
+
+
 def validate_name(name: str, max_length: int = 64) -> bool:
     """
     Validate a skill or command name.
@@ -27,7 +65,7 @@ def validate_description(description: str, max_length: int = 1024) -> bool:
 
 def copy_directory(src: Path, dst: Path, force: bool = False) -> bool:
     """
-    Copy a directory from src to dst.
+    Copy a directory from src to dst (symlink-safe).
 
     Args:
         src: Source directory
@@ -36,6 +74,10 @@ def copy_directory(src: Path, dst: Path, force: bool = False) -> bool:
 
     Returns:
         True if successful, False otherwise
+
+    Security:
+        - Symlinks are copied as-is (not followed) to prevent symlink attacks
+        - Dangling symlinks are ignored
     """
     try:
         if dst.exists() and not force:
@@ -45,7 +87,8 @@ def copy_directory(src: Path, dst: Path, force: bool = False) -> bool:
         if dst.exists():
             shutil.rmtree(dst)
 
-        shutil.copytree(src, dst)
+        # Copy without following symlinks for security
+        shutil.copytree(src, dst, symlinks=True, ignore_dangling_symlinks=True)
         return True
     except Exception as e:
         console.print(f"[red]Error copying directory: {e}[/red]")
@@ -137,3 +180,46 @@ def confirm_action(message: str, default: bool = False) -> bool:
         return default
 
     return response in ("y", "yes")
+
+
+def find_hook_directories(base_path: Path) -> List[Path]:
+    """
+    Find all hook directories (containing HOOK.md) in a base path.
+
+    Args:
+        base_path: Base directory to search
+
+    Returns:
+        List of paths to hook directories
+    """
+    hooks = []
+    if not base_path.exists():
+        return hooks
+
+    for item in base_path.rglob("HOOK.md"):
+        hooks.append(item.parent)
+
+    return sorted(hooks)
+
+
+def find_agent_files(base_path: Path) -> List[Path]:
+    """
+    Find all agent files (*.md) in a base path.
+
+    Args:
+        base_path: Base directory to search
+
+    Returns:
+        List of paths to agent files
+    """
+    agents = []
+    if not base_path.exists():
+        return agents
+
+    for item in base_path.rglob("*.md"):
+        # Skip template files and READMEs
+        if item.name.upper() in ("README.MD", "TEMPLATE.MD"):
+            continue
+        agents.append(item)
+
+    return sorted(agents)
