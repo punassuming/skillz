@@ -55,9 +55,9 @@ python -m cli.main --help
 **CLI Module (`cli/`)**
 - `main.py` - Click-based CLI entry point with command registration
 - `config.py` - Configuration management using YAML (`~/.config/skillz/config.yaml`)
-- `validator.py` - Validation logic for skills (SKILL.md) and commands (.md files)
-- `utils.py` - Shared utilities (name validation, file operations, search functions)
-- `commands/` - Individual CLI command implementations (install, uninstall, list, search, info, update, create)
+- `validator.py` - Validation logic for skills, commands, hooks, and agents
+- `utils.py` - Shared utilities (name validation, file operations, search functions, security)
+- `commands/` - Individual CLI command implementations (install, uninstall, list, search, info, update, create, export)
 
 **Skills Repository (`skills/`)**
 Each skill is a directory containing:
@@ -67,9 +67,23 @@ Each skill is a directory containing:
 **Commands Repository (`commands/`)**
 Standalone markdown files with optional YAML frontmatter (description, model, allowed-tools, argument-hint).
 
+**Hooks Repository (`hooks/`)**
+Each hook is a directory containing:
+- `HOOK.md` - Required file with YAML frontmatter (name, description, event, matcher, type, timeout)
+- `hook.py` or `hook.sh` - The executable hook script
+- Hooks are shell commands that execute at various points in Claude Code's lifecycle
+
+**Agents Repository (`agents/`)**
+Standalone markdown files for Claude Code subagents:
+- Each agent is a single `.md` file with YAML frontmatter (name, description, tools, model)
+- Agents are specialized AI assistants that handle specific tasks independently
+- They run in isolated context and return results to the main conversation
+
 **Templates (`templates/`)**
 - `SKILL_TEMPLATE.md` - Template for creating new skills
 - `COMMAND_TEMPLATE.md` - Template for creating new commands
+- `HOOK_TEMPLATE.md` - Template for creating new hooks
+- `AGENT_TEMPLATE.md` - Template for creating new agents
 
 ### Configuration Flow
 
@@ -84,17 +98,29 @@ Standalone markdown files with optional YAML frontmatter (description, model, al
 
 **Commands**: Optional frontmatter, description max 256 chars, valid model values (sonnet/opus/haiku).
 
+**Hooks**: Must have valid name (lowercase, hyphens, max 64 chars), description (max 256 chars), valid event (PreToolUse, PostToolUse, PermissionRequest, UserPromptSubmit, Notification, Stop, SubagentStop, PreCompact, SessionStart, SessionEnd), and at least one script file (*.py or *.sh).
+
+**Agents**: Must have valid name (lowercase, hyphens, max 64 chars), description (max 1024 chars), valid model (sonnet/opus/haiku), and valid tools list.
+
 **Allowed Tools**: Can be `["*"]` for all tools or list from: Bash, Read, Write, Edit, Glob, Grep, Task, WebFetch, WebSearch, TodoWrite, AskUserQuestion, Skill, SlashCommand, NotebookEdit, BashOutput, KillShell.
 
 ### Discovery and Installation
 
-- `find_skill_directories()` and `find_command_files()` recursively scan repository
+- `find_skill_directories()`, `find_command_files()`, `find_hook_directories()`, and `find_agent_files()` recursively scan repository
 - Installation copies from repository to personal/project directories
 - Search uses fuzzy matching on names, descriptions, and file contents
+- Hook installation also updates `settings.json` with the hook configuration
+
+### Security Utilities
+
+- `safe_path_join()` - Prevents path traversal attacks when joining paths
+- `validate_platform()` - Validates platform names against a whitelist
+- `PathTraversalError` - Raised when path traversal is detected
+- `InvalidPlatformError` - Raised when invalid platform is specified
 
 ## Key Conventions
 
-- **Naming**: Skills and commands use lowercase-with-hyphens naming
+- **Naming**: Skills, commands, hooks, and agents use lowercase-with-hyphens naming
 - **Frontmatter**: YAML between `---` delimiters at file start
 - **Tools restriction**: `allowed-tools` field limits which Claude tools the skill/command can use
 - **Repository path**: Must be configured via `skillz config set repository /path/to/repo`
@@ -112,9 +138,13 @@ The `install --all` command installs all skills and commands from the repository
 
 **Adding a new CLI command**: Create file in `cli/commands/`, implement as Click command, import and register in `cli/main.py`.
 
-**Creating a skill**: Use `claude-skills create --type skill` or manually create directory with SKILL.md containing proper frontmatter.
+**Creating a skill**: Use `skillz create --type skill` or manually create directory with SKILL.md containing proper frontmatter.
 
-**Validation errors**: Both SkillValidator and CommandValidator return `(is_valid, list_of_errors)` tuples.
+**Creating a hook**: Use `skillz hooks create my-hook` or manually create directory with HOOK.md and hook.py.
+
+**Creating an agent**: Use `skillz agents create my-agent` or manually create .md file with proper frontmatter.
+
+**Validation errors**: SkillValidator, CommandValidator, HookValidator, and AgentValidator all return `(is_valid, list_of_errors)` tuples.
 
 ## Git Policy
 
