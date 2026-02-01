@@ -6,7 +6,8 @@ from typing import Dict, Optional
 
 import yaml
 
-# Hardcoded whitelist of valid platforms for security
+# Whitelist of valid platforms to prevent arbitrary directory access via config manipulation.
+# Only known platforms with defined directory paths in DEFAULT_CONFIG are allowed.
 VALID_PLATFORMS = {"claude", "opencode", "codex", "gemini", "copilot", "mcp"}
 
 

@@ -33,24 +33,17 @@ def safe_path_join(base: Path, name: str) -> Path:
     # Resolve the base to an absolute path
     base_resolved = base.resolve()
 
-    # Join and resolve the result
-    result = (base / name).resolve()
+    # Create the joined path (unresolved to detect symlinks)
+    joined = base / name
+
+    # Resolve to get the actual target path
+    result = joined.resolve()
 
     # Check if the result is within the base directory
     try:
         result.relative_to(base_resolved)
     except ValueError:
         raise PathTraversalError(f"Path traversal detected: '{name}' would escape base directory")
-
-    # Additional check for symlinks pointing outside base
-    if result.is_symlink():
-        real_path = result.resolve()
-        try:
-            real_path.relative_to(base_resolved)
-        except ValueError:
-            raise PathTraversalError(
-                f"Symlink traversal detected: '{name}' points outside base directory"
-            )
 
     return result
 
@@ -83,8 +76,8 @@ def copy_directory(src: Path, dst: Path, force: bool = False) -> bool:
         True if successful, False otherwise
 
     Security:
-        - Does not follow symlinks (copies symlink as-is or ignores)
-        - Ignores dangling symlinks
+        - Symlinks are copied as-is (not followed) to prevent symlink attacks
+        - Dangling symlinks are ignored
     """
     try:
         if dst.exists() and not force:
@@ -92,8 +85,7 @@ def copy_directory(src: Path, dst: Path, force: bool = False) -> bool:
             return False
 
         if dst.exists():
-            # Use onerror handler for safer removal
-            shutil.rmtree(dst, ignore_errors=False)
+            shutil.rmtree(dst)
 
         # Copy without following symlinks for security
         shutil.copytree(src, dst, symlinks=True, ignore_dangling_symlinks=True)

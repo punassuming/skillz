@@ -3,7 +3,7 @@
 
 import pytest
 
-from cli.config import InvalidPlatformError, validate_platform
+from cli.config import VALID_PLATFORMS, InvalidPlatformError, validate_platform
 from cli.utils import PathTraversalError, safe_path_join
 
 
@@ -61,12 +61,9 @@ class TestSafePathJoin:
         link = base / "escape-link"
         link.symlink_to(outside)
 
-        # Attempting to use this existing symlink should be blocked
+        # The symlink target resolves outside base, so it should be blocked
         with pytest.raises(PathTraversalError):
-            result = safe_path_join(base, "escape-link")
-            # Force resolution check
-            if result.is_symlink():
-                raise PathTraversalError("Symlink escape")
+            safe_path_join(base, "escape-link")
 
     def test_path_with_dots_in_name(self, tmp_path):
         """Test that paths with dots in the name (not traversal) work."""
@@ -83,9 +80,7 @@ class TestValidatePlatform:
 
     def test_valid_platforms(self):
         """Test all valid platforms are accepted."""
-        valid_platforms = ["claude", "opencode", "codex", "gemini", "copilot", "mcp"]
-
-        for platform in valid_platforms:
+        for platform in VALID_PLATFORMS:
             result = validate_platform(platform)
             assert result == platform.lower()
 
